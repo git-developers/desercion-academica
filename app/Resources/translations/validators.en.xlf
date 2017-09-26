@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="user.profile.not_blank">
+                <source>user.profile.not_blank</source>
+                <target>Please select a profile.</target>
+            </trans-unit>
+            <trans-unit id="user.client.not_blank">
+                <source>user.client.not_blank</source>
+                <target>Please select a client.</target>
+            </trans-unit>
+            <trans-unit id="user.dni.not_blank">
+                <source>user.dni.not_blank</source>
+                <target>Please add a dni.</target>
+            </trans-unit>
+            <trans-unit id="user.created_at.not_blank">
+                <source>user.created_at.not_blank</source>
+                <target>Please add a created_at.</target>
+            </trans-unit>
+            <trans-unit id="user.name.not_blank">
+                <source>user.name.not_blank</source>
+                <target>Please add a nombre.</target>
+            </trans-unit>
+            <trans-unit id="user.name.regex">
+                <source>user.name.regex</source>
+                <target>The name should only contain text.</target>
+            </trans-unit>
+            <trans-unit id="user.last_name.not_blank">
+                <source>user.last_name.not_blank</source>
+                <target>Please add a last name.</target>
+            </trans-unit>
+            <trans-unit id="user.last_name.regex">
+                <source>user.last_name.regex</source>
+                <target>The last name should only contain text.</target>
+            </trans-unit>
+            <trans-unit id="user.image.not_blank">
+                <source>user.image.not_blank</source>
+                <target>Please add an image.</target>
+            </trans-unit>
+
+
+
+            <trans-unit id="crud.text.delete">
+                <source>crud.text.delete</source>
+                <target>Are you sure?</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

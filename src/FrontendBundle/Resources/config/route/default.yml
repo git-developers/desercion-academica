@@ -1,0 +1,8 @@
+frontend_default_index:
+    path: /{path}
+    defaults:
+        _controller: FrontendBundle:Default:index
+        path: 'index'
+    requirements:
+        _method: GET
+        path: .+

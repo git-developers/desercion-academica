@@ -1,0 +1,39 @@
+backend_assignuserhaspointofsale_index:
+    path:  /
+    defaults:
+        _controller: BackendBundle:AssignUserHasPointOfSale:index
+    requirements:
+    methods: [GET]
+
+backend_assignuserhaspointofsale_assign:
+    path:  /assign
+    defaults:
+        _controller: BackendBundle:AssignUserHasPointOfSale:assign
+    requirements:
+    methods: [POST]
+
+backend_assignuserhaspointofsale_boxleft_has_boxright:
+    path:  /boxleft-has-boxright
+    defaults:
+        _controller: BackendBundle:AssignUserHasPointOfSale:boxleftHasBoxright
+    requirements:
+    methods: [POST]
+
+backend_assignuserhaspointofsale_boxleft_search:
+    path: /box-left-search
+    defaults: { _controller: BackendBundle:AssignUserHasPointOfSale:boxLeftSearch }
+    requirements:
+    methods: [POST]
+
+backend_assignuserhaspointofsale_boxright_search:
+    path: /box-right-search
+    defaults: { _controller: BackendBundle:AssignUserHasPointOfSale:boxRightSearch }
+    requirements:
+    methods: [POST]
+
+backend_assignuserhaspointofsale_info:
+    path: /info
+    defaults: { _controller: BackendBundle:AssignUserHasPointOfSale:info }
+    requirements:
+    methods: [POST]
+

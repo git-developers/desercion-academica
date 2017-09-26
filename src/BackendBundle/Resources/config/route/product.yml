@@ -1,0 +1,24 @@
+backend_product_index:
+    path: /
+    defaults: { _controller: 'BackendBundle:Product:index' }
+    methods: [GET]
+backend_product_create:
+    path: /create
+    defaults: { _controller: 'BackendBundle:Product:create' }
+    methods: [POST]
+backend_product_edit:
+    path: /edit
+    defaults: { _controller: 'BackendBundle:Product:edit' }
+    methods: [POST, PUT]
+backend_product_delete:
+    path: /delete
+    defaults: { _controller: 'BackendBundle:Product:delete' }
+    methods: [POST, DELETE]
+backend_product_view:
+    path: /view
+    defaults: { _controller: 'BackendBundle:Product:view' }
+    methods: [POST]
+backend_product_info:
+    path: /info
+    defaults: { _controller: 'BackendBundle:Product:info' }
+    methods: [POST]

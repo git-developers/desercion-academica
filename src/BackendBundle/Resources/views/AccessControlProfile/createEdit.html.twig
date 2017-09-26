@@ -1,0 +1,118 @@
+{% extends "BackendBundle::template.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+
+        });
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-fw fa-expeditedssl"></i> Perfil
+            <small>{{ action }}</small>
+            {% if id is not null %}
+                <button type="button" class="btn btn-primary btn-xs">{{ id }}</button>
+            {% endif %}
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+
+                    {#
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Horizontal Form</h3>
+                    </div>
+                    #}
+
+                    {{ form_errors(formEntity) }}
+                    {{ form_start(formEntity)}}
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                {{ form_label(formEntity.name) }}
+                                {{ form_widget(formEntity.name) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_widget(formEntity.submit) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                {{ form_label(formEntity.permission) }}
+
+                                {% block choice_widget %}
+                                {% spaceless %}
+                                    <div>
+                                        <div>
+                                            <div>
+                                                {% set value = null %}
+                                                {% set tagNew = null %}
+                                                {% set tagOld = null %}
+                                                {% for child in formEntity.permission.children %}
+
+                                                    {% set choiceView = formEntity.permission.vars.choices[child.vars.value] %}
+                                                    {% set tagNew = choiceView.data.groupPermissionTag %}
+
+                                                    {% if tagNew != tagOld %}
+                                                        {% set tagOld = choiceView.data.groupPermissionTag %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="box box-success box-solid" style="min-height: 250px; ">
+                                                                    <div class="box-header with-border">
+                                                                        <h3 class="box-title">{{ tagNew }}</h3>
+                                                                    </div>
+                                                                    <div class="box-body">
+                                                                        {% endif %}
+                                                                        <div class="radio">
+                                                                            <label>
+                                                                                {{ form_widget(child, {'attr': {'class': 'flat-red', 'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                                {{ form_label(child, null, { 'label_attr': {'class': 'control-label '} }) }}
+                                                                            </label>
+                                                                        </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endspaceless %}
+                                {% endblock choice_widget %}
+                            </div>
+                        </div>
+
+                    </div>
+                    {{ form_end(formEntity)}}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

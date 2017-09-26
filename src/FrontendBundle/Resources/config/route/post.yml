@@ -1,0 +1,14 @@
+frontend_post_redirect:
+    path: /
+    defaults: { _controller: FrontendBundle:Post:redirect }
+    requirements:
+        _method:  GET
+
+frontend_post_index:
+    path: /{id}/{slug}
+    defaults: { _controller: FrontendBundle:Post:index }
+    requirements:
+        _method:  GET
+    defaults:
+        id: default
+        slug: default

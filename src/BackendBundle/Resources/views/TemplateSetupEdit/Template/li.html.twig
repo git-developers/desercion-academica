@@ -1,0 +1,31 @@
+{% spaceless %}
+
+    {% set templateObj = entity[template.assign_group_name_key_1] %}
+    {% set module = entity[template.assign_group_name_key_2] %}
+
+    <a href="{{ path('backend_setupedittemplate_module', {template_has_module_id:entity.id_increment}) }}">
+
+        {% set bg = '' %}
+        {% if app.request.get('_route') == 'backend_setupedittemplate_module' and template_has_module_id == entity.id_increment %}
+            {% set bg = 'bg-light-blue' %}
+        {% endif %}
+
+        <span class="{{ template.module_span ~ ' ' ~ bg }}" title="{{ entity.path }}">
+
+            <span class="badge {{ badge_color }}">
+                {{ entity.id_increment }}
+            </span>
+
+            <span id="span-{{ entity.id_increment }}" >
+                <span class="label label-default">
+                    {{ module.id_increment|default() }}
+                </span>
+
+                <span class="text">
+                    {{ entity.name }}
+                </span>
+            </span>
+
+        </span>
+    </a>
+{% endspaceless %}

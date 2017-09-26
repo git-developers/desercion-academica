@@ -1,0 +1,28 @@
+backend_googledrive_account_permissions:
+    path: /account-permissions/
+    defaults:
+        _controller: BackendBundle:GoogleDrive:accountPermissions
+    requirements:
+        _method: GET, POST
+
+backend_googledrive_revoke_token:
+    path: /revoke-token
+    defaults:
+        _controller: BackendBundle:GoogleDrive:revokeToken
+    requirements:
+        _method: GET
+
+backend_googledrive_clientsecret:
+    path: /client-Secret
+    defaults:
+        _controller: BackendBundle:GoogleDrive:clientSecret
+    requirements:
+        _method: GET
+
+backend_googledrive_index:
+    path: /{id}
+    defaults:
+        _controller: BackendBundle:GoogleDrive:index
+        id: ''
+    requirements:
+        _method: GET, POST

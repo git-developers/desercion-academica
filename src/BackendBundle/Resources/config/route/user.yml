@@ -1,0 +1,51 @@
+backend_user_index:
+    path:  /
+    defaults:
+        _controller: BackendBundle:User:index
+    methods: [GET]
+
+backend_user_create:
+    path:  /create
+    defaults:
+        _controller: BackendBundle:User:create
+    methods: [POST]
+
+backend_user_edit:
+    path:  /edit
+    defaults:
+        _controller: BackendBundle:User:edit
+    requirements:
+    methods: [POST, PUT]
+
+backend_user_delete:
+    path:  /delete
+    defaults:
+        _controller: BackendBundle:User:delete
+    requirements:
+    methods: [POST,DELETE]
+
+backend_user_view:
+    path:  /view
+    defaults:
+        _controller: BackendBundle:User:view
+    requirements:
+    methods: [POST]
+
+backend_user_info:
+    path:  /info
+    defaults:
+        _controller: BackendBundle:User:info
+    requirements:
+    methods: [POST]
+
+backend_user_search:
+    path: /search
+    defaults: { _controller: BackendBundle:User:search }
+    requirements:
+    methods: [POST]
+
+backend_user_change_password:
+    path: /change-password
+    defaults: { _controller: BackendBundle:User:changepassword }
+    requirements:
+    methods: [POST, PUT]

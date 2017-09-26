@@ -1,0 +1,24 @@
+backend_template_index:
+    path: /
+    defaults: { _controller: 'BackendBundle:Template:index' }
+    methods: [GET]
+backend_template_create:
+    path: /create
+    defaults: { _controller: 'BackendBundle:Template:create' }
+    methods: [POST]
+backend_template_edit:
+    path: /edit
+    defaults: { _controller: 'BackendBundle:Template:edit' }
+    methods: [POST, PUT]
+backend_template_delete:
+    path: /delete
+    defaults: { _controller: 'BackendBundle:Template:delete' }
+    methods: [POST, DELETE]
+backend_template_view:
+    path: /view
+    defaults: { _controller: 'BackendBundle:Template:view' }
+    methods: [POST]
+backend_template_info:
+    path: /info
+    defaults: { _controller: 'BackendBundle:Template:info' }
+    methods: [POST]

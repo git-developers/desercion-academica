@@ -1,0 +1,49 @@
+{% spaceless %}
+    {% for product in products %}
+
+        {% set isAssigned = false %}
+
+        {% if product.id_increment in productAssignedkeys %}
+            {% set isAssigned = true %}
+        {% endif %}
+
+        <li class="x-hand" data-id="{{ product.id_increment }}" id="li-product-{{ product.id_increment }}">
+
+            <span class="handle ui-sortable-handle">
+                <i class="fa fa-ellipsis-v"></i>
+                <i class="fa fa-ellipsis-v"></i>
+            </span>
+
+            <input
+                type="checkbox"
+                name="product[]"
+                class="product-checkbox"
+                value="{{ product.id_increment }}"
+                {{ isAssigned ? 'checked="checked"' : '' }}>
+
+            <span class="badge bg-light-blue">
+                {{ product.id_increment }}
+            </span>
+
+            <small class="label label-default">
+                {{ product.code }}
+            </small>
+
+            <span class="text">
+                {{ product.name }}
+            </span>
+
+            <div
+                class="tools"
+                {{ isAssigned ? 'style="display: block"' : '' }}>
+                <i class="fa fa-fw fa-2x fa-check-circle-o"></i>
+            </div>
+        </li>
+    {% else %}
+        <li class="">
+            <span class="text">
+                No hay productos.
+            </span>
+        </li>
+    {% endfor %}
+{% endspaceless %}

@@ -1,0 +1,12 @@
+frontend_user_index:
+    path: /
+    defaults: { _controller: FrontendBundle:User:index }
+    requirements:
+        _method:  GET
+
+frontend_user_register:
+    path: /register
+    defaults: { _controller: FrontendBundle:User:create }
+    requirements:
+        _method:  GET
+

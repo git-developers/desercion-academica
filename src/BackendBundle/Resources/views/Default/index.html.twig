@@ -1,0 +1,104 @@
+{% extends "CoreBundle::template.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#AdminLTE dashboard demo (This is only for demo purposes)#}
+    <script src="{{ asset('bundles/backend/dist/js/pages/dashboard.js')}}"></script>
+
+    {#AdminLTE for demo purposes#}
+    <script src="{{ asset('bundles/backend/dist/js/demo.js')}}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            Dashboard
+            <small>Control panel</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="small-box bg-aqua x-hand" onclick="location.href='{{ path('backend_registerattendanceteacher_index') }}';">
+                    <div class="inner" style="padding-bottom: 40px">
+                        <h3>Registrar asistencia</h3>
+                        <p>Docente</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-check-square-o"></i>
+                    </div>
+                    <a href="{{ path('backend_registerattendanceteacher_index') }}" class="small-box-footer">
+                        info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="small-box bg-green">
+                    <div class="inner" style="padding-bottom: 40px">
+                        <h3>Registrar asistencia</h3>
+                        <p>Alumno</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-check-square-o"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="small-box bg-yellow">
+                    <div class="inner" style="padding-bottom: 40px">
+                        <h3>Comparar</h3>
+                        <p>Notas</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-exchange"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="small-box bg-red">
+                    <div class="inner" style="padding-bottom: 40px">
+                        <h3>Test</h3>
+                        <p>Unique Visitors</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-file-text"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

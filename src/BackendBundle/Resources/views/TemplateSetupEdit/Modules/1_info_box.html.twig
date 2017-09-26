@@ -1,0 +1,31 @@
+{% spaceless %}
+
+    {#
+    <div class="callout bg-light-blue">
+        <h4>{{ templateHasModule.template.name }}</h4>
+    </div>
+    #}
+
+
+    <div class="info-box bg-light-blue">
+
+        <span class="info-box-icon">
+            <i class="fa fa-pencil-square-o"></i>
+            <i class="fa fa-thumbs-o-up" style="display: none"></i>
+        </span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">code: {{ templateHasModule.template.code }}</span>
+            <span class="info-box-number">{{ templateHasModule.template.name }}</span>
+
+            <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+            </div>
+            <span class="progress-description">
+                ----
+            </span>
+        </div>
+
+    </div>
+
+{% endspaceless %}

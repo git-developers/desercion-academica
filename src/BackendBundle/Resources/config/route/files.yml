@@ -1,0 +1,33 @@
+backend_files_save:
+    path: /save
+    condition: 'request.isXmlHttpRequest()'
+    defaults:
+        _controller: BackendBundle:Files:save
+    requirements:
+        _method: POST
+
+backend_files_delete_one:
+    path: /delete-one
+    condition: 'request.isXmlHttpRequest()'
+    defaults:
+        _controller: BackendBundle:Files:deleteOne
+    methods: [DELETE]
+
+backend_files_delete_many:
+    path: /delete-many
+    condition: 'request.isXmlHttpRequest()'
+    defaults:
+        _controller: BackendBundle:Files:deleteMany
+    methods: [DELETE]
+
+backend_files_watch:
+    path: /watch/{slug}
+    defaults:
+        _controller: BackendBundle:Files:watch
+    methods: [GET, POST]
+
+backend_files_index:
+    path: /
+    defaults:
+        _controller: BackendBundle:Files:index
+    methods: [GET, POST]

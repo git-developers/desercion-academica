@@ -1,0 +1,205 @@
+{% extends "BackendBundle:Files:template.html.twig" %}
+
+{% block bodyclass %}tianos-files{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    '@CoreBundle/Resources/public/assets/plugins/datatables/dataTables.bootstrap.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    '@CoreBundle/Resources/public/assets/plugins/datatables/jquery.dataTables.js'
+    '@CoreBundle/Resources/public/assets/plugins/datatables/dataTables.bootstrap.min.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {#
+    "bLengthChange": false,
+    "bFilter": false,
+    "bSort": true,
+    "bInfo": true,
+    "bAutoWidth": false,
+    #}
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            var tableJson = $('#table-json').DataTable({
+                "lengthMenu": [[50, 100, 150, -1], [50, 100, 150, "Todos"]],
+                "dom": '<"top"iflp><"clear">rt<"bottom"iflp>',
+//                "order": [[ 0, "desc" ]],
+//                "ordering": true,
+                "paging": true,
+                "info": true,
+                "autoWidth": true,
+                "filter": true,
+                "language": {
+                    "url": "{{ asset('bundles/core/datatables/extensions/language/spanish.json')}}"
+                },
+                "data": {{ entitiesJson|raw }},
+                "columns": [
+                    {
+                        "data": function (obj) {
+                            return '<img src="' + obj.icon_link +  '" class="img-thumbnail">';
+                        }
+                    },
+                    {
+                        "data": function (obj) {
+                            var url = '{{ path('backend_files_watch', {'slug': 'slug'}) }}';
+                            url = url.replace('slug', obj.slug);
+                            return '<a href="' + url + '">' + obj.name + '</a>';
+                        }
+                    },
+                    {
+                        "data": function (obj) {
+                            return '<small class="label label-default">'+obj.created_at+'</small>';
+                        }
+                    },
+                    {
+                        "data": function (obj) {
+                            var likes = '<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="likes 5079"><i class="fa fa-thumbs-o-up"></i> 75763648</button>';
+                            var views = '<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="vistas 4635"><i class="fa fa-eye"></i> 34543654</button>';
+                            return likes + '&nbsp' + views;
+                        }
+                    },
+                    {
+                        "data": function (obj) {
+
+                            var url = '{{ path('backend_files_watch', {'slug': 'slug'}) }}';
+                            url = url.replace('slug', obj.slug);
+
+                            var delete_btn = '<button type="button" title="delete" class="btn btn-danger btn-xs btn-delete" data-toggle="modal" data-target="#modal-delete" data-id="' + obj.unique_id + '" data-name="' + encodeURIComponent(obj.name) + '"><i class="fa fa-fw fa-trash"></i></button>';
+                            var edit_btn = '<button type="button" title="editar" class="btn btn-warning btn-xs" data-toggle="tooltip"><i class="fa fa-fw fa-pencil"></i></button>';
+                            return edit_btn + '&nbsp' + delete_btn;
+                        }
+                    },
+                ],
+                "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $(nRow).attr('id', 'item-' + aData.unique_id);
+//                    $(nRow).attr("class", "alert");
+                    return nRow;
+                }
+            });
+
+            /*** DELETE ***/
+            $('#table-json tbody').on('click', 'button.btn-delete', function () {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                var name = decodeURIComponent(name);
+                $('#modal-delete p#file-name').html(name);
+                $('#modal-delete button#btn-delete-accept').data('id',id);
+            });
+
+            $(document).on('click', '#btn-delete-accept', function () {
+
+                var id = $('#modal-delete button#btn-delete-accept').data('id');
+                var tr = $('table#table-json tbody tr#item-' + id);
+
+                $.ajax({
+                    type: 'post',
+                    url: "{{ path('backend_files_delete_one') }}",
+                    dataType: "json",
+                    data: {
+                        'id': id
+                    },
+                    success: function(data) {
+                        if(data.status == 'ok') {
+                            tr.remove();
+                            $('#modal-delete').modal('hide');
+                        }else if(data.status == 'access-denied') {
+                            alert('Acceso denegado: no tiene permisos para eliminar');
+                        }else{
+                            alert('no se borro item con id: '+ id);
+                        }
+                    }
+                });
+            });
+            /*** DELETE ***/
+
+        });
+
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-files-o"></i> Mis archivos
+            <small>lista</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box"> {#box-solid box-widget#}
+
+                    {#
+                    <div class="box-header">
+                        <h3 class="box-title">Data Table With Full Features</h3>
+                    </div>
+                    #}
+
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-sm-12 table-responsive">
+                                <table id="table-json" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 5%">icon</th>
+                                            <th>nombre</th>
+                                            <th style="width: 20%"><i class="fa fa-calendar"></i> creado</th>
+                                            <th style="width: 10%"><i class="fa fa-info-circle"></i> info</th>
+                                            <th style="width: 10%"></th>
+                                        </tr>
+                                    </thead>
+
+                                    {#<tfoot>#}
+                                    {#<tr>#}
+                                        {#<th>icon</th>#}
+                                        {#<th>nombre</th>#}
+                                        {#<th>creado</th>#}
+                                        {#<th>vistas</th>#}
+                                    {#</tr>#}
+                                    {#</tfoot>#}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{ include("BackendBundle:Files:Modal/modal_delete.html.twig") }}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

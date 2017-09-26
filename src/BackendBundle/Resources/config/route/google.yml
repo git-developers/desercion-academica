@@ -1,0 +1,7 @@
+backend_google_qr:
+    path: /qr/{link}
+    defaults:
+        _controller: BackendBundle:Google:qr
+        link: ''
+    requirements:
+        _method: POST

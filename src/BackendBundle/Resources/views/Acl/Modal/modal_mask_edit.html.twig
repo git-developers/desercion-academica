@@ -1,0 +1,87 @@
+<div class="modal modal-warning fade" id="modal-mask">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cambiar permisos (mask)</h4>
+            </div>
+
+            {{ form_start(formMaskEntity)}}
+
+                {{ form_widget(formMaskEntity.entry) }}
+
+                <div class="modal-body">
+                    <div class="box box-solid" style="background: none">
+
+                        <div class="box-body">
+
+                            <div class="callout callout-warning" style="background-color: #db8b0b !important">
+                                <h4>Entry con id: <span id="entry-id"></span></h4>
+                                {#<p>Entry con id: <span id="entry-id"></span></p>#}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(formMaskEntity.view) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formMaskEntity.view) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(formMaskEntity.create) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formMaskEntity.create) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(formMaskEntity.edit) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formMaskEntity.edit) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(formMaskEntity.delete) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formMaskEntity.delete) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(formMaskEntity.undelete) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formMaskEntity.undelete) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(formMaskEntity.operator) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formMaskEntity.operator) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(formMaskEntity.master) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formMaskEntity.master) }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                        {{ form_widget(formMaskEntity.submit) }}
+                    </div>
+
+                </div>
+            {{ form_end(formMaskEntity)}}
+
+        </div>
+    </div>
+</div>

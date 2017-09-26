@@ -1,0 +1,11 @@
+{% import "CoreBundle::Macro/tree_template.html.twig" as macro %}
+
+<div class="{{ defaults.module_main_div }} box-body">
+    <ul id="{{ defaults.module_main_ul }}">
+        {% if templateHasModuleTree is not empty %}
+            {{ macro.tree_template(templateHasModuleTree, -1, defaults, templateHasModule.idIncrement) }}
+        {% else %}
+            <p>No hay items que mostrar</p>
+        {% endif %}
+    </ul>
+</div>

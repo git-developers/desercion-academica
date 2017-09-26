@@ -1,0 +1,71 @@
+{% extends "CoreBundle::template.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        input[type=radio]{
+            height: 20px;
+            width: 20px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            Registrar asistencia de profesor
+            <small>Control panel</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Registrar</h3>
+                    </div>
+                    <form role="form">
+                        <div class="box-body">
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="ingreso">Marcar ingreso</label>
+                                        <input type="radio" name="register" id="ingreso">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="salida">Marcar salida</label>
+                                        <input type="radio" name="register" id="salida">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

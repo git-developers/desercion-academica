@@ -1,0 +1,4 @@
+backend_registerattendanceteacher_index:
+    path: /
+    defaults: { _controller: 'BackendBundle:RegisterAttendanceTeacher:index' }
+    methods: [GET]

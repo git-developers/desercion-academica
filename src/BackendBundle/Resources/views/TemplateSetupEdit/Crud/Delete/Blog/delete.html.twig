@@ -1,0 +1,11 @@
+{% extends 'CoreBundle::Crud/Template/api_content.html.twig' %}
+
+{% block api_content %}
+
+    {% set template_has_module_id = form_data.template_has_module_id %}
+
+    <input type="hidden" name="id" value="{{ id }}">
+    <input type="hidden" name="form_data[template_has_module_id]" value="{{ template_has_module_id }}">
+
+    <p>Esta seguro BLOG --- ?</p>
+{% endblock %}

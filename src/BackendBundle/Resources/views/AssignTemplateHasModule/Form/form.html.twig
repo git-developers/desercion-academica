@@ -1,0 +1,108 @@
+{% spaceless %}
+
+    {#{% if id is defined %}#}
+        {#<input type="hidden" value="{{ id }}" name="id">#}
+    {#{% endif %}#}
+
+    {{ form_widget(formEntity._token) }}
+
+    <div class="row">
+
+        {#formEntity.settings.vars.full_name#}
+
+        {#LEFT#}
+        <div class="col-md-6">
+
+            <div class="form-group">
+                {{ form_label(formEntity.name) }}
+                {{ form_widget(formEntity.name) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(formEntity.path) }}
+                {{ form_widget(formEntity.path) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(formEntity.templateName) }}
+                {{ form_widget(formEntity.templateName) }}
+            </div>
+
+            {% set accordion_id = 'accordion-' ~ random() %}
+
+            <div class="box-group" id="{{ accordion_id }}">
+                {% for key, setting in box.settings %}
+
+                    {% set index = loop.index ~ '-' ~ random() %}
+
+                    <div class="panel box {{ randomBoxColor() }}">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">
+                                <a data-toggle="collapse" data-parent="#{{ accordion_id }}" href="#collapse-{{ index }}">
+                                    {{ setting.name }}
+                                </a>
+                            </h4>
+                            <div class="pull-right box-tools">
+                                <button type="button" class="btn btn-success btn-xs {{ key }}" data-toggle="tooltip" title="" data-original-title="agregar">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="collapse-{{ index }}" class="panel-collapse collapse">
+                            <div class="box-body">
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        {#LEFT#}
+
+
+        {#RIGHT#}
+        <div class="col-md-6">
+            <label class="required" for="modules">
+                Modules
+            </label>
+            <div class="form-group" style="max-height: 400px; min-height: 400px;">
+                <ul class="{{ boxRight.modal_assign_class }} todo-list ui-sortable">
+                    {% for key, entity in formEntity.module.vars.choices %}
+                        <li class="x-hand">
+                            <span class="handle ui-sortable-handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                            </span>
+
+                            <input type="radio" value="{{ entity.value }}" name="{{ formEntity.module.vars.full_name }}" required>
+
+                            <span class="text">
+                                {{ entity.label|raw }}
+                            </span>
+                        </li>
+                    {% else %}
+                        <li>
+                            <span class="text">
+                                No hay resultados.
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {#RIGHT#}
+
+    </div>
+
+    <div class="form-group" style="display: none">
+        {{ form_label(formEntity.templateHasModule) }}
+        {{ form_widget(formEntity.templateHasModule) }}
+    </div>
+
+    <div class="form-group" style="display: none">
+        {{ form_label(formEntity.template) }}
+        {{ form_widget(formEntity.template) }}
+    </div>
+
+{% endspaceless %}

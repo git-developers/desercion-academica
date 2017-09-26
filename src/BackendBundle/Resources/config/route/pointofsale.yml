@@ -1,0 +1,24 @@
+backend_pointofsale_index:
+    path: /
+    defaults: { _controller: 'BackendBundle:PointOfSale:index' }
+    methods: [GET]
+backend_pointofsale_create:
+    path: /create
+    defaults: { _controller: 'BackendBundle:PointOfSale:create' }
+    methods: [POST]
+backend_pointofsale_edit:
+    path: /edit
+    defaults: { _controller: 'BackendBundle:PointOfSale:edit' }
+    methods: [POST, PUT]
+backend_pointofsale_delete:
+    path: /delete
+    defaults: { _controller: 'BackendBundle:PointOfSale:delete' }
+    methods: [POST, DELETE]
+backend_pointofsale_view:
+    path: /view
+    defaults: { _controller: 'BackendBundle:PointOfSale:view' }
+    methods: [POST]
+backend_pointofsale_info:
+    path: /info
+    defaults: { _controller: 'BackendBundle:PointOfSale:info' }
+    methods: [POST]

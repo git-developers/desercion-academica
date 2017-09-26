@@ -1,0 +1,31 @@
+# Select image from https://hub.docker.com/r/_/php/
+
+image: ubuntu:16.04
+
+cache:
+  paths:
+  - vendor/
+
+before_script:
+    - pwd
+#    - apt-get update -yqq
+#    - apt-get -y install php7.0
+#    - apt-get -y install php7.0-curl
+#    - apt-get -y install phpunit
+#    - apt-get -y install php-mbstring
+#    - apt-get -y install curl
+#    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#    - composer install
+#    - php -v
+
+
+prueba_unitaria_1:
+  script:
+    - echo 'Prueba unitaria 1'
+#    - vendor/bin/phpunit
+#    - DENTRO DEL DOCKER: bin/phpunit -c app/admin/ src/App/Bundle/CmsBundle/Tests/Controller/TestController.php
+
+
+#test:
+#  script:
+#  - vendor/bin/phpunit --configuration phpunit.xml --coverage-text --colors=never

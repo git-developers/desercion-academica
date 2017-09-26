@@ -1,0 +1,103 @@
+{% spaceless %}
+
+    <div class="box box-default">
+{#        <div class="box-header with-border">
+            <h3 class="box-title">About Me</h3>
+        </div>#}
+
+        <div class="box-body">
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Id</td>
+                        <td>
+                            <span class="label label-primary">
+                                {{ entity.idIncrement }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Module</td>
+                        <td>
+                            <span class="badge bg-aqua">
+                                {{ entity.module.nameBox }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{ entity.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Path</td>
+                        <td>{{ entity.path }}</td>
+                    </tr>
+                    <tr>
+                        <td>Template name</td>
+                        <td>{{ entity.templateName|default('[sin template]') }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+{#        <div class="box-footer">
+
+        </div>#}
+    </div>
+
+    <div class="box box-default">
+{#        <div class="box-header with-border">
+            <h3 class="box-title">About Me</h3>
+        </div>#}
+
+        <div class="box-body">
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Template nameBox</td>
+                        <td>{{ entity.template.nameBox }}</td>
+                    </tr>
+                    <tr>
+                        <td>createdAt</td>
+                        <td>
+                            <small class="label label-default">
+                                <i class="fa fa-clock-o"></i> {{ entity.createdAt|date('Y-m-d H:i:s') }}
+                            </small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>updatedAt</td>
+                        <td>
+                            <small class="label label-default">
+                                <i class="fa fa-clock-o"></i> {{ entity.updatedAt|date('Y-m-d H:i:s') }}
+                            </small>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+{#        <div class="box-footer">
+
+        </div>#}
+    </div>
+
+
+
+{% endspaceless %}

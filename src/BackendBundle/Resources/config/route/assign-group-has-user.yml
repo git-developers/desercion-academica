@@ -1,0 +1,45 @@
+backend_assigngrouphasuser_index:
+    path:  /
+    defaults:
+        _controller: BackendBundle:AssignGroupHasUser:index
+    requirements:
+    methods: [GET]
+
+backend_assigngrouphasuser_boxleft_has_boxright:
+    path:  /boxleft-has-boxright
+    defaults:
+        _controller: BackendBundle:AssignGroupHasUser:boxleftHasBoxright
+    requirements:
+    methods: [POST]
+
+backend_assigngrouphasuser_boxleft_search:
+    path: /box-left-search
+    defaults: { _controller: BackendBundle:AssignGroupHasUser:boxLeftSearch }
+    requirements:
+    methods: [POST]
+
+backend_assigngrouphasuser_boxright_search:
+    path: /box-right-search
+    defaults: { _controller: BackendBundle:AssignGroupHasUser:boxRightSearch }
+    requirements:
+    methods: [POST]
+
+backend_assigngrouphasuser_assign:
+    path:  /assign
+    defaults:
+        _controller: BackendBundle:AssignGroupHasUser:assign
+    requirements:
+    methods: [POST]
+
+backend_assigngrouphasuser_unassign:
+    path:  /un-assign
+    defaults:
+        _controller: BackendBundle:AssignGroupHasUser:unAssign
+    requirements:
+    methods: [POST]
+
+backend_assigngrouphasuser_info:
+    path: /info
+    defaults: { _controller: BackendBundle:AssignGroupHasUser:info }
+    requirements:
+    methods: [POST]

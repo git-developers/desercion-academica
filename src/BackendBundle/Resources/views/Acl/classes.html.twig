@@ -1,0 +1,177 @@
+{% extends "CoreBundle::template.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {#datatables#}
+    <link rel="stylesheet" href="{{ asset('bundles/core/assets/plugins/datatables/dataTables.bootstrap.css')}}">
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#datatables#}
+    <script src="{{ asset('bundles/core/assets/plugins/datatables/jquery.dataTables.js')}}"></script>
+    <script src="{{ asset('bundles/core/assets/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+
+    {#
+    "bLengthChange": false,
+    "bFilter": false,
+    "bSort": true,
+    "bInfo": true,
+    "bAutoWidth": false,
+    #}
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            var tableJson = $('#table-json').DataTable({
+                "lengthMenu": [[50, 100, 150, -1], [50, 100, 150, "Todos"]],
+                "dom": '<"top"iflp><"clear">rt<"bottom"iflp>',
+//                "order": [[ 0, "desc" ]],
+//                "ordering": true,
+                "paging": true,
+                "info": true,
+                "autoWidth": true,
+                "filter": true,
+                "language": {
+                    "url": "{{ asset('bundles/core/datatables/extensions/language/spanish.json')}}"
+                },
+                "data": {{ entitiesJson|raw }},
+                "columns": [
+                    {
+                        "data": function (obj) {
+                            return obj.id;
+                        }
+                    },
+                    {
+                        "data": function (obj) {
+                            return obj.class_type;
+                        }
+                    },
+                ],
+                "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $(nRow).attr("id", aData.id_increment);
+                    $(nRow).attr("class", "alert");
+                    return nRow;
+                }
+            });
+
+            /*** DELETE ***/
+            $('#table-json tbody').on('click', 'a.btn-delete', function () {
+
+                var tr = $(this).parents('tr');
+                setTrColor(tr, 'bg-red');
+                setSpanTrId();
+
+            });
+
+            $(document).on('click', '#btn-delete-accept', function () {
+
+                var id = $('.selected').attr('id');
+
+                $.ajax({
+                    type: 'post',
+                    url: "{{ path('backend_accesscontrol_role_index') }}",
+                    dataType: "json",
+                    data: {
+                        'id': id
+                    },
+                    success: function(data) {
+                        if(data.status == 'ok') {
+                            tableJson.row('.selected').remove().draw(false);
+                            $('#modal-delete').modal('hide');
+                        }else if(data.status == 'access-denied') {
+                            alert('Acceso denegado: no tiene permisos para eliminar');
+                        }else{
+                            alert('no se borro item con id: '+ id);
+                        }
+                    }
+                });
+            });
+            /*** DELETE ***/
+
+            function setSpanTrId(){
+                var id = $('.selected').attr("id");
+                $('.tr-id').html(id);
+            }
+
+            function setTrColor(tr, color){
+                if (tr.hasClass('selected')) {
+                    tr.removeClass('selected');
+                    tr.removeClass(color);
+                }
+                else {
+                    tableJson.$('tr.selected').removeClass('selected').removeClass(color);
+                    tr.addClass('selected');
+                    tr.addClass(color);
+                }
+            }
+
+            $('#modal-delete, #modal-edit').on('hidden.bs.modal', function() {
+                tableJson.$('tr.selected').removeClass('bg-yellow').removeClass('bg-red');
+            });
+
+        });
+
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-user-secret"></i> Access Control Lists • Classes
+            <small>lista</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-white"> {#box-primary#}
+
+                    {#
+                    <div class="box-header">
+                        <h3 class="box-title">Data Table With Full Features</h3>
+                    </div>
+                    #}
+
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="table-json" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                    <thead>
+                                    <tr>
+                                        <th>nombre</th>
+                                        <th>creado</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tfoot>
+                                    <tr>
+                                        <th>nombre</th>
+                                        <th>creado</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {#{{ include("BackendBundle:Profile:Modal/modal_delete.html.twig") }}#}
+
+{% endblock %}

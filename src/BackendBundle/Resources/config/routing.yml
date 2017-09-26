@@ -1,0 +1,91 @@
+backend_default:
+    resource: '@BackendBundle/Resources/config/route/default.yml'
+    prefix: /
+backend_user:
+    resource: '@BackendBundle/Resources/config/route/user.yml'
+    prefix: /user
+backend_session:
+    resource: '@BackendBundle/Resources/config/route/session.yml'
+    prefix: /session
+backend_gcm:
+    resource: '@BackendBundle/Resources/config/route/gcm.yml'
+    prefix: /gcm
+backend_google:
+    resource: '@BackendBundle/Resources/config/route/google.yml'
+    prefix: /google
+backend_googledrivesettings:
+    resource: '@BackendBundle/Resources/config/route/googledrive-settings.yml'
+    prefix: /google-drive-settings
+backend_googledrive:
+    resource: '@BackendBundle/Resources/config/route/googledrive.yml'
+    prefix: /google-drive
+backend_files:
+    resource: '@BackendBundle/Resources/config/route/files.yml'
+    prefix: /files
+backend_pointofsaletree:
+    resource: '@BackendBundle/Resources/config/route/pointofsale-tree.yml'
+    prefix: /point-of-sale-tree
+backend_acl:
+    resource: '@BackendBundle/Resources/config/route/acl.yml'
+    prefix: /acl
+backend_assignuserhaspointofsale:
+    resource: '@BackendBundle/Resources/config/route/assign-user-has-pointofsale.yml'
+    prefix: /assign-user-has-pointofsale
+backend_assigngrouphasuser:
+    resource: '@BackendBundle/Resources/config/route/assign-group-has-user.yml'
+    prefix: /assign-group-has-user
+backend_assignpointofsalehasproduct:
+    resource: '@BackendBundle/Resources/config/route/assign-pointofsale-has-product.yml'
+    prefix: /assign-pointofsale-has-product
+backend_assigntemplatehasmodule:
+    resource: '@BackendBundle/Resources/config/route/assign-template-has-module.yml'
+    prefix: /assign-template-has-module
+backend_categorytree:
+    resource: '@BackendBundle/Resources/config/route/category-tree.yml'
+    prefix: /category-tree
+backend_categorytreetoassign:
+    resource: '@BackendBundle/Resources/config/route/category-treetoassign.yml'
+    prefix: /category-tree-to-assign
+backend_templateecategory:
+    resource: '@BackendBundle/Resources/config/route/template-e-category.yml'
+    prefix: /template/e-category
+backend_setuptemplate:
+    resource: '@BackendBundle/Resources/config/route/template-setup.yml'
+    prefix: /template-setup
+backend_setupedittemplate:
+    resource: '@BackendBundle/Resources/config/route/template-setup-edit.yml'
+    prefix: /template-setup-edit
+backend_template:
+    resource: '@BackendBundle/Resources/config/route/template.yml'
+    prefix: /template
+backend_templatemodule:
+    resource: '@BackendBundle/Resources/config/route/templatemodule.yml'
+    prefix: /templatemodule
+backend_registerattendanceteacher:
+    resource: '@BackendBundle/Resources/config/route/register-attendance-teacher.yml'
+    prefix: /register-attendance-teacher
+backend_aclprofile:
+    resource: '@BackendBundle/Resources/config/route/aclprofile.yml'
+    prefix: /aclprofile
+backend_aclrole:
+    resource: '@BackendBundle/Resources/config/route/aclrole.yml'
+    prefix: /aclrole
+backend_client:
+    resource: '@BackendBundle/Resources/config/route/client.yml'
+    prefix: /client
+backend_groupofusers:
+    resource: '@BackendBundle/Resources/config/route/groupofusers.yml'
+    prefix: /groupofusers
+backend_pointofsale:
+    resource: '@BackendBundle/Resources/config/route/pointofsale.yml'
+    prefix: /pointofsale
+backend_product:
+    resource: '@BackendBundle/Resources/config/route/product.yml'
+    prefix: /product
+backend_course:
+    resource: '@BackendBundle/Resources/config/route/course.yml'
+    prefix: /course
+
+backend_assignuserhascourse:
+    resource: '@BackendBundle/Resources/config/route/assign-user-has-course.yml'
+    prefix: /assign-user-has-course

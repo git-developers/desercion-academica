@@ -1,0 +1,6 @@
+frontend_profile_index:
+    path: /{slug}
+    defaults: { _controller: FrontendBundle:Profile:index, slug: default }
+
+    requirements:
+        _method:  GET

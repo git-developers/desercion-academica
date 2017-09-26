@@ -1,0 +1,110 @@
+#    default.example:
+#        class: BackendBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+services:
+
+    backend.topic.googledrive:
+        class: BackendBundle\Services\GoogleDriveTopic
+        tags:
+            - { name: gos_web_socket.topic }
+
+    backend.service.gcm_service:
+        class: BackendBundle\Services\GcmService
+        arguments: ["@service_container"]
+
+    backend.file_uploader:
+        class: BackendBundle\Services\FileUploader
+        arguments: ['%uploads_directory%', '@service_container',]
+
+    backend.form.templatehaspagetype:
+        class: BackendBundle\Form\TemplateHasModuleType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: core.form.templatehaspagetype }
+
+    backend.form.templateeposttype:
+        class: BackendBundle\Form\TemplateEPostType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: core.form.templateeposttype }
+
+    backend.form.templateeitemtype:
+        class: BackendBundle\Form\TemplateEItemType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: core.form.templateeitemtype }
+
+    backend.form.usertype:
+        class: BackendBundle\Form\UserType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: core.form.usertype }
+
+    backend.form.useravatartype:
+        class: BackendBundle\Form\UserAvatarType
+        tags:
+            - { name: form.type, alias: backend.form.useravatartype }
+
+    backend.form.useredittype:
+        class: BackendBundle\Form\UserEditType
+        tags:
+            - { name: form.type, alias: backend.form.useredittype }
+
+    backend.form.userpasswordtype:
+        class: BackendBundle\Form\UserPasswordType
+        tags:
+            - { name: form.type, alias: backend.form.userpasswordtype }
+
+    backend.form.pointofsaletype:
+        class: BackendBundle\Form\PointOfSaleType
+        tags:
+            - { name: form.type, alias: backend.form.pointofsaletype }
+
+    backend.form.pointofsaletreetype:
+        class: BackendBundle\Form\PointOfSaleTreeType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: backend.form.pointofsaletreetype }
+
+    backend.form.clienttype:
+        class: BackendBundle\Form\ClientType
+        tags:
+            - { name: form.type, alias: backend.form.clienttype }
+
+    backend.form.pointofsalehasproductType:
+        class: BackendBundle\Form\PointOfSaleHasProductType
+        tags:
+            - { name: form.type, alias: backend.form.pointofsalehasproductType }
+
+    backend.form.categorytype:
+        class: BackendBundle\Form\CategoryType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: backend.form.categorytype }
+
+    backend.form.templatetcategorytype:
+        class: BackendBundle\Form\TemplateECategoryType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: backend.form.templatetcategorytype }
+
+    backend.form.producttype:
+        class: BackendBundle\Form\ProductType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: backend.form.producttype }
+
+    backend.form.profiletype:
+        class: BackendBundle\Form\ProfileType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: core.form.profiletype }
+
+    twig.extension.googledrive:
+        class: BackendBundle\Twig\Extension\GoogleDriveExtension
+        arguments: ['@service_container']
+        public: false
+        tags:
+         - { name: twig.extension }
+

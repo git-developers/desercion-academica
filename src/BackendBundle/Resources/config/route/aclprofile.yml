@@ -1,0 +1,24 @@
+backend_aclprofile_index:
+    path: /
+    defaults: { _controller: 'BackendBundle:AclProfile:index' }
+    methods: [GET]
+backend_aclprofile_create:
+    path: /create
+    defaults: { _controller: 'BackendBundle:AclProfile:create' }
+    methods: [POST]
+backend_aclprofile_edit:
+    path: /edit
+    defaults: { _controller: 'BackendBundle:AclProfile:edit' }
+    methods: [POST, PUT]
+backend_aclprofile_delete:
+    path: /delete
+    defaults: { _controller: 'BackendBundle:AclProfile:delete' }
+    methods: [POST, DELETE]
+backend_aclprofile_view:
+    path: /view
+    defaults: { _controller: 'BackendBundle:AclProfile:view' }
+    methods: [POST]
+backend_aclprofile_info:
+    path: /info
+    defaults: { _controller: 'BackendBundle:AclProfile:info' }
+    methods: [POST]

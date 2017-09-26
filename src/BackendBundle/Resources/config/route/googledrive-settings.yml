@@ -1,0 +1,7 @@
+backend_googledrivesettings_mimetype:
+    path: /mime-type
+    defaults:
+        _controller: BackendBundle:GoogleDrive:mimetype
+#        id: ''
+    requirements:
+        _method: GET, POST

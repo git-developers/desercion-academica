@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="mockup col-md-12">
+
+        {#{% for i in 1..entity.numbers_of_blocks %}#}
+        {% for i in 1..10 %}
+            {#<a href="{{ path('core_templatesetup_manage',{template_id:entity.id_increment}) }}">#}
+            <a href="">
+                <picture>
+                    {% set img = asset('bundles/core/template-frontend/template-3/block-images/block-' ~ i ~ '.png') %}
+                    <source media="(min-width: 64em)" srcset="{{ img }}">
+                    <source media="(min-width: 37.5em)" srcset="{{ img }}">
+                    <source srcset="{{ img }}">
+                    <img src="{{ img }}" alt="" class="img-thumbnail" style=""> {# 'background-color: #3c8dbc;' #}
+                </picture>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+

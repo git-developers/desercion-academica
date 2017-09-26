@@ -1,0 +1,77 @@
+{% spaceless %}
+
+    {% if id is defined %}
+        <input type="hidden" value="{{ id }}" name="id">
+    {% endif %}
+
+    {{ form_widget(formEntity._token) }}
+
+    <div class="form-group">
+        {{ form_label(formEntity.name) }}
+        {{ form_widget(formEntity.name) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formEntity.path) }}
+        {{ form_widget(formEntity.path) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formEntity.templateName) }}
+        {{ form_widget(formEntity.templateName) }}
+    </div>
+
+    {% set settings = formEntity.settings.vars.value %}
+    {% set accordion_id = 'accordion-' ~ random() %}
+
+    <div class="box-group" id="{{ accordion_id }}">
+        {% for key, setting in box.settings %}
+
+            {% set index = loop.index ~ '-' ~ random() %}
+
+            <div class="panel box {{ randomBoxColor() }}">
+                <div class="box-header with-border">
+                    <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#{{ accordion_id }}" href="#collapse-{{ index }}">
+                            {{ setting.name }}
+                        </a>
+                    </h4>
+                    <div class="pull-right box-tools">
+                        <button type="button" class="btn btn-success btn-xs {{ key }}" data-toggle="tooltip" title="" data-original-title="agregar">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="collapse-{{ index }}" class="panel-collapse collapse">
+                    <div class="box-body">
+
+                        {% if settings[key] is defined %}
+                            {% for i, obj in settings[key] %}
+                                <div class="input-group x-hand">
+
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-{{ setting.icon }}"></i>
+                                    </span>
+
+                                    <input
+                                        type="text"
+                                        name="template_has_module[settings][{{ key }}][]"
+                                        class="form-control"
+                                        placeholder="nombre"
+                                        value="{{ obj }}">
+
+                                    <span class="input-group-addon {{ key }}">
+                                        <i class="fa fa-trash-o"></i>
+                                    </span>
+
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endspaceless %}

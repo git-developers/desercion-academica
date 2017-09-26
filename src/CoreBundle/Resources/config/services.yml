@@ -1,0 +1,119 @@
+services:
+
+    core.listener.doctrine:
+        class: CoreBundle\EventListener\DoctrineListenerService
+        arguments: ["@service_container", "@security.token_storage"]
+        tags:
+          - { name: doctrine.event_listener, event: postUpdate }
+          - { name: doctrine.event_listener, event: preUpdate }
+          - { name: doctrine.event_listener, event: prePersist }
+          - { name: doctrine.event_listener, event: postLoad }
+          - { name: doctrine.event_listener, event: postRemove }
+
+    core.module:
+        class: CoreBundle\Services\ModuleBuilder\ModuleBuilder
+        arguments: ["@service_container"]
+        tags:
+            - { name: app.module, alias: app.module }
+
+    core.service.google_service_drive:
+        class: CoreBundle\Services\Google\GoogleService
+        arguments: [ "@doctrine.orm.entity_manager", "@service_container", "@twig" ]
+
+    core.service.listhastree:
+        class: CoreBundle\Services\ListHasTree\ListHasTree
+        arguments: [ "@router", "@request_stack" ]
+        tags:
+            - { name: core.service.listhastree, alias: core.service.listhastree }
+
+    core.service.template:
+        class: CoreBundle\Services\Template\Template
+        arguments: [ "@router", "@request_stack"]
+        tags:
+            - { name: core.service.template, alias: core.service.template }
+
+    core.service.cruduser:
+        class: CoreBundle\Services\CrudUser\CrudUser
+        arguments: [ "@router", "@request_stack" ]
+        tags:
+            - { name: core.service.cruduser, alias: core.service.cruduser }
+
+    core.service.crud:
+        class: CoreBundle\Services\Crud\Crud
+        arguments: [ "@router", "@request_stack" ]
+        tags:
+            - { name: core.service.crud, alias: core.service.crud }
+
+    core.service.tree:
+        class: CoreBundle\Services\Tree\Tree
+        arguments: [ "@router", "@request_stack" ]
+        tags:
+            - { name: core.service.tree, alias: core.service.tree }
+
+    core.service.treetoassign:
+        class: CoreBundle\Services\TreeToAssign\TreeToAssign
+        arguments: [ "@router", "@request_stack" ]
+        tags:
+            - { name: core.service.treetoassign, alias: core.service.treetoassign }
+
+    core.service.boxonetomany:
+        class: CoreBundle\Services\BoxOneToMany\BoxOneToMany
+        arguments: [ "@router", "@request_stack" ]
+        tags:
+            - { name: core.service.boxonetomany, alias: core.service.boxonetomany }
+
+    core.service.boxonetomanyassoc:
+        class: CoreBundle\Services\BoxOneToManyAssoc\BoxOneToManyAssoc
+        arguments: [ "@router", "@request_stack" ]
+        tags:
+            - { name: core.service.boxonetomanyassoc, alias: core.service.boxonetomanyassoc }
+
+    core.service.boxonetomanygroup:
+        class: CoreBundle\Services\BoxOneToManyGroup\BoxOneToManyGroup
+        arguments: [ "@router", "@request_stack" ]
+        tags:
+            - { name: core.service.boxonetomanygroup, alias: core.service.boxonetomanygroup }
+
+    twig.extension.crud:
+         class: CoreBundle\Twig\Extension\CrudExtension
+         arguments: ["@request_stack"]
+         public: false
+         tags:
+             - { name: twig.extension }
+
+    twig.extension.common:
+         class: CoreBundle\Twig\Extension\CommonExtension
+         public: false
+         tags:
+             - { name: twig.extension }
+
+    twig.extension.boxmapper:
+         class: CoreBundle\Twig\Extension\BoxMapperExtension
+         public: false
+         tags:
+             - { name: twig.extension }
+
+    twig.extension.treetoassign:
+         class: CoreBundle\Twig\Extension\TreeToAssignExtension
+         public: false
+         tags:
+             - { name: twig.extension }
+
+    twig.extension.template:
+         class: CoreBundle\Twig\Extension\Template\TemplateExtension
+         arguments: ["@doctrine.orm.entity_manager", "@jms_serializer"]
+         public: false
+         tags:
+             - { name: twig.extension }
+
+    twig.extension.user:
+        class: CoreBundle\Twig\Extension\UserExtension
+        public: false
+        tags:
+           - { name: twig.extension }
+
+    core.form.aclmasktype:
+        class: CoreBundle\Form\AclMaskType
+        arguments: ['@service_container']
+        tags:
+            - { name: form.type, alias: core.form.aclmasktype }

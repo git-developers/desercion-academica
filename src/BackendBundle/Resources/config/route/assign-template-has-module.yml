@@ -1,0 +1,55 @@
+backend_assigntemplatehasmodule_index:
+    path:  /
+    defaults:
+        _controller: BackendBundle:AssignTemplateHasModule:index
+    requirements:
+    methods: [GET]
+
+backend_assigntemplatehasmodule_info:
+    path: /info
+    defaults: { _controller: BackendBundle:AssignTemplateHasModule:info }
+    requirements:
+    methods: [POST]
+
+backend_assigntemplatehasmodule_boxleft_search:
+    path: /box-left-search
+    defaults: { _controller: BackendBundle:AssignTemplateHasModule:boxLeftSearch }
+    requirements:
+    methods: [POST]
+
+backend_assigntemplatehasmodule_boxleft_has_boxright:
+    path:  /boxleft-has-boxright
+    defaults:
+        _controller: BackendBundle:AssignTemplateHasModule:boxleftHasBoxright
+    requirements:
+    methods: [POST]
+
+backend_assigntemplatehasmodule_boxright_assign:
+    path: /box-right-assign
+    defaults: { _controller: BackendBundle:AssignTemplateHasModule:boxRightAssign }
+    requirements:
+    methods: [POST]
+
+backend_assigntemplatehasmodule_boxright_assign_view:
+    path: /box-right-assign-view
+    defaults: { _controller: BackendBundle:AssignTemplateHasModule:boxRightAssignView }
+    requirements:
+    methods: [POST]
+
+backend_assigntemplatehasmodule_boxright_assign_edit:
+    path: /box-right-assign-edit
+    defaults: { _controller: BackendBundle:AssignTemplateHasModule:boxRightAssignEdit }
+    requirements:
+    methods: [POST]
+
+backend_assigntemplatehasmodule_boxright_assign_child:
+    path: /box-right-assign-child
+    defaults: { _controller: BackendBundle:AssignTemplateHasModule:boxRightAssignChild }
+    requirements:
+    methods: [POST]
+
+backend_assigntemplatehasmodule_boxright_unassign:
+    path: /box-right-unassign
+    defaults: { _controller: BackendBundle:AssignTemplateHasModule:boxRightUnAssign }
+    requirements:
+    methods: [DELETE]

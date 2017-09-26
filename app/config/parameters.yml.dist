@@ -1,0 +1,28 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: tianos_db
+    database_user: root
+    database_password: ~
+    mailer_transport: gmail
+    mailer_host: smtp.gmail.com
+    mailer_user: ~
+    mailer_password: ~
+    secret: ad180a8a2e35f67cdc450e5a16b90da019165bfa
+    locale: Es_es
+    app_id: 129906047219991
+    theme_color: FF9C00
+    project_version: 2.4.1
+    project_url: tianos.com
+    google_client_id: ~
+    google_client_secret: ~
+
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    # Upload images directory
+    uploads_directory: '%kernel.root_dir%/../web/uploads/'
+

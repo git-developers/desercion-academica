@@ -1,0 +1,40 @@
+backend_templateecategory_index:
+    path: /
+    defaults:
+        _controller: BackendBundle:TemplateECategory:index
+    methods: [GET]
+
+backend_templateecategory_create:
+    path: /create
+    defaults:
+        _controller: BackendBundle:TemplateECategory:create
+    requirements:
+    methods: [POST]
+
+backend_templateecategory_createchild:
+    path: /create-child
+    defaults:
+        _controller: BackendBundle:TemplateECategory:createchild
+    requirements:
+    methods: [POST]
+
+backend_templateecategory_edit:
+    path:  /edit
+    defaults:
+        _controller: BackendBundle:TemplateECategory:edit
+    requirements:
+    methods: [POST, PUT]
+
+backend_templateecategory_delete:
+    path: /delete
+    defaults:
+        _controller: BackendBundle:TemplateECategory:delete
+    requirements:
+    methods: [POST, DELETE]
+
+backend_templateecategory_view:
+    path: /view
+    defaults:
+        _controller: BackendBundle:TemplateECategory:view
+    requirements:
+    methods: [POST]

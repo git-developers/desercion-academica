@@ -1,0 +1,24 @@
+backend_groupofusers_index:
+    path: /
+    defaults: { _controller: 'BackendBundle:GroupOfUsers:index' }
+    methods: [GET]
+backend_groupofusers_create:
+    path: /create
+    defaults: { _controller: 'BackendBundle:GroupOfUsers:create' }
+    methods: [POST]
+backend_groupofusers_edit:
+    path: /edit
+    defaults: { _controller: 'BackendBundle:GroupOfUsers:edit' }
+    methods: [POST, PUT]
+backend_groupofusers_delete:
+    path: /delete
+    defaults: { _controller: 'BackendBundle:GroupOfUsers:delete' }
+    methods: [POST, DELETE]
+backend_groupofusers_view:
+    path: /view
+    defaults: { _controller: 'BackendBundle:GroupOfUsers:view' }
+    methods: [POST]
+backend_groupofusers_info:
+    path: /info
+    defaults: { _controller: 'BackendBundle:GroupOfUsers:info' }
+    methods: [POST]

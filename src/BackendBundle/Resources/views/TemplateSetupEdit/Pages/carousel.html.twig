@@ -1,0 +1,36 @@
+{% spaceless %}
+
+    {% set random = random() %}
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div id="carousel-{{ random }}" class="carousel slide" data-ride="carousel">
+
+                <ol class="carousel-indicators">
+                    {% for key, carousel in carousels %}
+                        <li data-target="#carousel-{{ random }}" data-slide-to="{{ key }}" class="{{ loop.first ? 'active' : '' }}"></li>
+                    {% endfor %}
+                </ol>
+
+                <div class="carousel-inner">
+                    {% for key, carousel in carousels %}
+                        <div class="item {{ loop.first ? 'active' : '' }}">
+                            <img src="http://placehold.it/900x500/{{ randomCarouselColor() }}/ffffff&amp;text={{ carousel.name }}" alt="{{ carousel.name }}">
+                            <div class="carousel-caption">
+                                {{ carousel.name }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <a class="left carousel-control" href="#carousel-{{ random }}" data-slide="prev">
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-{{ random }}" data-slide="next">
+                    <span class="fa fa-angle-right"></span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+{% endspaceless %}

@@ -1,0 +1,9 @@
+{#{% extends "@FOSUser/layout.html.twig" %}#}
+{% extends "CoreBundle::template.html.twig" %}
+
+{% block fos_user_content %}
+
+    GATAZO
+
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+{% endblock fos_user_content %}

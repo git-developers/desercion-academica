@@ -1,0 +1,24 @@
+backend_course_index:
+    path: /
+    defaults: { _controller: 'BackendBundle:Course:index' }
+    methods: [GET]
+backend_course_create:
+    path: /create
+    defaults: { _controller: 'BackendBundle:Course:create' }
+    methods: [POST]
+backend_course_edit:
+    path: /edit
+    defaults: { _controller: 'BackendBundle:Course:edit' }
+    methods: [POST, PUT]
+backend_course_delete:
+    path: /delete
+    defaults: { _controller: 'BackendBundle:Course:delete' }
+    methods: [POST, DELETE]
+backend_course_view:
+    path: /view
+    defaults: { _controller: 'BackendBundle:Course:view' }
+    methods: [POST]
+backend_course_info:
+    path: /info
+    defaults: { _controller: 'BackendBundle:Course:info' }
+    methods: [POST]

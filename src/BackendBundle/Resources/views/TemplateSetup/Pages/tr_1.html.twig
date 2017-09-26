@@ -1,0 +1,14 @@
+{% spaceless %}
+    <div class="small-box {{ randomBgColor() }}">
+        <div class="inner">
+            <h3>{{ template.code }}</h3>
+            <p>{{ template.name|e }}</p>
+        </div>
+        <div class="icon">
+            <i class="fa fa-fw fa-th"></i>
+        </div>
+        <a href="javascript:void(0)" class="small-box-footer">
+            info <i class="fa fa-arrow-circle-right"></i>
+        </a>
+    </div>
+{% endspaceless %}

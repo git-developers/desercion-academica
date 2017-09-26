@@ -1,0 +1,24 @@
+backend_aclrole_index:
+    path: /
+    defaults: { _controller: 'BackendBundle:AclRole:index' }
+    methods: [GET]
+backend_aclrole_create:
+    path: /create
+    defaults: { _controller: 'BackendBundle:AclRole:create' }
+    methods: [POST]
+backend_aclrole_edit:
+    path: /edit
+    defaults: { _controller: 'BackendBundle:AclRole:edit' }
+    methods: [POST, PUT]
+backend_aclrole_delete:
+    path: /delete
+    defaults: { _controller: 'BackendBundle:AclRole:delete' }
+    methods: [POST, DELETE]
+backend_aclrole_view:
+    path: /view
+    defaults: { _controller: 'BackendBundle:AclRole:view' }
+    methods: [POST]
+backend_aclrole_info:
+    path: /info
+    defaults: { _controller: 'BackendBundle:AclRole:info' }
+    methods: [POST]

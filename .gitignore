@@ -1,0 +1,36 @@
+#local configs
+app/config/parameters.yml
+
+#symfony related stuff
+var/*
+!var/cache
+var/cache/*
+!var/cache/.gitkeep
+!var/logs
+var/logs/*
+!var/logs/.gitkeep
+!var/sessions
+var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+vendor/
+
+#symlinks
+web/bundles/*
+web/uploads/*
+web/media/*
+web/css/*
+web/js/*
+
+#IDE
+.buildpath
+.idea
+.tianos
+.settings/
+
+build/
+phpunit.xml
+
+#data
+data/google/credentials/*
+dump.rdb

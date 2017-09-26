@@ -1,0 +1,8 @@
+backend_user_index:
+    path: /{active}
+    defaults:
+        _controller: BackendBundle:User:index
+        active: '1'
+    requirements:
+        active: \d+
+    methods: [GET, POST]

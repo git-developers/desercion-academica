@@ -1,0 +1,19 @@
+frontend_security:
+    resource: '@FrontendBundle/Resources/config/route/security.yml'
+    prefix: /security
+
+frontend_post:
+    resource: "@FrontendBundle/Resources/config/route/post.yml"
+    prefix: /post
+
+frontend_user:
+    resource: "@FrontendBundle/Resources/config/route/user.yml"
+    prefix: /user
+
+frontend_profile:
+    resource: "@FrontendBundle/Resources/config/route/profile.yml"
+    prefix: /profile # modificar
+
+frontend_default:
+    resource: "@FrontendBundle/Resources/config/route/default.yml"
+    prefix: /

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="user.profile.not_blank">
+                <source>user.profile.not_blank</source>
+                <target>Seleccione un perfil.</target>
+            </trans-unit>
+            <trans-unit id="user.client.not_blank">
+                <source>user.client.not_blank</source>
+                <target>Seleccione un cliente.</target>
+            </trans-unit>
+            <trans-unit id="user.dni.not_blank">
+                <source>user.dni.not_blank</source>
+                <target>Te falto agregar el dni.</target>
+            </trans-unit>
+            <trans-unit id="user.created_at.not_blank">
+                <source>user.created_at.not_blank</source>
+                <target>Te falto agregar el created_at.</target>
+            </trans-unit>
+            <trans-unit id="user.name.not_blank">
+                <source>user.name.not_blank</source>
+                <target>Te falto agregar el nombre.</target>
+            </trans-unit>
+            <trans-unit id="user.name.regex">
+                <source>user.name.regex</source>
+                <target>Su nombre solo debe de tener texto.</target>
+            </trans-unit>
+            <trans-unit id="user.last_name.not_blank">
+                <source>user.last_name.not_blank</source>
+                <target>Te falto agregar el apellido.</target>
+            </trans-unit>
+            <trans-unit id="user.last_name.regex">
+                <source>user.last_name.regex</source>
+                <target>Tu apellido solo debe de tener texto.</target>
+            </trans-unit>
+            <trans-unit id="user.image.not_blank">
+                <source>user.image.not_blank</source>
+                <target>Te falto agregar tu imagen.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

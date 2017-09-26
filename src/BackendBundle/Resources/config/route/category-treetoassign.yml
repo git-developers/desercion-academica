@@ -1,0 +1,55 @@
+backend_categorytreetoassign_index:
+    path: /
+    defaults: { _controller: BackendBundle:CategoryTreeToAssign:index }
+    methods: [GET]
+
+backend_categorytreetoassign_create:
+    path: /create
+    defaults: { _controller: BackendBundle:CategoryTreeToAssign:create }
+    requirements:
+    methods: [POST]
+
+backend_categorytreetoassign_createchild:
+    path: /create-child
+    defaults: { _controller: BackendBundle:CategoryTreeToAssign:createchild }
+    requirements:
+    methods: [POST]
+
+backend_categorytreetoassign_edit:
+    path:  /edit
+    defaults:
+        _controller: BackendBundle:CategoryTreeToAssign:edit
+    requirements:
+    methods: [POST, PUT]
+
+backend_categorytreetoassign_delete:
+    path: /delete
+    defaults: { _controller: BackendBundle:CategoryTreeToAssign:delete }
+    requirements:
+    methods: [POST, DELETE]
+
+backend_categorytreetoassign_view:
+    path: /view
+    defaults: { _controller: BackendBundle:CategoryTreeToAssign:view }
+    requirements:
+    methods: [POST]
+
+backend_categorytreetoassign_boxleft_has_boxright:
+    path:  /boxleft-has-boxright
+    defaults:
+        _controller: BackendBundle:CategoryTreeToAssign:boxleftHasBoxright
+    requirements:
+    methods: [POST]
+
+backend_categorytreetoassign_boxright_search:
+    path: /box-right-search
+    defaults: { _controller: BackendBundle:CategoryTreeToAssign:boxRightSearch }
+    requirements:
+    methods: [POST]
+
+backend_categorytreetoassign_assign:
+    path:  /assign
+    defaults:
+        _controller: BackendBundle:CategoryTreeToAssign:assign
+    requirements:
+    methods: [POST]

@@ -1,0 +1,19 @@
+backend_acl_classes:
+    path: /classes
+    defaults: { _controller: BackendBundle:Acl:classes }
+    methods: [GET]
+
+backend_acl_object_identities:
+    path: /object-identities
+    defaults: { _controller: BackendBundle:Acl:objectIdentities }
+    methods: [GET, POST]
+
+backend_acl_entries:
+    path: /entries
+    defaults: { _controller: BackendBundle:Acl:entries }
+    methods: [GET, POST]
+
+backend_acl_changeentrymask:
+    path: /change-entry-mask
+    defaults: { _controller: BackendBundle:Acl:changeEntryMask }
+    methods: [GET, POST]
