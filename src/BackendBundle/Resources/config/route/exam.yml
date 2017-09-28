@@ -1,0 +1,24 @@
+backend_exam_index:
+    path: /
+    defaults: { _controller: 'BackendBundle:Exam:index' }
+    methods: [GET]
+backend_exam_create:
+    path: /create
+    defaults: { _controller: 'BackendBundle:Exam:create' }
+    methods: [POST]
+backend_exam_edit:
+    path: /edit
+    defaults: { _controller: 'BackendBundle:Exam:edit' }
+    methods: [POST, PUT]
+backend_exam_delete:
+    path: /delete
+    defaults: { _controller: 'BackendBundle:Exam:delete' }
+    methods: [POST, DELETE]
+backend_exam_view:
+    path: /view
+    defaults: { _controller: 'BackendBundle:Exam:view' }
+    methods: [POST]
+backend_exam_info:
+    path: /info
+    defaults: { _controller: 'BackendBundle:Exam:info' }
+    methods: [POST]

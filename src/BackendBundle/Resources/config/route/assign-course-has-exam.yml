@@ -1,0 +1,39 @@
+backend_assigncoursehasexam_index:
+    path:  /
+    defaults:
+        _controller: BackendBundle:AssignCourseHasExam:index
+    requirements:
+    methods: [GET]
+
+backend_assigncoursehasexam_assign:
+    path:  /assign
+    defaults:
+        _controller: BackendBundle:AssignCourseHasExam:assign
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasexam_boxleft_has_boxright:
+    path:  /boxleft-has-boxright
+    defaults:
+        _controller: BackendBundle:AssignCourseHasExam:boxleftHasBoxright
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasexam_boxleft_search:
+    path: /box-left-search
+    defaults: { _controller: BackendBundle:AssignCourseHasExam:boxLeftSearch }
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasexam_boxright_search:
+    path: /box-right-search
+    defaults: { _controller: BackendBundle:AssignCourseHasExam:boxRightSearch }
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasexam_info:
+    path: /info
+    defaults: { _controller: BackendBundle:AssignCourseHasExam:info }
+    requirements:
+    methods: [POST]
+

@@ -1,7 +1,11 @@
 {% spaceless %}
     {% for key, entity in rightEntity %}
 
-        {% set idIncrement = entity.id_increment|default() %}
+        {% set idIncrement = entity.id|default() %}
+
+        {% if idIncrement is empty %}
+            {% set idIncrement = entity.id_increment|default() %}
+        {% endif %}
 
         {% if boxRightAssignedKeys is defined %}
             {% set isAssigned = false %}
@@ -36,7 +40,7 @@
             </span>
 
             <span class="text">
-                {{ entity.name_box|default() }}
+                {{ entity.name_box|default('VALIDE_BOX_NAME') }}
             </span>
 
             {#<div class="tools">#}

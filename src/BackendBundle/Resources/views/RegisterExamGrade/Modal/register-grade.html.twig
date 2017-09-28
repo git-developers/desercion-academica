@@ -1,0 +1,64 @@
+<div class="modal modal-warning fade in" id="modal-grades">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Ingresar nota</h4>
+            </div>
+
+            <form name="form-notas" id="form-notas">
+
+                <div class="modal-body">
+
+                    <div class="info-box bg-aqua">
+                        <span class="info-box-icon">
+                            <i class="fa fa-fw fa-file-text"></i>
+                        </span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"><small class="label bg-blue">{{ course.idIncrement }}</small></span>
+                            <span class="info-box-number">{{ course.name }}</span>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 70%"></div>
+                            </div>
+                            <span class="progress-description">--</span>
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Nombre</th>
+                            <th>Ingresar nota</th>
+                        </tr>
+
+                        {% for key, exam in exams|first.exam %}
+                            <tr>
+                                <td>
+                                    <small class="label bg-blue">{{ exam.id_increment }}</small>
+                                </td>
+                                <td>{{ exam.name }}</td>
+                                <td>
+                                    <input type="hidden" name="obj[{{ key }}][course_id]" value="{{ course.idIncrement }}">
+                                    <input type="hidden" name="obj[{{ key }}][exam_id]" value="{{ exam.id_increment }}">
+                                    <input type="number" min="1" max="20" name="obj[{{ key }}][grade]" required="required" class="form-control" placeholder="nota">
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-outline">Guardar</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

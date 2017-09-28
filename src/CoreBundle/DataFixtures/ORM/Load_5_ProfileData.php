@@ -185,10 +185,13 @@ class Load_12_ProfileData extends AbstractFixture implements OrderedFixtureInter
         $entity = new Profile();
         $entity->setName('Alumno');
         $manager->persist($entity);
+        $this->addReference('profile-student', $entity);
+
 
         $entity = new Profile();
         $entity->setName('Docente');
         $manager->persist($entity);
+        $this->addReference('profile-teacher', $entity);
 
         $entity = new Profile();
         $entity->setName(Profile::GUEST);

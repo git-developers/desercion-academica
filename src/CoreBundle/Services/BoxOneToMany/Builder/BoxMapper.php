@@ -77,6 +77,13 @@ class BoxMapper extends Base
             return;
         }
 
+
+//        echo '<pre> POLLO 777:: ';
+//        print_r($boxRightIds);
+//        exit;
+
+
+
         $ids = [];
         foreach ($boxRightIds as $key => $value){
             if($this->getAction($value) == self::ACTION_CREATE){

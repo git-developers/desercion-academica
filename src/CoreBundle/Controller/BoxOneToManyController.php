@@ -35,12 +35,19 @@ class BoxOneToManyController extends BaseController
         $box = $boxMapper->getDefaults();
 
         $boxLeft = $leftMapper->getDefaults();
-        $leftEntity = $this->em()->getRepository($boxLeft['class_path'])->findAllBoxOneToMany($boxLeft['limit']);
+        $leftEntity = $this->em()->getRepository($boxLeft['class_path'])->findAll($boxLeft['limit']);
         $leftEntity = $this->getSerializeDecode($leftEntity, $boxLeft['group_name']);
 
         $boxRight = $rightMapper->getDefaults();
-        $rightEntity = $this->em()->getRepository($boxRight['class_path'])->findAll($boxRight['limit']);
+        $rightEntity = $this->em()->getRepository($boxRight['class_path'])->findAllBoxOneToMany($boxRight['limit'], $boxRight['user_profile_slug']);
         $rightEntity = $this->getSerializeDecode($rightEntity, $boxRight['group_name']);
+
+
+//        echo '<pre> POLLO:: ';
+//        print_r($rightEntity);
+//        exit;
+
+
 
         return $this->render(
             'CoreBundle:BoxOneToMany:index.html.twig',
@@ -97,7 +104,8 @@ class BoxOneToManyController extends BaseController
 
                 // remove entradas pasadas
                 foreach ($boxLeftEntity->$collectionGet() as $key => $leftEntity){
-                    if(in_array($leftEntity->getIdIncrement(), $boxRightIdsToDelete)){
+                    if(in_array($leftEntity->getId(), $boxRightIdsToDelete)){
+//                    if(in_array($leftEntity->getIdIncrement(), $boxRightIdsToDelete)){
                         $boxLeftEntity->$collectionRemove($leftEntity);
                         $this->persist($leftEntity);
                     }
@@ -150,7 +158,7 @@ class BoxOneToManyController extends BaseController
         $box = $boxMapper->getDefaults();
         $boxRight = $rightMapper->getDefaults();
 
-        $rightEntity = $this->em()->getRepository($boxRight['class_path'])->search($q, $boxRight['limit']);
+        $rightEntity = $this->em()->getRepository($boxRight['class_path'])->search($q, $boxRight['limit'], null, $boxRight['user_profile_slug']);
         $rightEntity = $this->getSerializeDecode($rightEntity, $boxRight['group_name']);
 
         $boxRightAssignedKeys = $this->getBoxRightAssignedkeys($request, $boxMapper, $leftMapper);
@@ -207,9 +215,7 @@ class BoxOneToManyController extends BaseController
         $box = $boxMapper->getDefaults();
         $boxLeft = $leftMapper->getDefaults();
 
-        $leftHasRight = $this->em()->getRepository($boxLeft['class_path'])->findBoxleftHasBoxright($boxLeftId);
-        
-
+        $leftHasRight = $this->em()->getRepository($boxLeft['class_path'])->findBoxleftHasBoxright($boxLeftId, $boxLeft['user_profile_slug']);
         $leftHasRight = $this->getSerializeDecode($leftHasRight, $box['assoc_group_name']);
         $leftHasRight = is_array($leftHasRight) ? array_shift($leftHasRight) : [];
         $leftHasRight = isset($leftHasRight[$box['assoc_group_name_key']]) ? $leftHasRight[$box['assoc_group_name_key']] : [];

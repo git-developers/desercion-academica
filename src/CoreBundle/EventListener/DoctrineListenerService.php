@@ -26,6 +26,8 @@ use CoreBundle\Entity\PointOfSaleHasProduct;
 use CoreBundle\Entity\TemplateEPost;
 use CoreBundle\Entity\TemplateEItem;
 use CoreBundle\Entity\Course;
+use CoreBundle\Entity\Exam;
+use CoreBundle\Entity\Assistance;
 use Cocur\Slugify\Slugify;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
@@ -200,6 +202,14 @@ class DoctrineListenerService implements EventSubscriber
 
             return;
         }else if ($entity instanceof Course){
+            $entity->setCreatedAt($this->dateTime);
+
+            return;
+        }else if ($entity instanceof Assistance){
+            $entity->setCreatedAt($this->dateTime);
+
+            return;
+        }else if ($entity instanceof Exam){
             $entity->setCreatedAt($this->dateTime);
 
             return;

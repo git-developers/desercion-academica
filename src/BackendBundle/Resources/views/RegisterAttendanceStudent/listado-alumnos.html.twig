@@ -1,0 +1,99 @@
+{% extends "CoreBundle::template.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        input[type=radio]{
+            height: 20px;
+            width: 20px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-fw fa-file-text-o"></i> Modulo Registrar asistencia alumno: lista de alumnos curso
+            <span class="badge bg-blue">{{ course.idIncrement }}</span> {{ course.name }}
+            <small>registrar asistencia de alumno</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="row">
+
+            <form action="{{ path('backend_registerattendancestudent_listado_alumnos', {curso_id:course.idIncrement}) }}" method="post">
+
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header"> {# with-border #}
+                            <h3 class="box-title">Lista</h3>
+                            <button type="submit" class="btn bg-purple btn-flat pull-right">Guardar cambios</button>
+                        </div>
+                        <div class="box-body">
+
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Nombre</th>
+                                    <th>Asistencia</th>
+                                </tr>
+
+                                {% for key, entity in entities %}
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" name="obj[{{ key }}][user_id]" value="{{ entity.id }}">
+                                            <small class="label bg-blue">{{ entity.id }}</small>
+                                        </td>
+                                        <td>{{ entity.name ~ ' ' ~ entity.lastName }}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="label label-success">Asistio</span>
+                                                        <br>
+                                                        <input type="radio" name="obj[{{ key }}][attended]" value="1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="label label-danger">Falto</span>
+                                                        <br>
+                                                        <input type="radio" name="obj[{{ key }}][attended]" value="0">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="box-footer">
+                            {#<button type="submit" class="btn btn-primary">Enviar</button>#}
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+{% endblock %}

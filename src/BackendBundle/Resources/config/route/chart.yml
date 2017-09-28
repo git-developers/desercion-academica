@@ -1,0 +1,9 @@
+backend_chart_piechart:
+    path: /pie-chart
+    defaults: { _controller: BackendBundle:Chart:pieChart }
+    methods: [GET]
+
+backend_chart_columnchart:
+    path: /column-chart
+    defaults: { _controller: BackendBundle:Chart:columnChart }
+    methods: [GET]

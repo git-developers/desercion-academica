@@ -2,52 +2,89 @@
 
 namespace BackendBundle\Controller;
 
-use CoreBundle\Controller\CrudController;
+use CoreBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
-use CoreBundle\Entity\Profile;
-use BackendBundle\Form\ProfileType;
-use CoreBundle\Services\Crud\Builder\CrudMapper;
+use CoreBundle\Entity\Course;
+use CoreBundle\Entity\User;
+use CoreBundle\Entity\Assistance;
 
-
-class RegisterAttendanceStudentController extends CrudController
+class RegisterAttendanceStudentController extends BaseController
 {
 
-    public function indexAction()
+    public function listadoCursosAction()
     {
-        $crud = $this->get('core.service.crud');
-        $crudMapper = $crud->getCrudMapper();
-        $dataTable = $crud->getDataTableMapper();
 
-        $crudMapper
-            ->add('section_icon', 'user')
-            ->add('class_path', self::CLASS_PATH)
-            ->add('group_name', self::GROUP_NAME)
-            ->add('section_box_class', 'primary')
-            ->add('section_title', 'Gestionar profiles')
-            ->add('modal_info_size', CrudMapper::MODAL_SIZE_LARGE)
-            ->add('modal_edit_size', CrudMapper::MODAL_SIZE_LARGE)
-            ->add('modal_create_size', CrudMapper::MODAL_SIZE_LARGE)
-        ;
+        $user = $this->getUser();
 
-        $dataTable
-            ->addColumn('#', " '<span class=\"badge bg-blue\">' + obj.id_increment + '</span>' ")
-            ->addColumn('Nombre del perfil', 'obj.name')
-            ->addColumn('Slug', 'obj.slug')
-            ->addColumn('Creado', 'obj.created_at', [
-                'icon' => 'calendar'
-            ])
-            ->addButtonTable(['edit', 'delete'], 'obj.id_increment')
-            ->addButtonHeader(['create', 'info'])
-            ->addRowCallBack('id', 'aData.id_increment')
-            ->addRowCallBack('data-id', 'aData.id_increment')
-            ->addRowCallBack('class', ' "alert" ')
-        ;
+        if(!$user){
+             throw $this->createNotFoundException('SISTEMA: tiene que logearse para tener el objeto usuario');
+        }
 
-        $dataTable->setOptions([
-            'pageLength' => 20,
-        ]);
+        $entities = $this->em()->getRepository(Course::class)->findAllByUserId($user->getId());
+        $entities = $this->getSerializeDecode($entities, 'course_has_user');
 
-        return parent::index($crudMapper, $dataTable);
+        return $this->render(
+            'BackendBundle:RegisterAttendanceStudent:listado-cursos.html.twig',
+            [
+                'entities' => $entities,
+            ]
+        );
     }
+
+    public function listadoAlumnosAction(Request $request, $curso_id)
+    {
+
+        $course = $this->em()->getRepository(Course::class)->find($curso_id);
+
+        if(!$course){
+            throw $this->createNotFoundException('SISTEMA: el curso no existe');
+        }
+
+        $entities = $this->em()->getRepository(User::class)->findAllByCourseId($curso_id, 'alumno');
+        $entities = $this->getSerializeDecode($entities, 'course_has_user');
+
+
+        if ($request->isMethod('POST')) {
+
+            $obj = $request->get('obj');
+
+            foreach ($obj as $key => $value){
+
+
+                $userId = isset($value['user_id']) ? $value['user_id'] : null;
+                $attended = isset($value['attended']) ? $value['attended'] : 0;
+
+                $user = $this->em()->getRepository(User::class)->find($userId);
+
+                if(!$user){
+                    continue;
+                }
+
+                $assistance = new Assistance();
+                $assistance->setUser($user);
+                $assistance->setAttended($attended);
+                $this->persist($assistance);
+            }
+
+            $this->flashSuccess('Se guardo con exito la asistencia');
+
+            $url = $this->generateUrl('backend_registerattendancestudent_listado_alumnos', ['curso_id' => $course->getIdIncrement()]);
+
+            return $this->redirect($url);
+
+        }
+
+
+
+        return $this->render(
+            'BackendBundle:RegisterAttendanceStudent:listado-alumnos.html.twig',
+            [
+                'course' => $course,
+                'entities' => $entities,
+            ]
+        );
+    }
+
+
 
 }

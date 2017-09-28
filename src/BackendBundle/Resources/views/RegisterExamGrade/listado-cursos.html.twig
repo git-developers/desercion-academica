@@ -1,0 +1,80 @@
+{% extends "CoreBundle::template.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        input[type=radio]{
+            height: 20px;
+            width: 20px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-fw fa-file-text-o"></i> Modulo Registrar notas: lista de cursos
+            <small>registrar notas de los examenes</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Lista</h3>
+                    </div>
+                    <div class="box-body">
+
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Name</th>
+                                <th>Lista de alumnos</th>
+                            </tr>
+
+                            {% for key, entity in entities %}
+                                <tr>
+                                    <td>
+                                        <small class="label bg-green">{{ entity.id_increment }}</small>
+                                    </td>
+                                    <td>{{ entity.name }}</td>
+                                    <td>
+                                        <a href="{{ path('backend_registerexamgrade_listado_alumnos', {curso_id:entity.id_increment}) }}" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-fw fa-users"></i>
+                                            Alumnos
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer">
+                        {#<button type="submit" class="btn btn-primary">Enviar</button>#}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

@@ -115,6 +115,33 @@ class Builder implements ContainerAwareInterface
 
 
 
+        /**
+         * EXAMENES
+         */
+        $child = 'Examenes';
+        $view = true; //$this->isGranted('ROLE_PRODUCT_VIEW');
+        $menu->addChild($child, [
+            'route' => 'backend_default_index',
+            'extras' => ['safe_label' => true],
+            'childrenAttributes' => [
+                'class' => 'treeview-menu',
+            ],
+        ])
+            ->setAttribute('allow_angle', true)
+            ->setAttribute('class', 'treeview')
+            ->setAttribute('icon', 'fa-fw fa-file-text-o')
+            ->setDisplay($view)
+        ;
+
+        $menu[$child]->addChild('Gestionar', [
+            'route' => 'backend_exam_index'
+        ])
+            ->setAttribute('icon', self::CIRCLE_1_YELLOW)
+            ->setDisplay($view)
+        ;
+
+
+
 
         /**
          * CATEGORIES
@@ -142,38 +169,11 @@ class Builder implements ContainerAwareInterface
 //        ;
 
 
-        /**
-         * PRODUCT
-         */
-        $child = 'Productos';
-        $productView = $this->isGranted('ROLE_PRODUCT_VIEW');
-        $menu->addChild($child, [
-            'route' => 'backend_default_index',
-            'extras' => ['safe_label' => true],
-            'childrenAttributes' => [
-                'class' => 'treeview-menu',
-            ],
-        ])
-        ->setAttribute('allow_angle', true)
-        ->setAttribute('class', 'treeview')
-        ->setAttribute('icon', 'fa-fw fa-cube')
-        ->setDisplay($productView)
-        ;
-
-        $menu[$child]->addChild('Listar', [
-            'route' => 'backend_product_index'
-        ])
-        ->setAttribute('icon', self::CIRCLE_1_YELLOW)
-        ->setDisplay($productView)
-        ;
-
-
-
-        /**
-         * CLIENT
-         */
-//        $child = 'Clientes';
-//        $clientView = $this->isGranted('ROLE_CLIENT_VIEW');
+//        /**
+//         * PRODUCT
+//         */
+//        $child = 'Productos';
+//        $productView = $this->isGranted('ROLE_PRODUCT_VIEW');
 //        $menu->addChild($child, [
 //            'route' => 'backend_default_index',
 //            'extras' => ['safe_label' => true],
@@ -183,15 +183,15 @@ class Builder implements ContainerAwareInterface
 //        ])
 //        ->setAttribute('allow_angle', true)
 //        ->setAttribute('class', 'treeview')
-//        ->setAttribute('icon', 'fa-fw fa-industry')
-//        ->setDisplay($clientView)
+//        ->setAttribute('icon', 'fa-fw fa-cube')
+//        ->setDisplay($productView)
 //        ;
 //
 //        $menu[$child]->addChild('Listar', [
-//            'route' => 'backend_client_index'
+//            'route' => 'backend_product_index'
 //        ])
 //        ->setAttribute('icon', self::CIRCLE_1_YELLOW)
-//        ->setDisplay($clientView)
+//        ->setDisplay($productView)
 //        ;
 
 
@@ -199,41 +199,41 @@ class Builder implements ContainerAwareInterface
         /**
          * ACCESS CONTROL LISTS
          */
-        $child = 'Access Control Lists';
-        $clasesView = true; //$this->isGranted('ROLE_CLIENT_VIEW');
-        $menu->addChild($child, [
-            'route' => 'backend_default_index',
-            'extras' => ['safe_label' => true],
-            'childrenAttributes' => [
-                'class' => 'treeview-menu',
-            ],
-        ])
-        ->setAttribute('allow_angle', true)
-        ->setAttribute('class', 'treeview')
-        ->setAttribute('icon', 'fa-fw fa-user-secret')
-        ->setDisplay($clasesView)
-        ;
-
-        $menu[$child]->addChild('Clases', [
-            'route' => 'backend_acl_classes'
-        ])
-        ->setAttribute('icon', self::CIRCLE_1_YELLOW)
-        ->setDisplay($clasesView)
-        ;
-
-        $menu[$child]->addChild('Object identities', [
-            'route' => 'backend_acl_object_identities'
-        ])
-        ->setAttribute('icon', self::CIRCLE_2_AQUA)
-        ->setDisplay($clasesView)
-        ;
-
-        $menu[$child]->addChild('Entries', [
-            'route' => 'backend_acl_entries'
-        ])
-        ->setAttribute('icon', self::CIRCLE_3_BLUE)
-        ->setDisplay($clasesView)
-        ;
+//        $child = 'Access Control Lists';
+//        $clasesView = true; //$this->isGranted('ROLE_CLIENT_VIEW');
+//        $menu->addChild($child, [
+//            'route' => 'backend_default_index',
+//            'extras' => ['safe_label' => true],
+//            'childrenAttributes' => [
+//                'class' => 'treeview-menu',
+//            ],
+//        ])
+//        ->setAttribute('allow_angle', true)
+//        ->setAttribute('class', 'treeview')
+//        ->setAttribute('icon', 'fa-fw fa-user-secret')
+//        ->setDisplay($clasesView)
+//        ;
+//
+//        $menu[$child]->addChild('Clases', [
+//            'route' => 'backend_acl_classes'
+//        ])
+//        ->setAttribute('icon', self::CIRCLE_1_YELLOW)
+//        ->setDisplay($clasesView)
+//        ;
+//
+//        $menu[$child]->addChild('Object identities', [
+//            'route' => 'backend_acl_object_identities'
+//        ])
+//        ->setAttribute('icon', self::CIRCLE_2_AQUA)
+//        ->setDisplay($clasesView)
+//        ;
+//
+//        $menu[$child]->addChild('Entries', [
+//            'route' => 'backend_acl_entries'
+//        ])
+//        ->setAttribute('icon', self::CIRCLE_3_BLUE)
+//        ->setDisplay($clasesView)
+//        ;
 
 
         /**
@@ -259,47 +259,68 @@ class Builder implements ContainerAwareInterface
         ;
 
         $menu[$child]->addChild('Curso <i class="fa fa-fw fa-arrow-right"></i> Docente', [
-            'route' => 'backend_assignuserhascourse_index',
+            'route' => 'backend_assigncoursehasuserteacher_index',
         ])
         ->setAttribute('icon', self::CIRCLE_1_YELLOW)
         ->setDisplay($categoryHasProduct)
         ;
 
-//        $menu[$child]->addChild('Punto venta <i class="fa fa-fw fa-arrow-right"></i> Producto', [
-//            'route' => 'backend_assignpointofsalehasproduct_index',
+        $menu[$child]->addChild('Curso <i class="fa fa-fw fa-arrow-right"></i> Alumno', [
+            'route' => 'backend_assigncoursehasuserstudent_index',
+        ])
+        ->setAttribute('icon', self::CIRCLE_2_AQUA)
+        ->setDisplay($categoryHasProduct)
+        ;
+
+//        $menu[$child]->addChild('Curso <i class="fa fa-fw fa-arrow-right"></i> Examen', [
+//            'route' => 'backend_assigncoursehasexam_index',
+//        ])
+//        ->setAttribute('icon', self::CIRCLE_1_YELLOW)
+//        ->setDisplay($categoryHasProduct)
+//        ;
+
+
+
+
+
+//        /**
+//         * SETTINGS
+//         */
+//        $child = 'Settings';
+//        $loadFixture = true; //$this->isGranted('ROLE_CLIENT_VIEW');
+//        $menu->addChild($child, [
+//            'route' => 'backend_default_index',
+//            'extras' => ['safe_label' => true],
+//            'childrenAttributes' => [
+//                'class' => 'treeview-menu',
+//            ],
+//        ])
+//        ->setAttribute('class', 'treeview')
+//        ->setAttribute('icon', 'fa-fw fa-cog')
+//        ->setDisplay($loadFixture)
+//        ;
+//
+//        $menu[$child]->addChild('Load Fixtures', [
+//            'route' => 'core_default_load_fixtures'
+//        ])
+//        ->setAttribute('icon', self::CIRCLE_1_YELLOW)
+//        ->setDisplay($loadFixture)
+//        ;
+//
+//        $menu[$child]->addChild('GoogleDrive mimetype', [
+//            'route' => 'backend_googledrivesettings_mimetype'
 //        ])
 //        ->setAttribute('icon', self::CIRCLE_2_AQUA)
-//        ->setDisplay($pdvHasProduct)
-//        ;
-//
-//        $menu[$child]->addChild('Usuario <i class="fa fa-fw fa-arrow-right"></i> Punto venta', [
-//            'route' => 'backend_assignuserhaspointofsale_index',
-//        ])
-//        ->setAttribute('icon', self::CIRCLE_3_BLUE)
-//        ->setDisplay($userHasPdv)
-//        ;
-//
-//        $menu[$child]->addChild('Grupo <i class="fa fa-fw fa-arrow-right"></i> Usuario', [
-//            'route' => 'backend_assigngrouphasuser_index',
-//        ])
-//        ->setAttribute('icon', self::CIRCLE_4_ORANGE)
-//        ->setDisplay($groupHasUser)
-//        ;
-//
-//        $menu[$child]->addChild('Template <i class="fa fa-fw fa-arrow-right"></i> Module', [
-//            'route' => 'backend_assigntemplatehasmodule_index',
-//        ])
-//        ->setAttribute('icon', self::CIRCLE_5_RED)
-//        ->setDisplay($templateHasModule)
+//        ->setDisplay($loadFixture)
 //        ;
 
 
 
         /**
-         * SETTINGS
+         * CHART
          */
-        $child = 'Settings';
-        $loadFixture = true; //$this->isGranted('ROLE_CLIENT_VIEW');
+        $child = 'Reportes';
+        $clientView = true; //$this->isGranted('ROLE_CLIENT_VIEW');
         $menu->addChild($child, [
             'route' => 'backend_default_index',
             'extras' => ['safe_label' => true],
@@ -307,24 +328,31 @@ class Builder implements ContainerAwareInterface
                 'class' => 'treeview-menu',
             ],
         ])
+        ->setAttribute('allow_angle', true)
         ->setAttribute('class', 'treeview')
-        ->setAttribute('icon', 'fa-fw fa-cog')
-        ->setDisplay($loadFixture)
+        ->setAttribute('icon', 'fa-fw fa-bar-chart')
+        ->setDisplay($clientView)
         ;
 
-        $menu[$child]->addChild('Load Fixtures', [
-            'route' => 'core_default_load_fixtures'
+        $menu[$child]->addChild('Pie Chart', [
+            'route' => 'backend_chart_piechart'
         ])
         ->setAttribute('icon', self::CIRCLE_1_YELLOW)
-        ->setDisplay($loadFixture)
+        ->setDisplay($clientView)
         ;
 
-        $menu[$child]->addChild('GoogleDrive mimetype', [
-            'route' => 'backend_googledrivesettings_mimetype'
+        $menu[$child]->addChild('Column Chart', [
+            'route' => 'backend_chart_columnchart'
         ])
         ->setAttribute('icon', self::CIRCLE_2_AQUA)
-        ->setDisplay($loadFixture)
+        ->setDisplay($clientView)
         ;
+
+
+
+
+
+
 
 
         return $menu;

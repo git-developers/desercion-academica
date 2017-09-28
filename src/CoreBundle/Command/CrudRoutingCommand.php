@@ -16,6 +16,7 @@ use BackendBundle\Controller\PointOfSaleController;
 use BackendBundle\Controller\ProductController;
 use BackendBundle\Controller\CourseController;
 use BackendBundle\Controller\TemplateModuleController;
+use BackendBundle\Controller\ExamController;
 
 //https://symfony.com/doc/current/components/yaml.html
 //https://symfony.com/doc/current/doctrine/reverse_engineering.html
@@ -24,7 +25,7 @@ use BackendBundle\Controller\TemplateModuleController;
 class CrudRoutingCommand extends ContainerAwareCommand
 {
 
-    //bin/console tianos:crud:routing BackendBundle
+    // php bin/console tianos:crud:routing BackendBundle
 
     protected function configure()
     {
@@ -221,6 +222,7 @@ class CrudRoutingCommand extends ContainerAwareCommand
         $controllers[] = PointOfSaleController::class;
         $controllers[] = ProductController::class;
         $controllers[] = CourseController::class;
+        $controllers[] = ExamController::class;
 
         return $controllers;
     }

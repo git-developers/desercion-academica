@@ -52,7 +52,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @JMSS\Groups({"user", "user_of_group"})
+     * @JMSS\Groups({"user", "user_of_group", "course_has_user"})
      */
     protected $id;
 
@@ -75,6 +75,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      * @var string
      *
      * @ORM\Column(name="slug", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
+     * @JMSS\Groups({"user", "user_of_group", "course_has_user"})
      */
     private $slug;
 
@@ -131,6 +132,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      *     message="user.name.regex"
      * )
      * @Assert\NotBlank(message="user.name.not_blank", groups={"registration_admin", "registration"})
+     * @JMSS\Groups({"user", "user_of_group", "course_has_user"})
      */
     private $name;
 
@@ -148,6 +150,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      *     message="user.last_name.regex"
      * )
      * @Assert\NotBlank(message="user.last_name.not_blank", groups={"registration_admin"})
+     * @JMSS\Groups({"user", "user_of_group", "course_has_user"})
      */
     private $lastName;
 
@@ -175,6 +178,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      *     checkMX = false,
      *     groups={"registration"}
      * )
+     * @JMSS\Groups({"user", "user_of_group", "course_has_user"})
      */
     protected $email;
 
@@ -282,27 +286,12 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      */
     private $files;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\PointOfSale", inversedBy="user")
-     * @ORM\JoinTable(name="user_has_point_of_sale",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="point_of_sale_id", referencedColumnName="id_increment")
-     *   }
-     * )
-     * @JMSS\Groups({"user_has_pointofsales"})
-     */
-    private $pointOfSale;
 
     /**
      * @var string
      *
      * @JMSS\Accessor(getter="getNameBox", setter="setNameBox")
-     * @JMSS\Groups({"user", "user_of_group"})
+     * @JMSS\Groups({"user", "course_has_user"})
      */
     private $nameBox;
 
@@ -316,16 +305,8 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\Course", inversedBy="user")
-     * @ORM\JoinTable(name="user_has_course",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="course_id", referencedColumnName="id_increment")
-     *   }
-     * )
-     * @JMSS\Groups({"user_has_course"})
+     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\Course", mappedBy="user")
+     * @JMSS\Groups({"user"})
      */
     private $course;
 
@@ -336,7 +317,6 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
     {
         $this->groupOfUsers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->files = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->pointOfSale = new \Doctrine\Common\Collections\ArrayCollection();
         $this->course = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -874,39 +854,6 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
         return $this->files;
     }
 
-    /**
-     * Add pointOfSale
-     *
-     * @param \CoreBundle\Entity\PointOfSale $pointOfSale
-     *
-     * @return User
-     */
-    public function addPointOfSale(\CoreBundle\Entity\PointOfSale $pointOfSale)
-    {
-        $this->pointOfSale[] = $pointOfSale;
-
-        return $this;
-    }
-
-    /**
-     * Remove pointOfSale
-     *
-     * @param \CoreBundle\Entity\PointOfSale $pointOfSale
-     */
-    public function removePointOfSale(\CoreBundle\Entity\PointOfSale $pointOfSale)
-    {
-        $this->pointOfSale->removeElement($pointOfSale);
-    }
-
-    /**
-     * Get pointOfSale
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPointOfSale()
-    {
-        return $this->pointOfSale;
-    }
 
     /**
      * Returns the roles granted to the user.
@@ -1019,6 +966,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
     {
         $this->termsAccepted = $termsAccepted;
     }
+
 
 
 

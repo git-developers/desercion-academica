@@ -41,6 +41,8 @@ class BoxRightMapper extends Base
 
             'route_search' => null,
             'route_select_item' => null,
+
+            'user_profile_slug' => null,
         ];
 
     }

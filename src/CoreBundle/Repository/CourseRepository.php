@@ -19,6 +19,27 @@ class CourseRepository extends EntityRepository
         return $this->findBy(['isActive' => 1], ['idIncrement' => 'DESC'], $limit, $offset);
     }
 
+    public function findAllByUserId($userId)
+    {
+
+        $em = $this->getEntityManager();
+        $dql = "
+            SELECT course, userT
+            FROM CoreBundle:Course course
+            INNER JOIN course.user userT
+            WHERE
+            userT.id = :user_id AND
+            userT.isActive = :active
+            ORDER BY course.idIncrement DESC
+            ";
+
+        $query = $em->createQuery($dql);
+        $query->setParameter('active', 1);
+        $query->setParameter('user_id', $userId);
+
+        return $query->getResult();
+    }
+
     public function search($q, $maxResults = null, $firstResult = null)
     {
         $em = $this->getEntityManager();
@@ -62,6 +83,29 @@ class CourseRepository extends EntityRepository
         $query->setParameter('id', $id);
 
         return $query->getOneOrNullResult();
+    }
+
+    public function findBoxleftHasBoxright($boxLeftId, $userProfileSlug)
+    {
+        $em = $this->getEntityManager();
+        $dql = "
+            SELECT course, userT, profile
+            FROM CoreBundle:Course course
+            INNER JOIN course.user userT
+            INNER JOIN userT.profile profile
+            WHERE
+            course.idIncrement = :id AND
+            course.isActive = :status AND
+            profile.slug = :user_profile_slug 
+            ORDER BY course.idIncrement DESC
+            ";
+
+        $query = $em->createQuery($dql);
+        $query->setParameter('status', 1);
+        $query->setParameter('id', $boxLeftId);
+        $query->setParameter('user_profile_slug', $userProfileSlug);
+
+        return $query->getResult();
     }
 
 }

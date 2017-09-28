@@ -1,0 +1,22 @@
+backend_registerexamgrade_listado_cursos:
+    path:  /listado-cursos
+    defaults:
+        _controller: BackendBundle:RegisterExamGrade:listadoCursos
+    requirements:
+    methods: [GET]
+
+backend_registerexamgrade_listado_alumnos:
+    path:  /listado-alumnos/{curso_id}
+    defaults:
+        _controller: BackendBundle:RegisterExamGrade:listadoAlumnos
+        curso_id: null
+    requirements:
+    methods: [GET, POST]
+
+backend_registerexamgrade_save_grades:
+    path:  /save-grades
+    defaults:
+        _controller: BackendBundle:RegisterExamGrade:saveGrades
+    requirements:
+    methods: [POST]
+

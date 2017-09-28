@@ -1,0 +1,4 @@
+backend_comparegrades_index:
+    path: /
+    defaults: { _controller: BackendBundle:CompareGrades:index }
+    methods: [GET]

@@ -1,0 +1,39 @@
+backend_assigncoursehasuserstudent_index:
+    path:  /
+    defaults:
+        _controller: BackendBundle:AssignCourseHasUserStudent:index
+    requirements:
+    methods: [GET]
+
+backend_assigncoursehasuserstudent_assign:
+    path:  /assign
+    defaults:
+        _controller: BackendBundle:AssignCourseHasUserStudent:assign
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasuserstudent_boxleft_has_boxright:
+    path:  /boxleft-has-boxright
+    defaults:
+        _controller: BackendBundle:AssignCourseHasUserStudent:boxleftHasBoxright
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasuserstudent_boxleft_search:
+    path: /box-left-search
+    defaults: { _controller: BackendBundle:AssignCourseHasUserStudent:boxLeftSearch }
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasuserstudent_boxright_search:
+    path: /box-right-search
+    defaults: { _controller: BackendBundle:AssignCourseHasUserStudent:boxRightSearch }
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasuserstudent_info:
+    path: /info
+    defaults: { _controller: BackendBundle:AssignCourseHasUserStudent:info }
+    requirements:
+    methods: [POST]
+

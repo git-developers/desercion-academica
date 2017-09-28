@@ -15,6 +15,9 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $client2 = $this->getReference('client-2');
 
         $profileEditor = $this->getReference('profile-editor');
+        $profileStudent = $this->getReference('profile-student');
+        $profileTeacher = $this->getReference('profile-teacher');
+
 
         $entity = new User();
         $entity->setClient($client1);
@@ -66,6 +69,115 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setEmail('inewton-' . uniqid() . '@gmail.com');
         $entity->setIsActive(true);
         $manager->persist($entity);
+
+
+        /**
+         * ALUMNOS
+         */
+        $entity = new User();
+        $entity->setClient($client2);
+//        $entity->setDni('11122345');
+        $entity->setPassword('123');
+        $entity->setName('Jose alumno');
+        $entity->setLastName('numero uno');
+        $entity->setEmail('alumno-1-' . uniqid() . '@gmail.com');
+        $entity->setIsActive(true);
+        $entity->setProfile($profileStudent);
+        $manager->persist($entity);
+
+        $entity = new User();
+        $entity->setClient($client2);
+//        $entity->setDni('11122345');
+        $entity->setPassword('123');
+        $entity->setName('Jose alumno');
+        $entity->setLastName('numero dos');
+        $entity->setEmail('alumno-2-' . uniqid() . '@gmail.com');
+        $entity->setIsActive(true);
+        $entity->setProfile($profileStudent);
+        $manager->persist($entity);
+
+        $entity = new User();
+        $entity->setClient($client2);
+//        $entity->setDni('11122345');
+        $entity->setPassword('123');
+        $entity->setName('Jose alumno');
+        $entity->setLastName('numero tres');
+        $entity->setEmail('alumno-3-' . uniqid() . '@gmail.com');
+        $entity->setIsActive(true);
+        $entity->setProfile($profileStudent);
+        $manager->persist($entity);
+
+        $entity = new User();
+        $entity->setClient($client2);
+//        $entity->setDni('11122345');
+        $entity->setPassword('123');
+        $entity->setName('Jose alumno');
+        $entity->setLastName('numero cuatro');
+        $entity->setEmail('alumno-4-' . uniqid() . '@gmail.com');
+        $entity->setIsActive(true);
+        $entity->setProfile($profileStudent);
+        $manager->persist($entity);
+
+        $entity = new User();
+        $entity->setClient($client2);
+//        $entity->setDni('11122345');
+        $entity->setPassword('123');
+        $entity->setName('Jose alumno');
+        $entity->setLastName('numero cinco');
+        $entity->setEmail('alumno-5-' . uniqid() . '@gmail.com');
+        $entity->setIsActive(true);
+        $entity->setProfile($profileStudent);
+        $manager->persist($entity);
+
+
+        /**
+         * TEACHER
+         */
+        $entity = new User();
+        $entity->setClient($client2);
+//        $entity->setDni('11122345');
+        $entity->setPassword('123');
+        $entity->setName('Juan docente');
+        $entity->setLastName('numero uno');
+        $entity->setEmail('docente-1-' . uniqid() . '@gmail.com');
+        $entity->setIsActive(true);
+        $entity->setProfile($profileTeacher);
+        $manager->persist($entity);
+
+        $entity = new User();
+        $entity->setClient($client2);
+//        $entity->setDni('11122345');
+        $entity->setPassword('123');
+        $entity->setName('Juan docente');
+        $entity->setLastName('numero dos');
+        $entity->setEmail('docente-2-' . uniqid() . '@gmail.com');
+        $entity->setIsActive(true);
+        $entity->setProfile($profileTeacher);
+        $manager->persist($entity);
+
+        $entity = new User();
+        $entity->setClient($client2);
+//        $entity->setDni('11122345');
+        $entity->setPassword('123');
+        $entity->setName('Juan docente');
+        $entity->setLastName('numero tres');
+        $entity->setEmail('docente-3-' . uniqid() . '@gmail.com');
+        $entity->setIsActive(true);
+        $entity->setProfile($profileTeacher);
+        $manager->persist($entity);
+
+        $entity = new User();
+        $entity->setClient($client2);
+//        $entity->setDni('11122345');
+        $entity->setPassword('123');
+        $entity->setName('Juan docente');
+        $entity->setLastName('numero cuatro');
+        $entity->setEmail('docente-4-' . uniqid() . '@gmail.com');
+        $entity->setIsActive(true);
+        $entity->setProfile($profileTeacher);
+        $manager->persist($entity);
+
+
 
 
         $manager->flush();

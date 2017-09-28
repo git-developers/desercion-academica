@@ -26,6 +26,7 @@ class CrudController extends BaseController
 
         $crud = $crudMapper->getDefaults();
         $entity = $this->em()->getRepository($crud['class_path'])->findAll();
+        $entity = $this->getSerialize($entity, $crud['group_name']);
 
 
 //        echo '<pre> POLLO:: ';
@@ -34,13 +35,7 @@ class CrudController extends BaseController
 
 
 
-        $entity = $this->getSerialize($entity, $crud['group_name']);
         $dataTable->setData($entity);
-
-
-
-
-
 
         return $this->render(
             'CoreBundle:Crud:index.html.twig',

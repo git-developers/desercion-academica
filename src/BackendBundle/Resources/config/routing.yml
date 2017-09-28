@@ -22,21 +22,12 @@ backend_googledrive:
 backend_files:
     resource: '@BackendBundle/Resources/config/route/files.yml'
     prefix: /files
-backend_pointofsaletree:
-    resource: '@BackendBundle/Resources/config/route/pointofsale-tree.yml'
-    prefix: /point-of-sale-tree
 backend_acl:
     resource: '@BackendBundle/Resources/config/route/acl.yml'
     prefix: /acl
-backend_assignuserhaspointofsale:
-    resource: '@BackendBundle/Resources/config/route/assign-user-has-pointofsale.yml'
-    prefix: /assign-user-has-pointofsale
 backend_assigngrouphasuser:
     resource: '@BackendBundle/Resources/config/route/assign-group-has-user.yml'
     prefix: /assign-group-has-user
-backend_assignpointofsalehasproduct:
-    resource: '@BackendBundle/Resources/config/route/assign-pointofsale-has-product.yml'
-    prefix: /assign-pointofsale-has-product
 backend_assigntemplatehasmodule:
     resource: '@BackendBundle/Resources/config/route/assign-template-has-module.yml'
     prefix: /assign-template-has-module
@@ -46,24 +37,24 @@ backend_categorytree:
 backend_categorytreetoassign:
     resource: '@BackendBundle/Resources/config/route/category-treetoassign.yml'
     prefix: /category-tree-to-assign
-backend_templateecategory:
-    resource: '@BackendBundle/Resources/config/route/template-e-category.yml'
-    prefix: /template/e-category
-backend_setuptemplate:
-    resource: '@BackendBundle/Resources/config/route/template-setup.yml'
-    prefix: /template-setup
-backend_setupedittemplate:
-    resource: '@BackendBundle/Resources/config/route/template-setup-edit.yml'
-    prefix: /template-setup-edit
 backend_template:
     resource: '@BackendBundle/Resources/config/route/template.yml'
     prefix: /template
 backend_templatemodule:
     resource: '@BackendBundle/Resources/config/route/templatemodule.yml'
     prefix: /templatemodule
+backend_assigncoursehasuserteacher:
+    resource: '@BackendBundle/Resources/config/route/assign-course-has-user-teacher.yml'
+    prefix: /assign-course-has-user-teacher
+backend_assigncoursehasuserstudent:
+    resource: '@BackendBundle/Resources/config/route/assign-course-has-user-student.yml'
+    prefix: /assign-course-has-user-student
 backend_registerattendanceteacher:
     resource: '@BackendBundle/Resources/config/route/register-attendance-teacher.yml'
     prefix: /register-attendance-teacher
+backend_registerattendancestudent:
+    resource: '@BackendBundle/Resources/config/route/register-attendance-student.yml'
+    prefix: /register-attendance-student
 backend_aclprofile:
     resource: '@BackendBundle/Resources/config/route/aclprofile.yml'
     prefix: /aclprofile
@@ -85,7 +76,22 @@ backend_product:
 backend_course:
     resource: '@BackendBundle/Resources/config/route/course.yml'
     prefix: /course
+backend_exam:
+    resource: '@BackendBundle/Resources/config/route/exam.yml'
+    prefix: /exam
 
-backend_assignuserhascourse:
-    resource: '@BackendBundle/Resources/config/route/assign-user-has-course.yml'
-    prefix: /assign-user-has-course
+backend_assigncoursehasexam:
+    resource: '@BackendBundle/Resources/config/route/assign-course-has-exam.yml'
+    prefix: /assign-course-has-exam
+
+backend_registerexamgrade:
+    resource: '@BackendBundle/Resources/config/route/register-exam-grade.yml'
+    prefix: /register-exam-grade
+
+backend_chart:
+    resource: '@BackendBundle/Resources/config/route/chart.yml'
+    prefix: /chart
+
+backend_comparegrades:
+    resource: '@BackendBundle/Resources/config/route/compare-grades.yml'
+    prefix: /compare-grades

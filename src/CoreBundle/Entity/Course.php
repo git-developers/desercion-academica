@@ -19,7 +19,7 @@ class Course
      * @ORM\Column(name="id_increment", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMSS\Groups({"course", "user_has_course"})
+     * @JMSS\Groups({"course", "course_has_user", "course_has_exam"})
      */
     private $idIncrement;
 
@@ -27,7 +27,7 @@ class Course
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=45, nullable=true)
-     * @JMSS\Groups({"course", "user_has_course"})
+     * @JMSS\Groups({"course", "course_has_user"})
      */
     private $code;
 
@@ -35,7 +35,7 @@ class Course
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=45, nullable=true)
-     * @JMSS\Groups({"course", "user_has_course"})
+     * @JMSS\Groups({"course", "course_has_user", "course_has_exam"})
      */
     private $name;
 
@@ -65,15 +65,40 @@ class Course
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\User", mappedBy="course")
+     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\User", inversedBy="course")
+     * @ORM\JoinTable(name="course_has_user",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="course_id", referencedColumnName="id_increment")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *   }
+     * )
+     * @JMSS\Groups({"course_has_user"})
      */
     private $user;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\Exam", inversedBy="course")
+     * @ORM\JoinTable(name="course_has_exam",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="course_id", referencedColumnName="id_increment")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="exam_id", referencedColumnName="id_increment")
+     *   }
+     * )
+     * @JMSS\Groups({"course_has_exam"})
+     */
+    private $exam;
 
     /**
      * @var string
      *
      * @JMSS\Accessor(getter="getNameBox", setter="setNameBox")
-     * @JMSS\Groups({"user_has_course", "course"})
+     * @JMSS\Groups({"course_has_user", "course"})
      */
     private $nameBox;
 
@@ -82,6 +107,7 @@ class Course
      */
     public function __construct()
     {
+        $this->exam = new \Doctrine\Common\Collections\ArrayCollection();
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -219,6 +245,26 @@ class Course
 
 
 
+
+    /**
+     *
+     * @return string
+     */
+    public function getNameBox()
+    {
+        return sprintf('%s', $this->name);
+    }
+
+    /**
+     * @param string $nameBox
+     */
+    public function setNameBox($nameBox)
+    {
+        $this->nameBox = $nameBox;
+    }
+
+
+
     /**
      * Add user
      *
@@ -253,21 +299,39 @@ class Course
         return $this->user;
     }
 
+
     /**
+     * Add exam
      *
-     * @return string
+     * @param \CoreBundle\Entity\Exam $exam
+     *
+     * @return Course
      */
-    public function getNameBox()
+    public function addExam(\CoreBundle\Entity\Exam $exam)
     {
-        return sprintf('%s', $this->name);
+        $this->exam[] = $exam;
+
+        return $this;
     }
 
     /**
-     * @param string $nameBox
+     * Remove exam
+     *
+     * @param \CoreBundle\Entity\Exam $exam
      */
-    public function setNameBox($nameBox)
+    public function removeExam(\CoreBundle\Entity\Exam $exam)
     {
-        $this->nameBox = $nameBox;
+        $this->exam->removeElement($exam);
+    }
+
+    /**
+     * Get exam
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExam()
+    {
+        return $this->exam;
     }
 
 

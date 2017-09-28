@@ -1,0 +1,39 @@
+backend_assigncoursehasuserteacher_index:
+    path:  /
+    defaults:
+        _controller: BackendBundle:AssignCourseHasUserTeacher:index
+    requirements:
+    methods: [GET]
+
+backend_assigncoursehasuserteacher_assign:
+    path:  /assign
+    defaults:
+        _controller: BackendBundle:AssignCourseHasUserTeacher:assign
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasuserteacher_boxleft_has_boxright:
+    path:  /boxleft-has-boxright
+    defaults:
+        _controller: BackendBundle:AssignCourseHasUserTeacher:boxleftHasBoxright
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasuserteacher_boxleft_search:
+    path: /box-left-search
+    defaults: { _controller: BackendBundle:AssignCourseHasUserTeacher:boxLeftSearch }
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasuserteacher_boxright_search:
+    path: /box-right-search
+    defaults: { _controller: BackendBundle:AssignCourseHasUserTeacher:boxRightSearch }
+    requirements:
+    methods: [POST]
+
+backend_assigncoursehasuserteacher_info:
+    path: /info
+    defaults: { _controller: BackendBundle:AssignCourseHasUserTeacher:info }
+    requirements:
+    methods: [POST]
+

@@ -15,7 +15,7 @@
                 {{ app_user_name(app.user, 0, 10) }}
                 {#<small>Miembro desde {{ app.user.createdAt|localizeddate('full', 'none', locale, null, 'Y') }}</small>#}
                 <small>Miembro desde el {{ app.user.createdAt|date('d, F Y')}}</small>
-                <small><code>{{ app.user.profile.name }}</code></small>
+                <small><code>{{ app.user.profile.name|default('no - profile') }}</code></small>
             </p>
         </li>
 
