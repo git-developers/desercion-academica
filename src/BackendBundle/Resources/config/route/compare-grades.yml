@@ -2,3 +2,18 @@ backend_comparegrades_index:
     path: /
     defaults: { _controller: BackendBundle:CompareGrades:index }
     methods: [GET]
+
+backend_comparegrades_list_students:
+    path: /list-students
+    defaults: { _controller: BackendBundle:CompareGrades:listStudents }
+    methods: [POST]
+
+backend_comparegrades_list_students_grades:
+    path: /list-students-grades
+    defaults: { _controller: BackendBundle:CompareGrades:listStudentsGrades }
+    methods: [POST]
+
+backend_comparegrades_send_email:
+    path: /send-email
+    defaults: { _controller: BackendBundle:CompareGrades:sendEmail }
+    methods: [POST]

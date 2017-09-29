@@ -1,0 +1,24 @@
+<ul class="todo-list ui-sortable">
+    {% for key, student in students %}
+        <li>
+            <span class="handle ui-sortable-handle">
+                <i class="fa fa-ellipsis-v"></i>
+                <i class="fa fa-ellipsis-v"></i>
+            </span>
+            <input type="radio" name="student" value="{{ student.id }}">
+            <small class="label label-warning">
+                <i class="fa fa-clock-o"></i> {{ student.id }}
+            </small>
+            <span class="text">{{ student.name ~ ' ' ~ student.lastName }}</span>
+            <div class="tools">
+                <i class="fa fa-check-square-o"></i>
+            </div>
+        </li>
+    {% else %}
+        <li>
+            <span class="text">No hay alumnos asignados</span>
+        </li>
+    {% endfor %}
+</ul>
+
+

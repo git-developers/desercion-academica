@@ -23,10 +23,15 @@
                 show: 'true'
             });
 
+            var userId = $(this).data('user-id');
+            $('#user_id').text(userId);
+
         });
 
         $( "#form-notas" ).submit(function( event ) {
             event.preventDefault();
+
+            var userId = $('#user_id').text();
 
             var fields = $("form[name='form-notas']").serializeArray();
 
@@ -34,7 +39,10 @@
                 url: '{{ path('backend_registerexamgrade_save_grades') }}',
                 type: 'POST',
                 dataType: 'json',
-                data: fields,
+                data: {
+                    fields:fields,
+                    userId:userId
+                },
                 cache: true,
                 beforeSend: function(jqXHR, settings) {
 
@@ -54,9 +62,8 @@
                     console.log('ERROR');
                 }
             });
-
-
         });
+
     </script>
 
 {% endblock %}
@@ -97,14 +104,14 @@
                                     <th>Ingresar nota</th>
                                 </tr>
 
-                                {% for key, entity in entities %}
+                                {% for key, student in students %}
                                     <tr>
                                         <td>
-                                            <small class="label bg-blue">{{ entity.id }}</small>
+                                            <small class="label bg-blue">{{ student.id }}</small>
                                         </td>
-                                        <td>{{ entity.name ~ ' ' ~ entity.lastName }}</td>
+                                        <td>{{ student.name ~ ' ' ~ student.lastName }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm">ingresar</button>
+                                            <button type="button" class="btn btn-primary btn-sm" data-user-id="{{ student.id }}">ingresar</button>
                                         </td>
                                     </tr>
                                 {% endfor %}

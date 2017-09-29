@@ -1,0 +1,19 @@
+backend_test_index:
+    path: /
+    defaults: { _controller: BackendBundle:Test:index }
+    methods: [GET, POST]
+
+backend_test_cache_clear:
+    path: /cache-clear
+    defaults: { _controller: BackendBundle:Test:cacheClear }
+    methods: [GET, POST]
+
+backend_test_assets_install:
+    path: /assets-install
+    defaults: { _controller: BackendBundle:Test:assetsInstall }
+    methods: [GET, POST]
+
+backend_test_assets_dump:
+    path: /assets-dump
+    defaults: { _controller: BackendBundle:Test:assetsDump }
+    methods: [GET, POST]

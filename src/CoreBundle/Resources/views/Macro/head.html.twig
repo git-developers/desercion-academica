@@ -3,8 +3,14 @@
     <meta meta http-equiv="X-UA-Compatible" content="IE=edge">
     {#Tell the browser to be responsive to screen width#}
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="robots" content="index,follow"/>
-    <meta name="googlebot" content="index, follow"/>
+
+    {#<meta name="robots" content="index,follow"/>#}
+    {#<meta name="googlebot" content="index, follow"/>#}
+
+    <meta name="robots" content="noindex" />
+    <meta name="googlebot" content="noindex"/>
+    <meta name="AdsBot-Google" content="noindex" />
+
     <meta name="theme-color" content="#{{ theme_color }}"/>
     <meta name="msapplication-TileColor" content="#{{ theme_color }}"/>
     <meta name="apple-mobile-web-app-title" content="{{ project_name }}"/>

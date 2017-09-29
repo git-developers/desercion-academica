@@ -7,10 +7,14 @@ parameters:
     database_name: tianos_db
     database_user: root
     database_password: ~
+
+    mailer_encryption: ssl
     mailer_transport: gmail
     mailer_host: smtp.gmail.com
     mailer_user: ~
     mailer_password: ~
+    mailer_main_email: ~
+
     secret: ad180a8a2e35f67cdc450e5a16b90da019165bfa
     locale: Es_es
     app_id: 129906047219991

@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as JMSS;
  * Grades
  *
  * @ORM\Table(name="grades", indexes={@ORM\Index(name="fk_grades_exam1_idx", columns={"exam_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\GradesRepository")
  */
 class Grades
 {
@@ -30,6 +30,13 @@ class Grades
      * @JMSS\Groups({"grades"})
      */
     private $courseId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id", type="integer", nullable=true)
+     */
+    private $userId;
 
     /**
      * @var integer
@@ -227,5 +234,30 @@ class Grades
     public function getExam()
     {
         return $this->exam;
+    }
+
+
+    /**
+     * Set userId
+     *
+     * @param integer $userId
+     *
+     * @return Grades
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return integer
+     */
+    public function getUserId()
+    {
+        return $this->userId;
     }
 }

@@ -95,3 +95,7 @@ backend_chart:
 backend_comparegrades:
     resource: '@BackendBundle/Resources/config/route/compare-grades.yml'
     prefix: /compare-grades
+
+backend_test:
+    resource: '@BackendBundle/Resources/config/route/test.yml'
+    prefix: /test

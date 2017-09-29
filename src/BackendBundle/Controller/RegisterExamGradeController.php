@@ -42,8 +42,8 @@ class RegisterExamGradeController extends BaseController
             throw $this->createNotFoundException('SISTEMA: el curso no existe');
         }
 
-        $entities = $this->em()->getRepository(User::class)->findAllByCourseId($curso_id, 'alumno');
-        $entities = $this->getSerializeDecode($entities, 'course_has_user');
+        $students = $this->em()->getRepository(User::class)->findAllByCourseId($curso_id, 'alumno');
+        $students = $this->getSerializeDecode($students, 'course_has_user');
 
         $exams = $this->em()->getRepository(Exam::class)->findAllByCourseId($curso_id);
         $exams = $this->getSerializeDecode($exams, 'course_has_exam');
@@ -53,7 +53,7 @@ class RegisterExamGradeController extends BaseController
             [
                 'exams' => $exams,
                 'course' => $course,
-                'entities' => $entities,
+                'students' => $students,
             ]
         );
     }
@@ -61,14 +61,39 @@ class RegisterExamGradeController extends BaseController
     public function saveGradesAction(Request $request)
     {
 
-        $all = $request->request->all();
-        $all = array_shift($all);
+        $fields = $request->get('fields');
+        $userId = $request->get('userId');
 
-        foreach ($all as $key => $value){
+        $courseI = 0;
+        $examI = 0;
+        $gradeI = 0;
+        $array = [];
+        foreach ($fields as $key => $value){
+
+            if($value['name'] == 'course_id'){
+                $array[$courseI]['course_id'] = $value['value'];
+                $courseI++;
+            }
+
+            if($value['name'] == 'exam_id'){
+                $array[$examI]['exam_id'] = $value['value'];
+                $examI++;
+            }
+
+            if($value['name'] == 'grade'){
+                $array[$gradeI]['grade'] = $value['value'];
+                $gradeI++;
+            }
+
+        }
+
+
+        foreach ($array as $key => $value){
 
             $exam = $this->em()->getRepository(Exam::class)->find($value['exam_id']);
 
             $grade = new Grades();
+            $grade->setUserId($userId);
             $grade->setCourseId($value['course_id']);
             $grade->setGrade($value['grade']);
             $grade->setExam($exam);

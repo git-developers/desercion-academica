@@ -1,0 +1,56 @@
+{% spaceless %}
+    <html>
+    <body>
+    <div style="background-color: #900; width:100%; text-align:center;">
+        <img style="margin:30px 0 30px 0" src="http://www.usmp.edu.pe/images/escudo1.png">
+    </div>
+
+    <h3 style="border-color: #d5e1e1;
+border-style: solid;
+border-width: 1px 0;
+font: 15px/48px 'ChronicleDisplayBold';
+text-align: center;
+text-transform: uppercase;
+width: 100%;">USMP: Sistema mensaje</h3>
+
+    <div class="">
+        <h1 style="clear: both;
+    color: #444;
+    font: 20px/1.15 'ChronicleDisplayBold';
+    margin-bottom: 10px;" >
+            Hola, <br>
+            te han enviado un email desde el sistema web:
+        </h1>
+    </div>
+
+    <div align="center" style="">
+
+        <table style="
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+        display: table;
+        border-collapse: separate;
+        border-spacing: 2px;
+        border: 1px solid grey;
+        " border="1">
+            <tbody>
+
+                <tr style="background-color: #dddddd;">
+                    <td style="font-weight: bold">Fecha enviado</td>
+                    <td>{{ now }}</td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight: bold">Mensaje</td>
+                    <td>{{ message|raw }}</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    </body>
+    </html>
+{% endspaceless %}

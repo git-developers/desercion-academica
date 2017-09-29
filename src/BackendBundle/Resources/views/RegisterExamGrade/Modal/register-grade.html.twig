@@ -18,12 +18,16 @@
                         </span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text"><small class="label bg-blue">{{ course.idIncrement }}</small></span>
+                            <span class="info-box-text">
+                                <small class="label bg-blue">{{ course.idIncrement }}</small>
+                            </span>
                             <span class="info-box-number">{{ course.name }}</span>
                             <div class="progress">
                                 <div class="progress-bar" style="width: 70%"></div>
                             </div>
-                            <span class="progress-description">--</span>
+                            <span class="progress-description">
+                               User id: <span id="user_id"></span>
+                            </span>
                         </div>
                     </div>
 
@@ -42,9 +46,9 @@
                                 </td>
                                 <td>{{ exam.name }}</td>
                                 <td>
-                                    <input type="hidden" name="obj[{{ key }}][course_id]" value="{{ course.idIncrement }}">
-                                    <input type="hidden" name="obj[{{ key }}][exam_id]" value="{{ exam.id_increment }}">
-                                    <input type="number" min="1" max="20" name="obj[{{ key }}][grade]" required="required" class="form-control" placeholder="nota">
+                                    <input type="hidden" name="course_id" value="{{ course.idIncrement }}">
+                                    <input type="hidden" name="exam_id" value="{{ exam.id_increment }}">
+                                    <input type="number" min="1" max="20" name="grade" required="required" class="form-control" placeholder="nota">
                                 </td>
                             </tr>
                         {% endfor %}
