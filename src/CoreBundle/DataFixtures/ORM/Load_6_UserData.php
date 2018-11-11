@@ -25,7 +25,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Alan');
         $entity->setLastName('Garcia');
-        $entity->setEmail('agarcia-' . uniqid() . '@gmail.com');
+        $entity->setEmail('agarcia@gmail.com');
         $entity->setIsActive(true);
         $entity->setProfile($profileEditor);
         $manager->persist($entity);
@@ -36,7 +36,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Albert');
         $entity->setLastName('Einstein');
-        $entity->setEmail('aeinstein-' . uniqid() . '@gmail.com');
+        $entity->setEmail('aeinstein@gmail.com');
         $entity->setIsActive(true);
         $manager->persist($entity);
 
@@ -46,7 +46,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Steve');
         $entity->setLastName('Jobs');
-        $entity->setEmail('sjobs-' . uniqid() . '@gmail.com');
+        $entity->setEmail('sjobs@gmail.com');
         $entity->setIsActive(true);
         $manager->persist($entity);
 
@@ -56,7 +56,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Bill');
         $entity->setLastName('Gates');
-        $entity->setEmail('bgates-' . uniqid() . '@gmail.com');
+        $entity->setEmail('bgates@gmail.com');
         $entity->setIsActive(true);
         $manager->persist($entity);
 
@@ -66,7 +66,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Isaac');
         $entity->setLastName('Newton');
-        $entity->setEmail('inewton-' . uniqid() . '@gmail.com');
+        $entity->setEmail('inewton@gmail.com');
         $entity->setIsActive(true);
         $manager->persist($entity);
 
@@ -80,7 +80,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Jose alumno');
         $entity->setLastName('numero uno');
-        $entity->setEmail('alumno-1-' . uniqid() . '@gmail.com');
+        $entity->setEmail('alumno-1@gmail.com');
         $entity->setIsActive(true);
         $entity->setProfile($profileStudent);
         $manager->persist($entity);
@@ -91,7 +91,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Jose alumno');
         $entity->setLastName('numero dos');
-        $entity->setEmail('alumno-2-' . uniqid() . '@gmail.com');
+        $entity->setEmail('alumno-2@gmail.com');
         $entity->setIsActive(true);
         $entity->setProfile($profileStudent);
         $manager->persist($entity);
@@ -102,7 +102,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Jose alumno');
         $entity->setLastName('numero tres');
-        $entity->setEmail('alumno-3-' . uniqid() . '@gmail.com');
+        $entity->setEmail('alumno-3@gmail.com');
         $entity->setIsActive(true);
         $entity->setProfile($profileStudent);
         $manager->persist($entity);
@@ -113,7 +113,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Jose alumno');
         $entity->setLastName('numero cuatro');
-        $entity->setEmail('alumno-4-' . uniqid() . '@gmail.com');
+        $entity->setEmail('alumno-4@gmail.com');
         $entity->setIsActive(true);
         $entity->setProfile($profileStudent);
         $manager->persist($entity);
@@ -124,7 +124,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Jose alumno');
         $entity->setLastName('numero cinco');
-        $entity->setEmail('alumno-5-' . uniqid() . '@gmail.com');
+        $entity->setEmail('alumno-5@gmail.com');
         $entity->setIsActive(true);
         $entity->setProfile($profileStudent);
         $manager->persist($entity);
@@ -139,7 +139,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Juan docente');
         $entity->setLastName('numero uno');
-        $entity->setEmail('docente-1-' . uniqid() . '@gmail.com');
+        $entity->setEmail('docente-1@gmail.com');
         $entity->setIsActive(true);
         $entity->setProfile($profileTeacher);
         $manager->persist($entity);
@@ -150,7 +150,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Juan docente');
         $entity->setLastName('numero dos');
-        $entity->setEmail('docente-2-' . uniqid() . '@gmail.com');
+        $entity->setEmail('docente-2@gmail.com');
         $entity->setIsActive(true);
         $entity->setProfile($profileTeacher);
         $manager->persist($entity);
@@ -161,7 +161,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Juan docente');
         $entity->setLastName('numero tres');
-        $entity->setEmail('docente-3-' . uniqid() . '@gmail.com');
+        $entity->setEmail('docente-3@gmail.com');
         $entity->setIsActive(true);
         $entity->setProfile($profileTeacher);
         $manager->persist($entity);
@@ -172,7 +172,7 @@ class Load_3_UserData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setPassword('123');
         $entity->setName('Juan docente');
         $entity->setLastName('numero cuatro');
-        $entity->setEmail('docente-4-' . uniqid() . '@gmail.com');
+        $entity->setEmail('docente-4@gmail.com');
         $entity->setIsActive(true);
         $entity->setProfile($profileTeacher);
         $manager->persist($entity);
