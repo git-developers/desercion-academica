@@ -39,11 +39,7 @@ save:
 	git config --global user.email $(AUTHOR_EMAIL)
 	git config --global user.name $(AUTHOR_NAME) --replace-all
 	git commit -m "modificaciones hechas el: $(NOW)"
-ifeq ($(http), 1)
-	git push origin_http master
-else
-	git push origin master
-endif
+	git push github master
 
 #READ: https://eole-io.github.io/sandstone/install-zmq-php-linux.html
 websocket:
@@ -87,10 +83,28 @@ ifeq ($(db), false)
 endif
 	mysql -h localhost -u root -proot $(DB)
 
-create_populate_db:
+db_load:
+	make migrate_delete
+	php bin/console doctrine:database:drop --force --if-exists
 	php bin/console doctrine:database:create --if-not-exists
-	#php bin/console doctrine:migration:diff
-	php bin/console doctrine:migration:migrate
+	php bin/console doctrine:migration:diff
+	php bin/console doctrine:migration:migrate --no-interaction
+	make load_fixture
+	make perm
+
+migrate_delete:
+	@echo =========== Migrations: delete all ===========;
+	rm -rf $$PWD/app/DoctrineMigrations
+
+load_fixture:
+	php bin/console tianos:truncate:tables
+	php bin/console doctrine:fixtures:load --no-interaction
+
+perm:
+	@echo ---;
+	@echo se dara permisos a los folderes cache y logs;
+	sudo chmod 0777 -R var/cache var/logs var/sessions $$PWD/app/DoctrineMigrations
+	@echo ---;
 
 log_nginx:
 ifeq ($(clean), 1)
