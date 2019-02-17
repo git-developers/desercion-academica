@@ -14,8 +14,6 @@ var messages = [], //array that hold the record of each string in chat
 //edit this function to change what the chatbot says
 function chatbotResponse() {
 
-    console.log("chatbotResponse ::::: " + lastUserMessage);
-
     lastUserMessage = lastUserMessage.trim();
 
     talking = true;
@@ -132,3 +130,27 @@ function keyPress(e) {
 function placeHolder() {
     document.getElementById("chatbox").placeholder = "";
 }
+
+
+$( document ).ready(function() {
+
+    $( "#removeClass" ).click(function() {
+
+        if ($(".popup-messages").is(":visible")) {
+            $(".popup-box").css("height", "50px");
+            $(".popup-messages").hide();
+            $(".popup-messages-footer").hide();
+        } else {
+            $(".popup-box").css("height", "415px");
+            $(".popup-messages").show();
+            $(".popup-messages-footer").show();
+        }
+
+
+
+
+    });
+
+});
+
+
