@@ -18,14 +18,9 @@ use BackendBundle\Controller\CourseController;
 use BackendBundle\Controller\TemplateModuleController;
 use BackendBundle\Controller\ExamController;
 
-//https://symfony.com/doc/current/components/yaml.html
-//https://symfony.com/doc/current/doctrine/reverse_engineering.html
-//doctrine:mapping:import
 
 class CrudRoutingCommand extends ContainerAwareCommand
 {
-
-    // php bin/console tianos:crud:routing BackendBundle
 
     protected function configure()
     {

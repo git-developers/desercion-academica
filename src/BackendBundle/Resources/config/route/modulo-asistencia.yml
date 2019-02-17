@@ -1,0 +1,9 @@
+backend_modulo_asistencia_index:
+    path: /
+    defaults: { _controller: BackendBundle:ModuloAsistencia:index }
+    methods: [GET, POST]
+
+backend_modulo_asistencia_pollo:
+    path: /column-chart
+    defaults: { _controller: BackendBundle:ModuloAsistencia:columnChart }
+    methods: [GET]

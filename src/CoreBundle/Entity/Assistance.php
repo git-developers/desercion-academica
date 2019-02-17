@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as JMSS;
  * Assistance
  *
  * @ORM\Table(name="assistance", indexes={@ORM\Index(name="fk_assistance_user_tianos1_idx", columns={"user_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\AssistanceRepository")
  */
 class Assistance
 {
@@ -19,6 +19,7 @@ class Assistance
      * @ORM\Column(name="id_increment", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @JMSS\Groups({"assistance"})
      */
     private $idIncrement;
 
@@ -26,6 +27,7 @@ class Assistance
      * @var boolean
      *
      * @ORM\Column(name="attended", type="boolean", nullable=true)
+     * @JMSS\Groups({"assistance"})
      */
     private $attended;
 
@@ -59,6 +61,7 @@ class Assistance
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })
+     * @JMSS\Groups({"assistance"})
      */
     private $user;
 

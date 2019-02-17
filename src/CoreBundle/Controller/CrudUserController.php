@@ -29,6 +29,10 @@ class CrudUserController extends BaseController
         $entity = $this->em()->getRepository($crud['class_path'])->findAll();
         $entity = $this->getSerialize($entity, $crud['group_name']);
         $dataTable->setData($entity);
+	
+//	    echo "POLLO:: <pre>";
+//	    print_r($entity);
+//	    exit;
 
         return $this->render(
             'CoreBundle:CrudUser:index.html.twig',

@@ -2,6 +2,10 @@ backend_course_index:
     path: /
     defaults: { _controller: 'BackendBundle:Course:index' }
     methods: [GET]
+backend_course_index_admin:
+    path: /admin
+    defaults: { _controller: 'BackendBundle:Course:index3' }
+    methods: [GET]
 backend_course_create:
     path: /create
     defaults: { _controller: 'BackendBundle:Course:create' }

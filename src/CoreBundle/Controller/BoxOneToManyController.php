@@ -13,6 +13,69 @@ use CoreBundle\Services\BoxOneToMany\Builder\BoxRightMapper;
 class BoxOneToManyController extends BaseController
 {
 
+    public function index2(BoxMapper $boxMapper, BoxLeftMapper $leftMapper, BoxRightMapper $rightMapper)
+    {
+
+//        $this->denyAccessUnlessGranted($boxMapper->role(Action::VIEW), null, self::ACCESS_DENIED_ROLE_MSG);
+
+        $boxMapper
+            ->add('route_info', $boxMapper->switchRoute(Action::INFO))
+        ;
+
+        $leftMapper
+            ->add('route_search', $leftMapper->switchRoute(Action::BOXLEFT_SEARCH))
+            ->add('route_select_item', $leftMapper->switchRoute(Action::BOXLEFT_HAS_BOXRIGHT))
+        ;
+
+        $rightMapper
+            ->add('route_search', $rightMapper->switchRoute(Action::BOXRIGHT_SEARCH))
+            ->add('route_select_item', $rightMapper->switchRoute(Action::ASSIGN))
+        ;
+
+        $box = $boxMapper->getDefaults();
+
+        $boxLeft = $leftMapper->getDefaults();
+        $leftEntity = $this->em()->getRepository($boxLeft['class_path'])->findAll($boxLeft['limit']);
+        $leftEntity = $this->getSerializeDecode($leftEntity, $boxLeft['group_name']);
+
+        $boxRight = $rightMapper->getDefaults();
+        $rightEntity = $this->em()->getRepository($boxRight['class_path'])->findAllBoxOneToMany($boxRight['limit'], $boxRight['user_profile_slug']);
+        $rightEntity = $this->getSerializeDecode($rightEntity, $boxRight['group_name']);
+	
+	
+	    /**
+	     * CURSOS QUE PERTENECEN AL USUARIO LOGEADO
+	     */
+	    $cursosId = [];
+	    $user = $this->getUser();
+	    $courseHasUser = $this->em()->getRepository($boxLeft['class_path'])->findAllByUser($user);
+
+	    foreach ($courseHasUser as $key => $value) {
+		    $cursosId[] = $value->getIdIncrement();
+	    }
+	
+	    foreach ($leftEntity as $key => $leftEntity2) {
+		    $cursoId = $leftEntity2['id_increment'];
+		    
+		    if (!in_array($cursoId, $cursosId)) {
+		        unset($leftEntity[$key]);
+		    }
+	    }
+	    
+
+        return $this->render(
+            'CoreBundle:BoxOneToMany:index.html.twig',
+            [
+                'box' => $box,
+                'boxLeft' => $boxLeft,
+                'boxRight' => $boxRight,
+                'leftEntity' => $leftEntity,
+                'rightEntity' => $rightEntity,
+            ]
+        );
+
+    }
+
     public function index(BoxMapper $boxMapper, BoxLeftMapper $leftMapper, BoxRightMapper $rightMapper)
     {
 
@@ -41,13 +104,6 @@ class BoxOneToManyController extends BaseController
         $boxRight = $rightMapper->getDefaults();
         $rightEntity = $this->em()->getRepository($boxRight['class_path'])->findAllBoxOneToMany($boxRight['limit'], $boxRight['user_profile_slug']);
         $rightEntity = $this->getSerializeDecode($rightEntity, $boxRight['group_name']);
-
-
-//        echo '<pre> POLLO:: ';
-//        print_r($rightEntity);
-//        exit;
-
-
 
         return $this->render(
             'CoreBundle:BoxOneToMany:index.html.twig',
@@ -133,8 +189,83 @@ class BoxOneToManyController extends BaseController
             'errors' => $errors,
         ]);
     }
+	
+    
+	public function assign2(Request $request, BoxMapper $boxMapper, BoxLeftMapper $leftMapper, BoxRightMapper $rightMapper)
+	{
+		if (!$this->isXmlHttpRequest()) {
+			throw $this->createAccessDeniedException(self::ACCESS_DENIED_MSG);
+		}
 
-    public function boxLeftSearch(Request $request, BoxLeftMapper $leftMapper)
+//        if (!$this->isGranted($boxMapper->role(Action::ASSIGN))) {
+//            return $this->render(
+//                'CoreBundle:Crud:Template/access_denied.html.twig',
+//                [
+//                    'action' => Action::ASSIGN,
+//                ]
+//            );
+//        }
+		
+		$box = $boxMapper->getDefaults();
+		$boxLeft = $leftMapper->getDefaults();
+		$boxRight = $rightMapper->getDefaults();
+		
+		$boxLeftId = $leftMapper->handleSelectedId($request);
+		$boxRightIds = $rightMapper->handleSelectedId($request);
+		$boxRightIdsToCreate = $boxMapper->getIdsToCreate($boxRightIds);
+		$boxRightIdsToDelete = $boxMapper->getIdsToDelete($boxRightIds);
+		
+		$errors = [];
+		$status = self::AJAX_STATUS_ERROR;
+
+//        if(empty($boxLeftId)){
+//            $errors[] = self::AJAX_STATUS_BOXLEFT_NOT_VALUE;
+//        }
+		
+		try {
+			
+			$collectionGet = $box['collection_get'];
+			$collectionAdd = $box['collection_add'];
+			$collectionRemove = $box['collection_remove'];
+			$boxLeftEntity = $this->em()->getRepository($boxLeft['class_path'])->findOneById($boxLeftId);
+			
+			if($boxLeftEntity){
+				
+				// remove entradas pasadas
+				foreach ($boxLeftEntity->$collectionGet() as $key => $leftEntity){
+					if(in_array($leftEntity->getIdIncrement(), $boxRightIdsToDelete)){
+//                    if(in_array($leftEntity->getIdIncrement(), $boxRightIdsToDelete)){
+						$boxLeftEntity->$collectionRemove($leftEntity);
+						$this->persist($leftEntity);
+					}
+				}
+				
+				// add nuevas entradas
+				foreach ($boxRightIdsToCreate as $key => $boxRightId){
+					$boxRightEntity = $this->em()->getRepository($boxRight['class_path'])->findOneById($boxRightId);
+					
+					if (!$boxLeftEntity->$collectionGet()->contains($boxRightEntity)) {
+						$boxLeftEntity->$collectionAdd($boxRightEntity);
+						$this->persist($boxRightEntity);
+					}
+				}
+				
+				$status = self::AJAX_STATUS_SUCCESS;
+			}
+			
+		}catch (\Exception $e){
+			$errors[] = $e->getMessage();
+		}
+		
+		return $this->json([
+			'status' => $status,
+			'errors' => $errors,
+		]);
+	}
+	
+	
+	
+	public function boxLeftSearch(Request $request, BoxLeftMapper $leftMapper)
     {
         $q = $leftMapper->handleSearchValue($request);
         $boxLeft = $leftMapper->getDefaults();
@@ -197,7 +328,7 @@ class BoxOneToManyController extends BaseController
         $box = $boxMapper->getDefaults();
         $boxRight = $rightMapper->getDefaults();
         $leftHasRight = $this->getLeftHasRightValues($boxLeftId, $boxMapper, $leftMapper);
-
+        
         return $this->render(
             'CoreBundle:BoxOneToMany:Li/box_right.html.twig',
             [
@@ -208,6 +339,42 @@ class BoxOneToManyController extends BaseController
             ]
         );
 
+    }
+
+    public function boxleftHasBoxright2(Request $request, BoxMapper $boxMapper, BoxLeftMapper $leftMapper, BoxRightMapper $rightMapper)
+    {
+        if (!$this->isXmlHttpRequest()) {
+            throw $this->createAccessDeniedException(self::ACCESS_DENIED_MSG);
+        }
+
+        $boxLeftId = $request->get('id');
+        $box = $boxMapper->getDefaults();
+        $boxRight = $rightMapper->getDefaults();
+        $leftHasRight = $this->getLeftHasRightValues2($boxLeftId, $boxMapper, $leftMapper);
+        
+        return $this->render(
+            'CoreBundle:BoxOneToMany:Li/box_right.html.twig',
+            [
+                'isAssigned' => true,
+                'action' => $box['action_delete'],
+                'boxRight' => $boxRight,
+                'rightEntity' => $leftHasRight,
+            ]
+        );
+
+    }
+
+    private function getLeftHasRightValues2($boxLeftId, BoxMapper $boxMapper, BoxLeftMapper $leftMapper)
+    {
+        $box = $boxMapper->getDefaults();
+        $boxLeft = $leftMapper->getDefaults();
+
+        $leftHasRight = $this->em()->getRepository($boxLeft['class_path'])->findBoxleftHasBoxright2($boxLeftId, $boxLeft['user_profile_slug']);
+        $leftHasRight = $this->getSerializeDecode($leftHasRight, $box['assoc_group_name']);
+        $leftHasRight = is_array($leftHasRight) ? array_shift($leftHasRight) : [];
+        $leftHasRight = isset($leftHasRight[$box['assoc_group_name_key']]) ? $leftHasRight[$box['assoc_group_name_key']] : [];
+
+        return $leftHasRight;
     }
 
     private function getLeftHasRightValues($boxLeftId, BoxMapper $boxMapper, BoxLeftMapper $leftMapper)

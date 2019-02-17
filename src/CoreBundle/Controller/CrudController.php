@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use CoreBundle\Services\Common\Action;
 use CoreBundle\Services\Crud\Builder\CrudMapper;
 use CoreBundle\Services\Crud\Builder\DataTableMapper;
+use CoreBundle\Entity\Course;
 
 class CrudController extends BaseController
 {
@@ -28,13 +29,6 @@ class CrudController extends BaseController
         $entity = $this->em()->getRepository($crud['class_path'])->findAll();
         $entity = $this->getSerialize($entity, $crud['group_name']);
 
-
-//        echo '<pre> POLLO:: ';
-//        print_r($entity);
-//        exit;
-
-
-
         $dataTable->setData($entity);
 
         return $this->render(
@@ -46,6 +40,64 @@ class CrudController extends BaseController
         );
 
     }
+    
+	public function index2(CrudMapper $crudMapper, DataTableMapper $dataTable)
+	{
+
+
+/*        $user = $this->getUser();
+
+        if($user){
+            echo '<pre>';
+            print_r($user->getProfile()->getName());
+            exit;
+        }*/
+		
+		/**
+		 * CURSOS QUE PERTENECEN AL USUARIO LOGEADO
+		 */
+		$cursosId = [];
+		$user = $this->getUser();
+		$courseHasUser = $this->em()->getRepository(Course::class)->findAllByUser($user);
+		
+		foreach ($courseHasUser as $key => $value) {
+			$cursosId[] = $value->getIdIncrement();
+		}
+		
+		$crudMapper
+			->add('route_create', $crudMapper->switchRoute(Action::CREATE))
+			->add('route_edit', $crudMapper->switchRoute(Action::EDIT))
+			->add('route_view', $crudMapper->switchRoute(Action::VIEW))
+			->add('route_delete', $crudMapper->switchRoute(Action::DELETE))
+			->add('route_info', $crudMapper->switchRoute(Action::INFO))
+		;
+		
+		$crud = $crudMapper->getDefaults();
+		$entity = $this->em()->getRepository($crud['class_path'])->findAll();
+		
+		$newEntity = [];
+		foreach ($entity as $key => $entity2) {
+			$cursoId = $entity2->getIdIncrement();
+			
+			if (in_array($cursoId, $cursosId)) {
+				$newEntity[] = $entity2;
+			}
+		}
+		
+		$entity = $this->getSerialize($newEntity, $crud['group_name']);
+		
+		$dataTable->setData($entity);
+		
+		return $this->render(
+			'CoreBundle:Crud:index.html.twig',
+			[
+				'crud' => $crud,
+				'dataTable' => $dataTable,
+			]
+		);
+		
+	}
+
 
     public function create(Request $request, CrudMapper $crudMapper)
     {

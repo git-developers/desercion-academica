@@ -65,9 +65,6 @@
 
         </div>
 
-
-
-
         <div class="row">
 
             <div class="col-md-6">
@@ -109,12 +106,47 @@
                 <div class="small-box bg-blue x-hand" onclick="location.href='{{ path('backend_registerexamgrade_listado_cursos') }}';">
                     <div class="inner" style="padding-bottom: 40px">
                         <h3>Ingresar notas examen</h3>
-                        <p>test</p>
+                        <p>module</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-file-text"></i>
                     </div>
                     <a href="{{ path('backend_registerexamgrade_listado_cursos') }}" class="small-box-footer">
+                        info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="small-box bg-teal x-hand" onclick="location.href='{{ path('backend_modulo_resultado_index') }}';">
+                    <div class="inner" style="padding-bottom: 40px">
+                        <h3>Modulo mi resultado</h3>
+                        <p>module</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-fw fa-bar-chart"></i>
+                    </div>
+                    <a href="{{ path('backend_modulo_resultado_index') }}" class="small-box-footer">
+                        info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="small-box bg-purple x-hand" onclick="location.href='{{ path('backend_modulo_asistencia_index') }}';">
+                    <div class="inner" style="padding-bottom: 40px">
+                        <h3>Modulo asistencia</h3>
+                        <p>module</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <a href="{{ path('backend_modulo_asistencia_index') }}" class="small-box-footer">
                         info <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>

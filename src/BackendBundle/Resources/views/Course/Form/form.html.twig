@@ -7,13 +7,36 @@
 
     {{ form_widget(formEntity._token) }}
 
-    <div class="form-group">
-        {{ form_label(formEntity.name) }}
-        {{ form_widget(formEntity.name) }}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(formEntity.name) }}
+                {{ form_widget(formEntity.name) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(formEntity.ciclo) }}
+                {{ form_widget(formEntity.ciclo) }}
+            </div>
+        </div>
     </div>
 
-    {#<div class="form-group">#}
-        {#{{ form_label(formEntity.description) }}#}
-        {#{{ form_widget(formEntity.description) }}#}
-    {#</div>#}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <i class="fa fa-fw fa-clock-o"></i>
+                {{ form_label(formEntity.rangeStart) }}
+                {{ form_widget(formEntity.rangeStart) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <i class="fa fa-fw fa-clock-o"></i>
+                {{ form_label(formEntity.rangeEnd) }}
+                {{ form_widget(formEntity.rangeEnd) }}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

@@ -1,0 +1,9 @@
+backend_modulo_resultado_index:
+    path: /
+    defaults: { _controller: BackendBundle:ModuloResultado:index }
+    methods: [GET, POST]
+
+backend_modulo_resultado_list_students_grades:
+    path: /list-students-grades
+    defaults: { _controller: BackendBundle:ModuloResultado:listStudentsGrades }
+    methods: [POST]

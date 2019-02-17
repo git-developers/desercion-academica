@@ -96,7 +96,7 @@ class CourseRepository extends EntityRepository
             WHERE
             course.idIncrement = :id AND
             course.isActive = :status AND
-            profile.slug = :user_profile_slug 
+            profile.slug = :user_profile_slug
             ORDER BY course.idIncrement DESC
             ";
 
@@ -104,6 +104,55 @@ class CourseRepository extends EntityRepository
         $query->setParameter('status', 1);
         $query->setParameter('id', $boxLeftId);
         $query->setParameter('user_profile_slug', $userProfileSlug);
+
+        return $query->getResult();
+    }
+
+    public function findBoxleftHasBoxright2($boxLeftId, $userProfileSlug)
+    {
+        $em = $this->getEntityManager();
+        $dql = "
+            SELECT course, exam
+            FROM CoreBundle:Course course
+            INNER JOIN course.exam exam
+            WHERE
+            course.idIncrement = :id AND
+            course.isActive = :status
+            ORDER BY course.idIncrement DESC
+            ";
+
+        $query = $em->createQuery($dql);
+        $query->setParameter('status', 1);
+        $query->setParameter('id', $boxLeftId);
+//        $query->setParameter('user_profile_slug', $userProfileSlug);
+	
+//	    echo "POLLO:: <pre>";
+//	    print_r($query->getSQL());
+//	    exit;
+
+        return $query->getResult();
+    }
+
+    public function findAllByUser($user)
+    {
+        $em = $this->getEntityManager();
+        $dql = "
+            SELECT course, userT
+            FROM CoreBundle:Course course
+            INNER JOIN course.user userT
+            WHERE
+            userT.id = :userId
+            ORDER BY course.idIncrement DESC
+            ";
+
+        $query = $em->createQuery($dql);
+	
+	    $userId = $user->getId();
+        $query->setParameter('userId', $userId);
+
+//	    echo "POLLO:: <pre>";
+//	    print_r($query->getSQL());
+//	    exit;
 
         return $query->getResult();
     }

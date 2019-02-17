@@ -22,7 +22,7 @@ class AssignCourseHasExamController extends BoxOneToManyController {
 
     const BOXRIGHT_CLASS_PATH = Exam::class;
     const BOXRIGHT_LIMIT = 20;
-    const BOXRIGHT_TITLE = 'Exam';
+    const BOXRIGHT_TITLE = 'Exámen';
     const BOXRIGHT_ICON = 'file-text-o';
     const BOXRIGHT_GROUP_NAME = 'exam';
 
@@ -51,7 +51,7 @@ class AssignCourseHasExamController extends BoxOneToManyController {
             ->add('user_profile_slug', 'docente')
         ;
 
-        return parent::index($boxMapper, $leftMapper, $rightMapper);
+        return parent::index2($boxMapper, $leftMapper, $rightMapper);
     }
 
     public function assignAction(Request $request)
@@ -75,7 +75,7 @@ class AssignCourseHasExamController extends BoxOneToManyController {
             ->add('class_path', self::BOXRIGHT_CLASS_PATH)
         ;
 
-        return parent::assign($request, $boxMapper, $leftMapper, $rightMapper);
+        return parent::assign2($request, $boxMapper, $leftMapper, $rightMapper);
     }
 
     public function boxLeftSearchAction(Request $request)
@@ -137,7 +137,7 @@ class AssignCourseHasExamController extends BoxOneToManyController {
             ->add('user_profile_slug', 'docente')
         ;
 
-        return parent::boxleftHasBoxright($request, $boxMapper, $leftMapper, $rightMapper);
+        return parent::boxleftHasBoxright2($request, $boxMapper, $leftMapper, $rightMapper);
     }
 
     public function infoAction(Request $request)

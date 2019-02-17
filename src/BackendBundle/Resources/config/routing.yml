@@ -79,23 +79,24 @@ backend_course:
 backend_exam:
     resource: '@BackendBundle/Resources/config/route/exam.yml'
     prefix: /exam
-
 backend_assigncoursehasexam:
     resource: '@BackendBundle/Resources/config/route/assign-course-has-exam.yml'
     prefix: /assign-course-has-exam
-
 backend_registerexamgrade:
     resource: '@BackendBundle/Resources/config/route/register-exam-grade.yml'
     prefix: /register-exam-grade
-
 backend_chart:
     resource: '@BackendBundle/Resources/config/route/chart.yml'
     prefix: /chart
-
 backend_comparegrades:
     resource: '@BackendBundle/Resources/config/route/compare-grades.yml'
     prefix: /compare-grades
-
 backend_test:
     resource: '@BackendBundle/Resources/config/route/test.yml'
     prefix: /test
+backend_modulo_asistencia:
+    resource: '@BackendBundle/Resources/config/route/modulo-asistencia.yml'
+    prefix: /modulo-asistencia
+backend_modulo_resultado:
+    resource: '@BackendBundle/Resources/config/route/modulo-resultado.yml'
+    prefix: /modulo-resultado

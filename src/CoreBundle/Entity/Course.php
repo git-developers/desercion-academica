@@ -40,6 +40,32 @@ class Course
     private $name;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="ciclo", type="integer", length=11, nullable=true)
+     * @JMSS\Groups({"course", "course_has_user", "course_has_exam"})
+     */
+    private $ciclo;
+	
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="range_start", type="datetime", nullable=true)
+	 * @JMSS\Type("DateTime<'H:i'>")
+	 * @JMSS\Groups({"course", "course_has_user", "course_has_exam"})
+	 */
+	private $rangeStart;
+	
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="range_end", type="datetime", nullable=true)
+	 * @JMSS\Type("DateTime<'H:i'>")
+	 * @JMSS\Groups({"course", "course_has_user", "course_has_exam"})
+	 */
+	private $rangeEnd;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
@@ -333,6 +359,55 @@ class Course
     {
         return $this->exam;
     }
-
+	
+	/**
+	 * @return int
+	 */
+	public function getCiclo()
+	{
+		return $this->ciclo;
+	}
+	
+	/**
+	 * @param int $ciclo
+	 */
+	public function setCiclo($ciclo)
+	{
+		$this->ciclo = $ciclo;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getRangeStart()
+	{
+		return $this->rangeStart;
+	}
+	
+	/**
+	 * @param string $rangeStart
+	 */
+	public function setRangeStart($rangeStart)
+	{
+		$this->rangeStart = $rangeStart;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getRangeEnd()
+	{
+		return $this->rangeEnd;
+	}
+	
+	/**
+	 * @param string $rangeEnd
+	 */
+	public function setRangeEnd($rangeEnd)
+	{
+		$this->rangeEnd = $rangeEnd;
+	}
+	
+	
 
 }

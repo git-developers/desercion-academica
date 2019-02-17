@@ -32,7 +32,7 @@ class Profile
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=100, nullable=false)
-     * @JMSS\Groups({"profile"})
+     * @JMSS\Groups({"profile", "user"})
      */
     private $name;
 

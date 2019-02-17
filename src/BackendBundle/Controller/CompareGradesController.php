@@ -90,7 +90,6 @@ class CompareGradesController extends BaseController
                 [
                     'now' => $now,
                     'message' => $messageTxt
-                    ,
                 ]
             ),
             'text/html'

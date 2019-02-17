@@ -1,0 +1,111 @@
+{% extends "CoreBundle::template.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-fw fa-user"></i> Modulo asistencia
+            <small>chart</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header"> {# with-border #}
+                        <h3 class="box-title">Chart</h3>
+                    </div>
+                    <div class="box-body">
+
+                        <form method="post" action="{{ path('backend_modulo_asistencia_index') }}">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                        <input
+                                            type="date"
+                                            class="form-control"
+                                            name="date_assistance"
+                                            value="{{ dateAssistance }}"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-sm btn-success">
+                                        Filtrar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <br>
+
+                        <ul class="todo-list">
+                            {% for entity in entities %}
+                                <li>
+                                    <span class="handle ui-sortable-handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>
+                                    <span class="text">
+                                        <span class="badge bg-blue">{{ entity.id_increment }}</span>
+                                        Dia: {{ entity.created_at }}
+                                    </span>
+
+                                    {% if entity.attended %}
+                                        <small class="label label-success">
+                                            <i class="fa fa-ok"></i> Asistio
+                                        </small>
+                                    {% else %}
+                                        <small class="label label-danger">
+                                            <i class="fa fa-remove"></i> No Asistio
+                                        </small>
+                                    {% endif %}
+
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                            {% else %}
+                                <li>
+                                    No hay datos.
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                    <div class="box-footer">
+                        {#<button type="submit" class="btn btn-primary">Enviar</button>#}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

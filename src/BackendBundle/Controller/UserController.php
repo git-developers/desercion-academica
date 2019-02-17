@@ -55,6 +55,7 @@ class UserController extends CrudUserController {
 //                'property' => '"<span class=\"label label-primary\">" + obj.client.id_increment  + "</span> " + obj.client.name',
 //                'icon' => 'industry',
 //            ])
+            ->addColumn('Perfil', ' obj.profile != null ? obj.profile.name : "sin perfil" ' )
             ->addColumn('Name', 'obj.name')
             ->addColumn('LastName', 'obj.lastName')
             ->addColumn('Username', 'obj.username')

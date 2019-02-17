@@ -33,6 +33,7 @@ endif
 	php bin/console cache:clear --env=$(ENV) $(DEBUG);
 	php bin/console assets:install --symlink --env=$(ENV) $(DEBUG);
 	php bin/console assetic:dump --env=$(ENV) $(DEBUG);
+	make perm
 
 save:
 	git add .
@@ -83,7 +84,7 @@ ifeq ($(db), false)
 endif
 	mysql -h localhost -u root -proot $(DB)
 
-db_load:
+db_load_XXXXXXXSSSWW:
 	make migrate_delete
 	php bin/console doctrine:database:drop --force --if-exists
 	php bin/console doctrine:database:create --if-not-exists

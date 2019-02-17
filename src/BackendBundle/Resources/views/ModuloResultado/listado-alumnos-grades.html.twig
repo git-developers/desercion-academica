@@ -4,7 +4,6 @@
         <th style="width: 10px">#</th>
         <th>Nota test promedio</th>
         <th>Nota en curso real</th>
-        <th>Enviar email</th>
     </tr>
 
     {% for key, grade in grades %}
@@ -14,15 +13,10 @@
             </td>
             <td>{{ grade.grade }}</td>
             <td>{{ random(20) }}</td>
-            <td>
-                <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal-send-email">
-                    <i class="fa fa-fw fa-envelope-o"></i> enviar email
-                </button>
-            </td>
         </tr>
     {% else %}
         <tr>
-            <td colspan="4">
+            <td colspan="3">
                 No hay datos que mostrar.
             </td>
         </tr>

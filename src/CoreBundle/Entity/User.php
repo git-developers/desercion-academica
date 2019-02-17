@@ -52,7 +52,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @JMSS\Groups({"user", "user_of_group", "course_has_user"})
+     * @JMSS\Groups({"user", "user_of_group", "course_has_user", "assistance"})
      */
     protected $id;
 
@@ -132,7 +132,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      *     message="user.name.regex"
      * )
      * @Assert\NotBlank(message="user.name.not_blank", groups={"registration_admin", "registration"})
-     * @JMSS\Groups({"user", "user_of_group", "course_has_user"})
+     * @JMSS\Groups({"user", "user_of_group", "course_has_user", "assistance"})
      */
     private $name;
 
@@ -150,7 +150,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      *     message="user.last_name.regex"
      * )
      * @Assert\NotBlank(message="user.last_name.not_blank", groups={"registration_admin"})
-     * @JMSS\Groups({"user", "user_of_group", "course_has_user"})
+     * @JMSS\Groups({"user", "user_of_group", "course_has_user", "assistance"})
      */
     private $lastName;
 
@@ -250,6 +250,8 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      *   @ORM\JoinColumn(name="profile_id", referencedColumnName="id_increment")
      * })
      * @Assert\NotBlank(message = "user.profile.not_blank", groups={"registration_admin"} )
+     *
+     * @JMSS\Groups({"user"})
      */
     private $profile;
 
