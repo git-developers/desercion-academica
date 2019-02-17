@@ -91,6 +91,7 @@
             '@CoreBundle/Resources/public/main-assets/plugins/pace/pace.min.css'
 
             '@CoreBundle/Resources/public/common/css/tianos.css'
+            '@CoreBundle/Resources/public/common/css/chatbot.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -115,6 +116,9 @@
 
         {% block content %}
         {% endblock %}
+
+        {{ include("CoreBundle::chatbot.html.twig") }}
+
     </div>
 
     <footer class="main-footer">
@@ -149,6 +153,8 @@
         '@CoreBundle/Resources/public/main-assets/plugins/iCheck/icheck.min.js'
         '@CoreBundle/Resources/public/main-assets/plugins/slimScroll/jquery.slimscroll.min.js'
         '@CoreBundle/Resources/public/main-assets/bower_components/PACE/pace.min.js'
+
+        '@CoreBundle/Resources/public/common/js/chatbot.js'
 
     %}
     <script src="{{ asset_url }}"></script>

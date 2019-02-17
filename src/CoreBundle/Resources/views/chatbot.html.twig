@@ -1,0 +1,138 @@
+<div class="popup-box chat-popup popup-box-on" id="qnimate">
+    <div class="popup-head">
+        <div class="popup-head-left pull-left">
+            <img src="{{ asset('bundles/core/common/images/bot.png') }}" alt="Chat Bot" height="40">
+            Chat Bot
+        </div>
+        <div class="popup-head-right pull-right">
+{#            <div class="btn-group">
+                <button class="chat-header-button" data-toggle="dropdown" type="button" aria-expanded="false">
+                    <i class="glyphicon glyphicon-cog"></i>
+                </button>
+                <ul role="menu" class="dropdown-menu pull-right">
+                    <li><a href="#">Media</a></li>
+                    <li><a href="#">Block</a></li>
+                    <li><a href="#">Clear Chat</a></li>
+                    <li><a href="#">Email Chat</a></li>
+                </ul>
+            </div>#}
+
+            <button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button">
+                <i class="glyphicon glyphicon-off"></i>
+            </button>
+        </div>
+    </div>
+    <div class="popup-messages">
+
+        <div class="direct-chat-messages">
+
+            <div class="chat-box-single-line">
+                <abbr class="timestamp">
+                    {{ "now"|date("Y-m-d") }}
+                </abbr>
+            </div>
+
+            <div class="direct-chat-msg doted-border">
+                <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-left">
+                        Chat Bot
+                    </span>
+                </div>
+                <img
+                    alt="iamgurdeeposahan"
+                    src="{{ asset('bundles/core/common/images/bot.png') }}"
+                    class="direct-chat-img">
+                <div class="direct-chat-text">
+                    Hola alumno, como le puedo ayudar?
+                </div>
+                <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-timestamp pull-right">
+                        {{ "now"|date("Y-m-d g:ia") }}
+                    </span>
+                </div>
+                <div class="direct-chat-info clearfix" style="display: none">
+                    <img
+                        alt="iamgurdeeposahan"
+                        src="{{ asset('bundles/core/common/images/bot.png') }}"
+                        class="direct-chat-img big-round">
+                    <span class="direct-chat-reply-name">Auto</span>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="popup-messages-footer">
+        <textarea id="chatbox" placeholder="Escriba un mensaje..." rows="10" cols="40" name="message"></textarea>
+        {#<textarea id="status_message" placeholder="Escriba un mensaje..." rows="10" cols="40" name="message"></textarea>#}
+        <div class="btn-footer">
+            <button class="bg_none">
+                <i class="glyphicon glyphicon-film"></i>
+            </button>
+            <button class="bg_none">
+                <i class="glyphicon glyphicon-camera"></i>
+            </button>
+            <button class="bg_none">
+                <i class="glyphicon glyphicon-paperclip"></i>
+            </button>
+            <button class="bg_none pull-right">
+                <i class="glyphicon glyphicon-thumbs-up"></i>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="clone-chat-bot" class="direct-chat-msg doted-border" style="display: none">
+    <div class="direct-chat-info clearfix">
+        <span class="direct-chat-name pull-left">
+            {{ app.user.name }} (usuario)
+        </span>
+    </div>
+    <img
+        alt="iamgurdeeposahan"
+        src="{{ asset('bundles/core/common/images/bot.png') }}"
+        class="direct-chat-img">
+    <div class="direct-chat-text">--------</div>
+    <div class="direct-chat-info clearfix">
+        <span class="direct-chat-timestamp pull-right">
+            {{ "now"|date("Y-m-d g:ia") }}
+        </span>
+    </div>
+    <div class="direct-chat-info clearfix" style="display: none">
+        <img
+            alt="iamgurdeeposahan"
+            src="{{ asset('bundles/core/common/images/bot.png') }}"
+            class="direct-chat-img big-round">
+        <span class="direct-chat-reply-name">Auto</span>
+    </div>
+</div>
+
+
+<div id="clone-user" class="direct-chat-msg doted-border" style="display: none">
+    <div class="direct-chat-info clearfix">
+        <span class="direct-chat-name pull-left">
+            {{ app.user.name }} (usuario)
+        </span>
+    </div>
+    <img
+        alt="iamgurdeeposahan"
+        src="{{ asset('bundles/core/common/images/user.png') }}"
+        class="direct-chat-img">
+    <div class="direct-chat-text">--------</div>
+    <div class="direct-chat-info clearfix">
+        <span class="direct-chat-timestamp pull-right">
+            {{ "now"|date("Y-m-d g:ia") }}
+        </span>
+    </div>
+    <div class="direct-chat-info clearfix" style="display: none">
+        <img
+            alt="iamgurdeeposahan"
+            src="{{ asset('bundles/core/common/images/user.png') }}"
+            class="direct-chat-img big-round">
+        <span class="direct-chat-reply-name">Auto</span>
+    </div>
+</div>
