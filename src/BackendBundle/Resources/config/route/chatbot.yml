@@ -1,0 +1,29 @@
+backend_chatbot_index:
+    path: /
+    defaults: { _controller: 'BackendBundle:ChatBot:index' }
+    methods: [GET]
+backend_chatbot_create:
+    path: /create
+    defaults: { _controller: 'BackendBundle:ChatBot:create' }
+    methods: [GET, POST]
+backend_chatbot_edit:
+    path: /edit/{id}
+    defaults: { id: null, _controller: 'BackendBundle:ChatBot:edit' }
+    methods: [GET, POST]
+backend_chatbot_delete:
+    path: /delete
+    defaults: { _controller: 'BackendBundle:ChatBot:delete' }
+    methods: [POST, DELETE]
+backend_chatbot_view:
+    path: /view
+    defaults: { _controller: 'BackendBundle:ChatBot:view' }
+    methods: [POST]
+backend_chatbot_info:
+    path: /info
+    defaults: { _controller: 'BackendBundle:ChatBot:info' }
+    methods: [POST]
+
+backend_chatbot_search:
+    path: /search
+    defaults: { _controller: 'BackendBundle:ChatBot:search' }
+    methods: [POST]

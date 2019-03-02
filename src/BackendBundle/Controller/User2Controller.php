@@ -16,24 +16,6 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class User2Controller extends BaseController {
 
-    /*
-
-    select * from acl_classes;
-    select * from acl_entries;
-    select * from acl_object_identities;
-    select * from acl_object_identity_ancestors;
-    select * from acl_security_identities;
-
-    delete from acl_classes;
-    delete from acl_entries;
-    delete from acl_object_identities;
-    delete from acl_object_identity_ancestors;
-    delete from acl_security_identities;
-
-    */
-
-
-
     public function indexAction(Request $request)
     {
 //        if (!$this->get('security.authorization_checker')->isGranted('ROLE_EDIT_USER')) {

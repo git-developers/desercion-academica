@@ -1,0 +1,60 @@
+{% extends 'CoreBundle::Crud/Template/api_content.html.twig' %}
+
+
+{% block api_content %}
+
+    {#<script src="http://cdn.ckeditor.com/4.3.4/standard/ckeditor.js"></script>#}
+
+    <script type="text/javascript">
+
+        window.CKEDITOR_BASEPATH = "http://cdn.ckeditor.com/4.3.4/standard/";
+
+        CKEDITOR.editorConfig = function (config) {
+            config.language = 'es';
+            config.uiColor = '#F7B42C';
+            config.height = 300;
+            config.toolbarCanCollapse = true;
+
+        };
+        CKEDITOR.replace('chat_bot_description');
+
+        // window.CKEDITOR.replace('chat_bot_description');
+        // window.CKEDITOR_BASEPATH = '../node_modules/ckeditor/';
+
+        // $(document).ready(function(){
+        //
+        //     $.fn.modal.Constructor.prototype.enforceFocus = function () {
+        //         modal_this = this
+        //         $(document).on('focusin.modal', function (e) {
+        //             if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
+        //                 // add whatever conditions you need here:
+        //                 &&
+        //                 !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select') && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+        //                 modal_this.$element.focus()
+        //             }
+        //         })
+        //     };
+        //
+        // });
+
+    </script>
+
+
+
+    {% if id is defined %}
+        <input type="hidden" value="{{ id }}" name="id">
+    {% endif %}
+
+    {{ form_widget(formEntity._token) }}
+
+    <div class="form-group">
+        {{ form_label(formEntity.name) }}
+        {{ form_widget(formEntity.name) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formEntity.description) }}
+        {{ form_widget(formEntity.description) }}
+    </div>
+
+{% endblock %}

@@ -8,6 +8,7 @@ use CoreBundle\Services\Common\Action;
 use CoreBundle\Services\Crud\Builder\CrudMapper;
 use CoreBundle\Services\Crud\Builder\DataTableMapper;
 use CoreBundle\Entity\Course;
+use CoreBundle\Entity\ChatBot;
 
 class CrudController extends BaseController
 {
@@ -40,6 +41,35 @@ class CrudController extends BaseController
         );
 
     }
+	
+	public function indexChatBot(CrudMapper $crudMapper, DataTableMapper $dataTable)
+	{
+
+//        $this->denyAccessUnlessGranted($crudMapper->role(Action::VIEW), null, self::ACCESS_DENIED_ROLE_MSG);
+		
+		$crudMapper
+			->add('route_create', $crudMapper->switchRoute(Action::CREATE))
+			->add('route_edit', $crudMapper->switchRoute(Action::EDIT))
+			->add('route_view', $crudMapper->switchRoute(Action::VIEW))
+			->add('route_delete', $crudMapper->switchRoute(Action::DELETE))
+			->add('route_info', $crudMapper->switchRoute(Action::INFO))
+		;
+		
+		$crud = $crudMapper->getDefaults();
+		$entity = $this->em()->getRepository($crud['class_path'])->findAll();
+		$entity = $this->getSerialize($entity, $crud['group_name']);
+		
+		$dataTable->setData($entity);
+		
+		return $this->render(
+			'CoreBundle:Crud:index_chatbot.html.twig',
+			[
+				'crud' => $crud,
+				'dataTable' => $dataTable,
+			]
+		);
+		
+	}
     
 	public function index2(CrudMapper $crudMapper, DataTableMapper $dataTable)
 	{
@@ -172,6 +202,83 @@ class CrudController extends BaseController
             ]
         );
     }
+	
+	
+	
+	
+	
+	public function createChatBot(Request $request, CrudMapper $crudMapper)
+	{
+		
+		if (!$this->isXmlHttpRequest()) {
+			throw $this->createAccessDeniedException(self::ACCESS_DENIED_MSG);
+		}
+		
+		$crudMapper
+			->add('template_create', $crudMapper->getFormTemplate())
+			->add('test', 'test', [
+				'label' => '',
+			])
+		;
+		
+		$crud = $crudMapper->getDefaults();
+		
+		$options = !empty($crud['form_data']) ? ['form_data' => $crud['form_data']] : ['form_data' => []];
+		
+		$entity = new $crud['class_path']();
+		$form = $this->createForm($crud['form_type'], $entity, $options);
+		$form->handleRequest($request);
+		
+		if ($form->isSubmitted()) {
+			
+			$errors = [];
+			$entityJson = null;
+			$status = self::AJAX_STATUS_ERROR;
+			
+			try{
+				
+				if ($form->isValid()) {
+					
+					$user = $this->getUser();
+					$entity->addUser($user);
+					$this->persist($entity);
+					$entityJson = $this->getSerializeDecode($entity, $crud['group_name']);
+					$status = self::AJAX_STATUS_SUCCESS;
+					
+				}else{
+					foreach ($form->getErrors(true) as $key => $error) {
+						if ($form->isRoot()) {
+							$errors[] = $error->getMessage();
+						} else {
+							$errors[] = $error->getMessage();
+						}
+					}
+				}
+				
+			}catch (\Exception $e){
+				$errors[] = $e->getMessage();
+			}
+			
+			return $this->json([
+				'status' => $status,
+				'errors' => $errors,
+				'entity' => $entityJson,
+			]);
+		}
+		
+		
+		return $this->render(
+			$this->validateTemplate($crud['template_create']),
+			[
+				'crud' => $crud,
+				'formEntity' => $form->createView(),
+			]
+		);
+	}
+
+    
+    
+    
 
     public function edit(Request $request, CrudMapper $crudMapper)
     {

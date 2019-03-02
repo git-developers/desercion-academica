@@ -34,4 +34,15 @@ class ChartController extends Controller {
         );
     }
 
+    public function columnChart2Action()
+    {
+
+        return $this->render(
+            'BackendBundle:Chart:column_chart_2.html.twig',
+            [
+                'entitiesJson' => null,
+            ]
+        );
+    }
+
 }

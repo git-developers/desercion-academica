@@ -4,6 +4,33 @@ AUTHOR_NAME := "Jafeth Bendezu"
 HOST_PROJECT := desercion-academica.com
 DATABASE_NAME := desercion_academica_db
 
+
+db_load:
+	make migrate_delete
+	php bin/console doctrine:database:drop --force --if-exists
+	php bin/console doctrine:database:create --if-not-exists
+	php bin/console doctrine:migration:diff
+	php bin/console doctrine:migration:migrate --no-interaction
+	make perm
+	make load_fixture
+	make perm
+
+migrate_delete:
+	@echo =========== Migrations: delete all ===========;
+	rm -rf $$PWD/app/DoctrineMigrations
+
+load_fixture:
+	php bin/console tianos:truncate:tables
+	php bin/console doctrine:fixtures:load --no-interaction
+
+perm:
+	@echo ---;
+	@echo se dara permisos a los folderes cache y logs;
+	chmod 0777 -R var/cache var/logs var/sessions $$PWD/app/DoctrineMigrations
+	@echo ---;
+
+
+
 delete:
 	@echo ---;
 	@echo Borrando los folderes cache y logs;
@@ -84,23 +111,6 @@ ifeq ($(db), false)
 endif
 	mysql -h localhost -u root -proot $(DB)
 
-db_load_XXXXXXXSSSWW:
-	make migrate_delete
-	php bin/console doctrine:database:drop --force --if-exists
-	php bin/console doctrine:database:create --if-not-exists
-	php bin/console doctrine:migration:diff
-	php bin/console doctrine:migration:migrate --no-interaction
-	make load_fixture
-	make perm
-
-migrate_delete:
-	@echo =========== Migrations: delete all ===========;
-	rm -rf $$PWD/app/DoctrineMigrations
-
-load_fixture:
-	php bin/console tianos:truncate:tables
-	php bin/console doctrine:fixtures:load --no-interaction
-
 perm:
 	@echo ---;
 	@echo se dara permisos a los folderes cache y logs;
@@ -178,11 +188,11 @@ step_2_init_msql:
 	mysql -u root -p
 	#dentro de mysql, ejecutar: ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
 
-load_fixture:
-	php bin/console tianos:truncate:tables
-	php bin/console doctrine:fixtures:load
-
 setfacl:
 	HTTPDUSER=$$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 	setfacl -dR -m u:"$$HTTPDUSER":rwX -m u:$(whoami):rwX var
 	setfacl -R -m u:"$$HTTPDUSER":rwX -m u:$(whoami):rwX var
+
+run:
+	sudo service nginx stop; sudo service apache2 restart; sudo service php7.2-fpm restart
+

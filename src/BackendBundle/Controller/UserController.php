@@ -21,14 +21,14 @@ class UserController extends CrudUserController {
     public function indexAction()
     {
 
-//
-//        $user = $this->getUser();
-//
-//        if($user){
-//            echo '<pre>';
-//            print_r($user->getRoles());
-//            exit;
-//        }
+
+/*        $user = $this->getUser();
+
+        if($user){
+            echo '<pre>';
+            print_r($user->getRoles());
+            exit;
+        }*/
 
         $crud = $this->get('core.service.cruduser');
         $crudMapper = $crud->getCrudMapper();
@@ -63,7 +63,8 @@ class UserController extends CrudUserController {
                 'icon' => 'calendar'
             ])
             ->addButtonTable(['edit', 'delete', 'change_password'], 'obj.id_increment')
-            ->addButtonHeader(['create', 'info'])
+//            ->addButtonHeader(['create', 'info'])
+            ->addButtonHeader(['create'])
             ->addRowCallBack('id', 'aData.id')
             ->addRowCallBack('data-id', 'aData.id')
             ->addRowCallBack('class', ' "alert" ')

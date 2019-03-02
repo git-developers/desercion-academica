@@ -311,7 +311,17 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
      * @JMSS\Groups({"user"})
      */
     private $course;
+	
+	/**
+	 * @var \Doctrine\Common\Collections\Collection
+	 *
+	 * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\ChatBot", mappedBy="user")
+	 */
+	private $chatbot;
 
+	
+	
+	
     /**
      * Constructor
      */
@@ -320,6 +330,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
         $this->groupOfUsers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->files = new \Doctrine\Common\Collections\ArrayCollection();
         $this->course = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->chatbot = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -971,7 +982,7 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
 
 
 
-
+//    **********************
 
     /**
      * Add course
@@ -1006,6 +1017,46 @@ class User extends BaseUser // implements UserInterface, DomainObjectInterface, 
     {
         return $this->course;
     }
-
-
+	
+	
+	/**
+	 * Add chatbot
+	 *
+	 * @param \AppBundle\Entity\ChatBot $chatbot
+	 *
+	 * @return UserTianos
+	 */
+	public function addChatbot(\CoreBundle\Entity\ChatBot $chatbot)
+	{
+		$this->chatbot[] = $chatbot;
+		
+		return $this;
+	}
+	
+	/**
+	 * Remove chatbot
+	 *
+	 * @param \AppBundle\Entity\ChatBot $chatbot
+	 */
+	public function removeChatbot(\CoreBundle\Entity\ChatBot $chatbot)
+	{
+		$this->chatbot->removeElement($chatbot);
+	}
+	
+	/**
+	 * Get chatbot
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getChatbot()
+	{
+		return $this->chatbot;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

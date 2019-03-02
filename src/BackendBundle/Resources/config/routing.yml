@@ -100,3 +100,6 @@ backend_modulo_asistencia:
 backend_modulo_resultado:
     resource: '@BackendBundle/Resources/config/route/modulo-resultado.yml'
     prefix: /modulo-resultado
+backend_chatbot:
+    resource: '@BackendBundle/Resources/config/route/chatbot.yml'
+    prefix: /chatbot

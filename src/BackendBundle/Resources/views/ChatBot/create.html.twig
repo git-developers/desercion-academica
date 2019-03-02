@@ -1,0 +1,115 @@
+{% extends "CoreBundle::template.html.twig" %}
+
+{% block bodyclass %}{% spaceless %}
+    {#{{ crud.body_css }}#}
+{% endspaceless %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    filter='cssrewrite'
+    '@CoreBundle/Resources/public/common/css/switch.css'
+    '@CoreBundle/Resources/public/main-assets/plugins/datatables/dataTables.bootstrap.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        window.CKEDITOR_BASEPATH = '{{ app.request.getSchemeAndHttpHost() }}/desercion-academica/src/CoreBundle/Resources/public/main-assets/ckeditor/';
+    </script>
+    <script src="{{ app.request.getSchemeAndHttpHost() }}/desercion-academica/src/CoreBundle/Resources/public/main-assets/ckeditor/ckeditor.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+
+
+        });
+
+        CKEDITOR.editorConfig = function (config) {
+            config.language = 'es';
+            config.uiColor = '#F7B42C';
+            config.height = 300;
+            config.toolbarCanCollapse = true;
+
+        };
+        CKEDITOR.replace('chat_bot_description');
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-fw fa-commenting-o"></i> Crear Chat Bot
+            <small>lista</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+
+                    {#
+                    <div class="box-header">
+                        <h3 class="box-title">Data Table With Full Features</h3>
+                    </div>
+                    #}
+
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-sm-7 table-responsive">
+
+                                {{ form_start(formEntity) }}
+                                {#{{ form_widget(form) }}#}
+
+                                {% if id is defined %}
+                                    <input type="hidden" value="{{ id }}" name="id">
+                                {% endif %}
+
+                                {{ form_widget(formEntity._token) }}
+
+                                <div class="form-group">
+                                    {{ form_label(formEntity.name) }}
+                                    {{ form_widget(formEntity.name) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(formEntity.description) }}
+                                    {{ form_widget(formEntity.description) }}
+                                </div>
+
+                                <div class="form-group pull-right">
+                                    <button type="submit" class="btn btn-success">Guardar Chat Bot</button>
+                                </div>
+
+                                {{ form_end(formEntity) }}
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {#{{ include('CoreBundle:Crud:Modal/create.html.twig') }}#}
+
+
+{% endblock %}

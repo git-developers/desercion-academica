@@ -27,10 +27,10 @@ class Builder implements ContainerAwareInterface
 //            print_r($user->getRoles());
 //            exit;
 //        }
-
-
-
-        $menu = $factory->createItem('root', [
+	
+	    $route = $this->container->get('request_stack')->getCurrentRequest()->attributes->get('_route');
+	
+	    $menu = $factory->createItem('root', [
             'childrenAttributes' => [
             'class' => 'sidebar-menu',
             ],
@@ -334,47 +334,83 @@ class Builder implements ContainerAwareInterface
 //        ->setAttribute('icon', self::CIRCLE_2_AQUA)
 //        ->setDisplay($loadFixture)
 //        ;
+	
+	
+	    $user = $this->getUser();
+	    $profile = $user->getProfile()->getName();
+	    $profile = strtoupper($profile);
+	    
+	
+	    if ($profile == "ADMINISTRATOR" || $profile == "DOCENTE") {
+		
+		    /**
+		     * CHART
+		     */
+		    $child = 'Reportes';
+		    $clientView = true; //$this->isGranted('ROLE_CLIENT_VIEW');
+		    $menu->addChild($child, [
+			    'route' => 'backend_default_index',
+			    'extras' => ['safe_label' => true],
+			    'childrenAttributes' => [
+				    'class' => 'treeview-menu',
+			    ],
+		    ])
+			    ->setAttribute('allow_angle', true)
+			    ->setAttribute('class', 'treeview')
+			    ->setAttribute('icon', 'fa-fw fa-bar-chart')
+			    ->setDisplay($clientView)
+		    ;
+		
+		    $menu[$child]->addChild('Reporte asistencia alumno', [
+			    'route' => 'backend_chart_piechart'
+		    ])
+			    ->setAttribute('icon', self::CIRCLE_1_YELLOW)
+			    ->setDisplay($clientView)
+		    ;
+		
+		    $menu[$child]->addChild('Reporte de deserción', [
+			    'route' => 'backend_chart_columnchart'
+		    ])
+			    ->setAttribute('icon', self::CIRCLE_2_AQUA)
+			    ->setDisplay($clientView)
+		    ;
+		
+		    $menu[$child]->addChild('Reporte de chat bot', [
+			    'route' => 'backend_chart_columnchart_2'
+		    ])
+			    ->setAttribute('icon', self::CIRCLE_3_BLUE)
+			    ->setDisplay($clientView)
+		    ;
+	    }
+	
+	
+	    if (
+//		    $profile == "ADMINISTRATOR" ||
+		    $profile == "DOCENTE") {
+		    $child = 'Chat Bot';
+		    $menu->addChild($child, [
+			    'route' => 'backend_chatbot_index',
+			    'extras' => ['safe_label' => true],
+			    'childrenAttributes' => [
+				    'class' => 'treeview-menu',
+			    ],
+		    ])
+			    ->setAttribute('allow_angle', true)
+			    ->setAttribute('class', 'treeview')
+			    ->setAttribute('icon', 'fa fa-fw fa-commenting-o')
+			    ->setDisplay(true)
+		    ;
+		
+/*		    $menu[$child]->addChild('Gestionar', [
+			    'route' => 'backend_exam_index'
+		    ])
+			    ->setAttribute('icon', self::CIRCLE_1_YELLOW)
+			    ->setDisplay($view)
+		    ;*/
+	    }
 
 
-
-        /**
-         * CHART
-         */
-        $child = 'Reportes';
-        $clientView = true; //$this->isGranted('ROLE_CLIENT_VIEW');
-        $menu->addChild($child, [
-            'route' => 'backend_default_index',
-            'extras' => ['safe_label' => true],
-            'childrenAttributes' => [
-                'class' => 'treeview-menu',
-            ],
-        ])
-        ->setAttribute('allow_angle', true)
-        ->setAttribute('class', 'treeview')
-        ->setAttribute('icon', 'fa-fw fa-bar-chart')
-        ->setDisplay($clientView)
-        ;
-
-        $menu[$child]->addChild('Pie Chart', [
-            'route' => 'backend_chart_piechart'
-        ])
-        ->setAttribute('icon', self::CIRCLE_1_YELLOW)
-        ->setDisplay($clientView)
-        ;
-
-        $menu[$child]->addChild('Column Chart', [
-            'route' => 'backend_chart_columnchart'
-        ])
-        ->setAttribute('icon', self::CIRCLE_2_AQUA)
-        ->setDisplay($clientView)
-        ;
-
-
-
-
-
-
-
+		
 
         return $menu;
     }

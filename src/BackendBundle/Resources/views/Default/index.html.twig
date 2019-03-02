@@ -31,135 +31,38 @@
 
     <section class="content">
 
+        {#{{ dump(app.user.profile.slug) }}#}
+
+
         <div class="row">
-
-            <div class="col-md-6">
-                <div class="small-box bg-aqua x-hand" onclick="location.href='{{ path('backend_registerattendanceteacher_index') }}';">
-                    <div class="inner" style="padding-bottom: 40px">
-                        <h3>Registrar asistencia</h3>
-                        <p>Docente</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-check-square-o"></i>
-                    </div>
-                    <a href="{{ path('backend_registerattendanceteacher_index') }}" class="small-box-footer">
-                        info <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="small-box bg-green x-hand" onclick="location.href='{{ path('backend_registerattendancestudent_listado_cursos') }}';">
-                    <div class="inner" style="padding-bottom: 40px">
-                        <h3>Registrar asistencia</h3>
-                        <p>Alumno</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-check-square-o"></i>
-                    </div>
-                    <a href="{{ path('backend_registerattendancestudent_listado_cursos') }}" class="small-box-footer">
-                        info <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
+            {% if app.user.profile.slug == "docente" or app.user.profile.slug == "administrator" %}
+                {{ include("BackendBundle:Default:Module/module_registrar_asistencia_docente.html.twig") }}
+                {{ include("BackendBundle:Default:Module/module_registrar_asistencia_alumno.html.twig") }}
+            {% endif %}
         </div>
 
         <div class="row">
-
-            <div class="col-md-6">
-                <div class="small-box bg-yellow x-hand" onclick="location.href='{{ path('backend_comparegrades_index') }}';">
-                    <div class="inner" style="padding-bottom: 40px">
-                        <h3>Comparar notas</h3>
-                        <p>Notas</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-exchange"></i>
-                    </div>
-                    <a href="{{ path('backend_comparegrades_index') }}" class="small-box-footer">
-                        info <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="small-box bg-red x-hand" onclick="location.href='{{ path('backend_assigncoursehasexam_index') }}';">
-                    <div class="inner" style="padding-bottom: 40px">
-                        <h3>Examenes</h3>
-                        <p>test</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-file-text"></i>
-                    </div>
-                    <a href="{{ path('backend_assigncoursehasexam_index') }}" class="small-box-footer">
-                        info <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
+            {% if app.user.profile.slug == "docente" or app.user.profile.slug == "administrator" %}
+                {{ include("BackendBundle:Default:Module/comparar_notas.html.twig") }}
+                {{ include("BackendBundle:Default:Module/examenes.html.twig") }}
+            {% endif %}
         </div>
 
 
         <div class="row">
-
-            <div class="col-md-6">
-                <div class="small-box bg-blue x-hand" onclick="location.href='{{ path('backend_registerexamgrade_listado_cursos') }}';">
-                    <div class="inner" style="padding-bottom: 40px">
-                        <h3>Ingresar notas examen</h3>
-                        <p>module</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-file-text"></i>
-                    </div>
-                    <a href="{{ path('backend_registerexamgrade_listado_cursos') }}" class="small-box-footer">
-                        info <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="small-box bg-teal x-hand" onclick="location.href='{{ path('backend_modulo_resultado_index') }}';">
-                    <div class="inner" style="padding-bottom: 40px">
-                        <h3>Modulo mi resultado</h3>
-                        <p>module</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-fw fa-bar-chart"></i>
-                    </div>
-                    <a href="{{ path('backend_modulo_resultado_index') }}" class="small-box-footer">
-                        info <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
+            {% if app.user.profile.slug == "docente" or app.user.profile.slug == "administrator" %}
+                {{ include("BackendBundle:Default:Module/ingresar_notas_examen.html.twig") }}
+                {{ include("BackendBundle:Default:Module/modulo_asistencia.html.twig") }}
+            {% endif %}
         </div>
 
 
         <div class="row">
-
-            <div class="col-md-6">
-                <div class="small-box bg-purple x-hand" onclick="location.href='{{ path('backend_modulo_asistencia_index') }}';">
-                    <div class="inner" style="padding-bottom: 40px">
-                        <h3>Modulo asistencia</h3>
-                        <p>module</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-user"></i>
-                    </div>
-                    <a href="{{ path('backend_modulo_asistencia_index') }}" class="small-box-footer">
-                        info <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-
-            </div>
-
+            {% if app.user.profile.slug == "alumno" %}
+                {{ include("BackendBundle:Default:Module/examenes.html.twig") }}
+                {{ include("BackendBundle:Default:Module/modulo_mi_resultado.html.twig") }}
+            {% endif %}
         </div>
-
-
-
 
     </section>
 

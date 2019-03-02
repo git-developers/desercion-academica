@@ -53,6 +53,7 @@
                     modalMsgDiv.hide();
                     modalMsgText.empty();
                     apiContent.html(msg_loading);
+
                 },
                 success: function(data, textStatus, jqXHR) {
                     $('button[type="submit"]').prop('disabled', false);

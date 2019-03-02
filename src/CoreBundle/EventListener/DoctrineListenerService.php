@@ -27,6 +27,7 @@ use CoreBundle\Entity\TemplateEPost;
 use CoreBundle\Entity\TemplateEItem;
 use CoreBundle\Entity\Course;
 use CoreBundle\Entity\Exam;
+use CoreBundle\Entity\ChatBot;
 use CoreBundle\Entity\Assistance;
 use Cocur\Slugify\Slugify;
 use Psr\Log\LoggerInterface;
@@ -210,6 +211,10 @@ class DoctrineListenerService implements EventSubscriber
 
             return;
         }else if ($entity instanceof Exam){
+            $entity->setCreatedAt($this->dateTime);
+
+            return;
+        }else if ($entity instanceof ChatBot){
             $entity->setCreatedAt($this->dateTime);
 
             return;

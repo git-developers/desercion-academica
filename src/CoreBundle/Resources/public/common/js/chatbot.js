@@ -31,6 +31,35 @@ function chatbotResponse() {
         botMessageOut = botMessage;
     }
 
+
+
+    /**
+     * BUSCAR EN DATABASE
+     */
+    $.ajax({
+        url: "/desercion-academica/web/backend/chatbot/search",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            lastUserMessage: lastUserMessage.toString().trim().toLowerCase()
+        },
+        cache: true,
+        beforeSend: function(jqXHR, settings) {
+
+        },
+        success: function(data, textStatus, jqXHR) {
+            botMessage = 'Te presento la información sobre: ' + lastUserMessage;
+            botMessageOut = data.description;
+        },
+        error: function(jqXHR, exception) {
+            console.log(" AJAX :: error ");
+        }
+    });
+
+
+
+
+    /*
     if (lastUserMessage.toString().trim().toLowerCase().indexOf("estadistica") >= 0) {
         botMessage = 'Te presento la información sobre: estadistica';
         botMessageOut = 'Información del curso de estadística <br><a href="https://www.youtube.com/watch?v=fOuRqk1nzgY"><img id="img" width="168" src="https://i.ytimg.com/vi/fOuRqk1nzgY/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&amp;rs=AOn4CLC1DWfOFd-MTI3Ay45KcVMNTDxk1w"></a>';
@@ -40,22 +69,30 @@ function chatbotResponse() {
         botMessage = 'Te presento la información sobre: economía';
         botMessageOut = 'Información del curso de economía <br><a href="https://www.youtube.com/watch?v=Memoa2BL39w"><img id="img" width="168" src="https://i.ytimg.com/vi/Memoa2BL39w/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLAdKjFPpNKBVJnLSNjSHJXJaHnEFQ"></a>';
     }
+    */
 
-    //clone user message
-    var cloneUser = $("#clone-user").clone();
-    cloneUser.find(".direct-chat-text").html(lastUserMessage);
-    cloneUser.appendTo(".direct-chat-messages").css("display", "block");
 
-    //clone chatbot message
-    var cloneChatBot = $("#clone-chat-bot").clone();
-    cloneChatBot.find(".direct-chat-text").html(botMessageOut);
-    cloneChatBot.appendTo(".direct-chat-messages").css("display", "block");
+    setTimeout(function(){
+
+        //clone user message
+        var cloneUser = $("#clone-user").clone();
+        cloneUser.find(".direct-chat-text").html(lastUserMessage);
+        cloneUser.appendTo(".direct-chat-messages").css("display", "block");
+
+        //clone chatbot message
+        var cloneChatBot = $("#clone-chat-bot").clone();
+        // botMessageOut = $.parseHTML(botMessageOut);
+        cloneChatBot.find(".direct-chat-text").html(botMessageOut);
+        cloneChatBot.appendTo(".direct-chat-messages").css("display", "block");
+
+    }, 1500);
 
 }
 
 //this runs each time enter is pressed.
 //It controls the overall input and output
 function newEntry() {
+
 
     var messageBox = $("#chatbox").val();
 
@@ -82,7 +119,12 @@ function newEntry() {
         //add the chatbot's name and message to the array messages
         messages.push("<b>" + botName + ":</b> " + botMessage);
         // says the message using the text to speech function written below
-        Speech(botMessage);
+
+
+        setTimeout(function(){
+            Speech(botMessage);
+        }, 1500);
+
 
         //outputs the last few array elements of messages to html
         // for (var i = 1; i < 8; i++) {
@@ -90,6 +132,10 @@ function newEntry() {
         //         document.getElementById("chatlog" + i).innerHTML = messages[messages.length - i];
         // }
     }
+
+
+
+
 }
 
 //text to Speech

@@ -37,7 +37,7 @@
     '@CoreBundle/Resources/public/main-assets/plugins/datatables/dataTables.bootstrap.min.js'
     '@CoreBundle/Resources/public/main-assets/plugins/ckeditor/ckeditor.js'
     '@CoreBundle/Resources/public/crud/js/formCreate.js'
-    '@CoreBundle/Resources/public/crud/js/formEdit.js'
+    '@CoreBundle/Resources/public/crud/js/formEditChatBot.js'
     '@CoreBundle/Resources/public/crud/js/formDelete.js'
     '@CoreBundle/Resources/public/crud/js/formView.js'
     '@CoreBundle/Resources/public/crud/js/formInfo.js'
@@ -129,11 +129,10 @@
                 table_json: tableJson,
             });
 
-            $('body.{{ crud.body_css }}').formEdit({
+            $('body.{{ crud.body_css }}').formEditChatBot({
                 form_edit_name: '{{ crud.form_edit_name }}',
                 modal_edit_id: '{{ crud.modal_edit_id }}',
-                route_edit: '{{ crud.route_edit }}',
-                table_json: tableJson,
+                route_edit: '{{ path('backend_chatbot_edit') }}',
             });
 
             $('body.{{ crud.body_css }}').formDelete({
@@ -172,11 +171,9 @@
             {#<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>#}
             {#<li class="active">Dashboard</li>#}
 
-            {% for key, value in dataTable.buttonHeader %}
-                <li>
-                    {{ value|raw }}
-                </li>
-            {% endfor %}
+            <a class="btn btn-success btn-xs" alt="Crear item" title="Crear item" style="margin-right: 5px" href="{{ path('backend_chatbot_create') }}">
+                <i class="fa fa-fw fa-plus"></i> crear item
+            </a>
         </ol>
     </section>
 

@@ -7,3 +7,8 @@ backend_chart_columnchart:
     path: /column-chart
     defaults: { _controller: BackendBundle:Chart:columnChart }
     methods: [GET]
+
+backend_chart_columnchart_2:
+    path: /column-chart-2
+    defaults: { _controller: BackendBundle:Chart:columnChart2 }
+    methods: [GET]

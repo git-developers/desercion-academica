@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20181111174725 extends AbstractMigration
+class Version20190302094614 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -19,7 +19,9 @@ class Version20181111174725 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE qr (id_increment INT AUTO_INCREMENT NOT NULL, cht VARCHAR(45) NOT NULL, chl TEXT NOT NULL, chs VARCHAR(45) NOT NULL, choe VARCHAR(45) DEFAULT NULL, chld VARCHAR(45) DEFAULT NULL, created DATETIME NOT NULL, updated DATETIME DEFAULT NULL, status TINYINT(1) NOT NULL, PRIMARY KEY(id_increment)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE course (id_increment INT AUTO_INCREMENT NOT NULL, code VARCHAR(45) DEFAULT NULL, name VARCHAR(45) DEFAULT NULL, created_at DATETIME DEFAULT NULL, updated_at DATETIME DEFAULT NULL, is_active TINYINT(1) DEFAULT NULL, PRIMARY KEY(id_increment)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE chat_bot (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(45) NOT NULL, description TEXT NOT NULL, created_at DATETIME DEFAULT NULL, updated_at DATETIME DEFAULT NULL, is_active TINYINT(1) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE chatbot_has_user (chatbot_id INT NOT NULL, user_id INT NOT NULL, INDEX IDX_FAFB6A5A1984C580 (chatbot_id), INDEX IDX_FAFB6A5AA76ED395 (user_id), PRIMARY KEY(chatbot_id, user_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE course (id_increment INT AUTO_INCREMENT NOT NULL, code VARCHAR(45) DEFAULT NULL, name VARCHAR(45) DEFAULT NULL, ciclo INT DEFAULT NULL, range_start DATETIME DEFAULT NULL, range_end DATETIME DEFAULT NULL, created_at DATETIME DEFAULT NULL, updated_at DATETIME DEFAULT NULL, is_active TINYINT(1) DEFAULT NULL, PRIMARY KEY(id_increment)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE course_has_user (course_id INT NOT NULL, user_id INT NOT NULL, INDEX IDX_797B6040591CC992 (course_id), INDEX IDX_797B6040A76ED395 (user_id), PRIMARY KEY(course_id, user_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE course_has_exam (course_id INT NOT NULL, exam_id INT NOT NULL, INDEX IDX_CC5310CF591CC992 (course_id), INDEX IDX_CC5310CF578D5E91 (exam_id), PRIMARY KEY(course_id, exam_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE gcm (id_increment INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, click_action VARCHAR(45) DEFAULT NULL, icon VARCHAR(45) DEFAULT NULL, color VARCHAR(45) DEFAULT NULL, sound VARCHAR(45) DEFAULT NULL, badge VARCHAR(45) DEFAULT NULL, title VARCHAR(45) DEFAULT NULL, body TEXT DEFAULT NULL, created DATETIME NOT NULL, updated DATETIME DEFAULT NULL, active TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_CF0A2136A76ED395 (user_id), PRIMARY KEY(id_increment)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
@@ -38,6 +40,8 @@ class Version20181111174725 extends AbstractMigration
         $this->addSql('CREATE TABLE exam (id_increment INT AUTO_INCREMENT NOT NULL, code VARCHAR(45) DEFAULT NULL, name VARCHAR(45) DEFAULT NULL, description TEXT DEFAULT NULL, created_at DATETIME DEFAULT NULL, updated_at DATETIME DEFAULT NULL, is_active TINYINT(1) DEFAULT NULL, PRIMARY KEY(id_increment)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user_tianos (id INT AUTO_INCREMENT NOT NULL, profile_id INT DEFAULT NULL, client_id INT DEFAULT NULL, username VARCHAR(180) NOT NULL, username_canonical VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, email_canonical VARCHAR(180) NOT NULL, enabled TINYINT(1) NOT NULL, salt VARCHAR(255) DEFAULT NULL, password VARCHAR(255) NOT NULL, last_login DATETIME DEFAULT NULL, confirmation_token VARCHAR(180) DEFAULT NULL, password_requested_at DATETIME DEFAULT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', slug VARCHAR(255) DEFAULT NULL, device_code VARCHAR(100) DEFAULT NULL, dni VARCHAR(8) DEFAULT NULL, name VARCHAR(100) NOT NULL, last_name VARCHAR(100) DEFAULT NULL, dob DATE DEFAULT NULL, address VARCHAR(100) DEFAULT NULL, phone VARCHAR(45) DEFAULT NULL, image VARCHAR(255) DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, is_active TINYINT(1) NOT NULL, last_access DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_3ABBC1D792FC23A8 (username_canonical), UNIQUE INDEX UNIQ_3ABBC1D7A0D96FBF (email_canonical), UNIQUE INDEX UNIQ_3ABBC1D7C05FB297 (confirmation_token), INDEX IDX_3ABBC1D719EB6921 (client_id), INDEX FK_8D93D649CCFA12B8 (profile_id), UNIQUE INDEX email_UNIQUE (email), UNIQUE INDEX username_UNIQUE (username), UNIQUE INDEX dni_UNIQUE (dni), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user_has_files (user_id INT NOT NULL, files_id INT NOT NULL, INDEX IDX_FD5CDD03A76ED395 (user_id), INDEX IDX_FD5CDD03A3E65B2F (files_id), PRIMARY KEY(user_id, files_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE chatbot_has_user ADD CONSTRAINT FK_FAFB6A5A1984C580 FOREIGN KEY (chatbot_id) REFERENCES chat_bot (id)');
+        $this->addSql('ALTER TABLE chatbot_has_user ADD CONSTRAINT FK_FAFB6A5AA76ED395 FOREIGN KEY (user_id) REFERENCES user_tianos (id)');
         $this->addSql('ALTER TABLE course_has_user ADD CONSTRAINT FK_797B6040591CC992 FOREIGN KEY (course_id) REFERENCES course (id_increment)');
         $this->addSql('ALTER TABLE course_has_user ADD CONSTRAINT FK_797B6040A76ED395 FOREIGN KEY (user_id) REFERENCES user_tianos (id)');
         $this->addSql('ALTER TABLE course_has_exam ADD CONSTRAINT FK_CC5310CF591CC992 FOREIGN KEY (course_id) REFERENCES course (id_increment)');
@@ -66,6 +70,7 @@ class Version20181111174725 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->addSql('ALTER TABLE chatbot_has_user DROP FOREIGN KEY FK_FAFB6A5A1984C580');
         $this->addSql('ALTER TABLE course_has_user DROP FOREIGN KEY FK_797B6040591CC992');
         $this->addSql('ALTER TABLE course_has_exam DROP FOREIGN KEY FK_CC5310CF591CC992');
         $this->addSql('ALTER TABLE category DROP FOREIGN KEY FK_64C19C112469DE2');
@@ -78,6 +83,7 @@ class Version20181111174725 extends AbstractMigration
         $this->addSql('ALTER TABLE user_has_files DROP FOREIGN KEY FK_FD5CDD03A3E65B2F');
         $this->addSql('ALTER TABLE course_has_exam DROP FOREIGN KEY FK_CC5310CF578D5E91');
         $this->addSql('ALTER TABLE grades DROP FOREIGN KEY FK_3AE36110578D5E91');
+        $this->addSql('ALTER TABLE chatbot_has_user DROP FOREIGN KEY FK_FAFB6A5AA76ED395');
         $this->addSql('ALTER TABLE course_has_user DROP FOREIGN KEY FK_797B6040A76ED395');
         $this->addSql('ALTER TABLE gcm DROP FOREIGN KEY FK_CF0A2136A76ED395');
         $this->addSql('ALTER TABLE group_of_users_has_user DROP FOREIGN KEY FK_6838269DA76ED395');
@@ -85,6 +91,8 @@ class Version20181111174725 extends AbstractMigration
         $this->addSql('ALTER TABLE session DROP FOREIGN KEY FK_D044D5D4A76ED395');
         $this->addSql('ALTER TABLE user_has_files DROP FOREIGN KEY FK_FD5CDD03A76ED395');
         $this->addSql('DROP TABLE qr');
+        $this->addSql('DROP TABLE chat_bot');
+        $this->addSql('DROP TABLE chatbot_has_user');
         $this->addSql('DROP TABLE course');
         $this->addSql('DROP TABLE course_has_user');
         $this->addSql('DROP TABLE course_has_exam');
